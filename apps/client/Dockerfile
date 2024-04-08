@@ -45,10 +45,14 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 react
 USER react
 
-COPY --from=installer /app/apps/client/vite.config.ts .
-COPY --from=installer /app/apps/client/package.json .
+# COPY --from=installer /app/apps/client/vite.config.ts .
+# COPY --from=installer /app/apps/client/package.json .
 
-COPY --from=installer --chown=react:nodejs /app/apps/client/dist .
-COPY --from=installer --chown=react:nodejs /app/apps/client/public ./apps/client/public
+# COPY --from=installer /app/apps/client/dist .
+COPY --from=installer /app/apps/client .
+# COPY --from=installer --chown=react:nodejs /apps/client/dist .
 
-CMD node apps/client/server.js
+EXPOSE 5173
+
+CMD [ "pnpm", "dev" ]
+# CMD node apps/client/disty

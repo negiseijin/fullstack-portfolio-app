@@ -32,7 +32,7 @@ COPY --from=builder /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 RUN pnpm install
 
 # Build the project and its dependencies
-COPY --from=builder /app/out/full/ .
+COPY --from=builder /app/out/full/apps/server .
 COPY turbo.json turbo.json
 
 RUN pnpm turbo build --filter=server...
@@ -44,6 +44,7 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 hono
 USER hono
+# COPY --from=installer /app/apps/server/dist .
 COPY --from=installer /app .
 
-CMD node apps/server/src/index.ts
+# CMD node app/index.js

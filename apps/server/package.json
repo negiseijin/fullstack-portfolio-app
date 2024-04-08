@@ -2,8 +2,10 @@
   "name": "server",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "build": "tsc",
     "check": "biome check ./src",
     "check:fix": "biome check --apply ./src",
     "format": "biome format ./src",
