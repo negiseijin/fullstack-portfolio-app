@@ -4,11 +4,13 @@ services:
     build:
       context: .
       dockerfile: ./apps/client/Dockerfile
-      target: develop
+      target: Prodcution
     restart: always
     ports:
       - 5173:5173
+      - 80:80
     tty: true
+    stdin_open: true
     networks:
       - app_network
     volumes:
@@ -19,9 +21,10 @@ services:
     build:
       context: .
       dockerfile: ./apps/server/Dockerfile
-      target: develop
+      target: Development
     restart: always
     tty: true
+    stdin_open: true
     ports:
       - 3000:3000
     networks:

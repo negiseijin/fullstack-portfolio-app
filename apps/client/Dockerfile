@@ -36,7 +36,7 @@ COPY turbo.json turbo.json
 
 RUN pnpm turbo build --filter=client...
 
-FROM base AS develop
+FROM base AS Development
 RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
@@ -44,10 +44,16 @@ COPY --from=installer /app .
 RUN pnpm install
 CMD [ "pnpm", "turbo", "dev", "--filter=client" ]
 
-FROM base AS runner
-WORKDIR /app
-# Don't run production as root
-RUN addgroup --system --gid 1001 client
-RUN adduser --system --uid 1001 client
-USER client
-COPY --from=installer /app .
+# FROM base AS runner
+# WORKDIR /app
+# # Don't run production as root
+# RUN addgroup --system --gid 1001 client
+# RUN adduser --system --uid 1001 client
+# USER client
+# COPY --from=installer /app .
+
+FROM nginx:alpine AS Prodcution
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=installer /app/apps/client/dist /usr/share/nginx/html
+EXPOSE 80/tcp
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

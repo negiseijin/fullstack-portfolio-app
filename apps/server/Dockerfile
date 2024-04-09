@@ -36,7 +36,7 @@ COPY turbo.json turbo.json
 
 RUN pnpm turbo build --filter=server...
 
-FROM base AS develop
+FROM base AS Development
 RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
