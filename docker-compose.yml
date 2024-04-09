@@ -4,26 +4,37 @@ services:
     build:
       context: .
       dockerfile: ./apps/client/Dockerfile
+      target: develop
     restart: always
     ports:
       - 5173:5173
     tty: true
     networks:
       - app_network
+    volumes:
+      - ./apps/client:/app/apps/client
+      - node_modules:/app/apps/client/node_modules
   server:
     container_name: server
     build:
       context: .
       dockerfile: ./apps/server/Dockerfile
+      target: develop
     restart: always
     tty: true
     ports:
       - 3000:3000
     networks:
       - app_network
+    volumes:
+      - ./apps/server:/app/apps/server
+      - node_modules:/app/apps/server/node_modules
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
 networks:
   app_network:
     driver: bridge
+
+volumes:
+  node_modules:

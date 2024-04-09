@@ -4,8 +4,8 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
-# Make sure you update both files!
+# The web Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
+# Make sure you update this Dockerfile, the Dockerfile in the web workspace and copy that over to Dockerfile in the docs.
 
 FROM base AS builder
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
@@ -16,7 +16,6 @@ WORKDIR /app
 COPY . .
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm install turbo --global
-COPY . .
 RUN turbo prune client --docker
 
 # Add lockfile and package.json's of isolated subworkspace
@@ -25,34 +24,30 @@ RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
 
-# First install the dependencies (as they change less often)
+# First install dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=builder /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 RUN pnpm install
 
-# Build the project
+# Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
 RUN pnpm turbo build --filter=client...
 
+FROM base AS develop
+RUN apk add --no-cache libc6-compat
+RUN apk update
+WORKDIR /app
+COPY --from=installer /app .
+RUN pnpm install
+CMD [ "pnpm", "turbo", "dev", "--filter=client" ]
+
 FROM base AS runner
 WORKDIR /app
-
 # Don't run production as root
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 react
-USER react
-
-# COPY --from=installer /app/apps/client/vite.config.ts .
-# COPY --from=installer /app/apps/client/package.json .
-
-# COPY --from=installer /app/apps/client/dist .
-COPY --from=installer /app/apps/client .
-# COPY --from=installer --chown=react:nodejs /apps/client/dist .
-
-EXPOSE 5173
-
-CMD [ "pnpm", "dev" ]
-# CMD node apps/client/disty
+RUN addgroup --system --gid 1001 client
+RUN adduser --system --uid 1001 client
+USER client
+COPY --from=installer /app .

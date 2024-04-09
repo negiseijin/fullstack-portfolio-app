@@ -16,7 +16,6 @@ WORKDIR /app
 COPY . .
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm install turbo --global
-COPY . .
 RUN turbo prune server --docker
 
 # Add lockfile and package.json's of isolated subworkspace
@@ -32,19 +31,23 @@ COPY --from=builder /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 RUN pnpm install
 
 # Build the project and its dependencies
-COPY --from=builder /app/out/full/apps/server .
+COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
 RUN pnpm turbo build --filter=server...
 
+FROM base AS develop
+RUN apk add --no-cache libc6-compat
+RUN apk update
+WORKDIR /app
+COPY --from=installer /app .
+RUN pnpm install
+CMD [ "pnpm", "turbo", "dev", "--filter=server" ]
+
 FROM base AS runner
 WORKDIR /app
-
 # Don't run production as root
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 hono
-USER hono
-# COPY --from=installer /app/apps/server/dist .
+RUN addgroup --system --gid 1001 server
+RUN adduser --system --uid 1001 server
+USER server
 COPY --from=installer /app .
-
-# CMD node app/index.js
