@@ -1,6 +1,6 @@
+import books from "@/route/books";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import books from "./books";
 
 const app = new Hono();
 
