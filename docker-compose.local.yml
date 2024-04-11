@@ -14,6 +14,7 @@ services:
       - app_network
     volumes:
       - ./apps/client:/app/apps/client
+      - client_data:/app/apps/client/node_modules
   server:
     container_name: server
     build:
@@ -29,7 +30,12 @@ services:
       - app_network
     volumes:
       - ./apps/server:/app/apps/server
+      - server_data:/app/apps/server/node_modules
 
 networks:
   app_network:
     driver: bridge
+
+volumes:
+  client_data:
+  server_data:
