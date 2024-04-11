@@ -42,7 +42,7 @@ RUN apk update
 WORKDIR /app
 COPY --from=installer /app .
 RUN pnpm install
-CMD [ "pnpm", "turbo", "dev", "--filter=client" ]
+CMD [ "pnpm", "turbo", "dev", "--filter", "client" ]
 
 # FROM base AS runner
 # WORKDIR /app
@@ -56,4 +56,4 @@ FROM nginx:alpine AS Prodcution
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=installer /app/apps/client/dist /usr/share/nginx/html
 EXPOSE 80/tcp
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+CMD [ "/usr/sbin/nginx", "-g", "daemon off;" ]

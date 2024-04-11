@@ -42,7 +42,7 @@ RUN apk update
 WORKDIR /app
 COPY --from=installer /app .
 RUN pnpm install
-CMD [ "pnpm", "turbo", "dev", "--filter=server" ]
+CMD [ "pnpm", "turbo", "dev", "--filter", "server" ]
 
 FROM base AS runner
 WORKDIR /app
@@ -50,4 +50,5 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 server
 RUN adduser --system --uid 1001 server
 USER server
-COPY --from=installer /app .
+COPY --from=installer /app/apps/server/dist .
+CMD [ "node", "index.js" ]
