@@ -4,8 +4,11 @@ services:
     build:
       context: .
       dockerfile: ./apps/client/Dockerfile
-      target: Development
-    restart: always
+      args:
+        - NODE_ENV=${NODE_ENV:-development}
+      target: ${NODE_ENV:-development}
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
     ports:
       - 5173:5173
     tty: true
@@ -20,8 +23,11 @@ services:
     build:
       context: .
       dockerfile: ./apps/server/Dockerfile
-      target: Development
-    restart: always
+      args:
+        - NODE_ENV=${NODE_ENV:-development}
+      target: ${NODE_ENV:-development}
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
     tty: true
     stdin_open: true
     ports:

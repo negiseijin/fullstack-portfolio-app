@@ -3,6 +3,7 @@ FROM node:20.12.1-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
+ENV NODE_ENV $NODE_ENV
 
 # The web Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update this Dockerfile, the Dockerfile in the web workspace and copy that over to Dockerfile in the docs.
@@ -40,15 +41,17 @@ FROM base AS Development
 RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
-COPY --from=installer /app .
+RUN chown -R node:node /app
+USER node
+COPY --from=installer --chown=node:node /app .
 RUN pnpm install
 CMD [ "pnpm", "turbo", "dev", "--filter", "server" ]
 
-FROM base AS runner
+FROM base AS Prodcution
 WORKDIR /app
 # Don't run production as root
-RUN addgroup --system --gid 1001 server
+RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 server
 USER server
-COPY --from=installer /app/apps/server/dist .
+COPY --from=installer --chown=server:nodejs /app/apps/server/dist .
 CMD [ "node", "index.js" ]

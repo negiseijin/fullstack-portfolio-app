@@ -4,7 +4,11 @@ services:
     build:
       context: .
       dockerfile: ./apps/client/Dockerfile
-      target: Prodcution
+      args:
+        - NODE_ENV=${NODE_ENV:-prodcution}
+      target: ${NODE_ENV:-prodcution}
+    environment:
+      - NODE_ENV=${NODE_ENV:-prodcution}
     ports:
       - 80:80
     networks:
@@ -15,7 +19,11 @@ services:
     build:
       context: .
       dockerfile: ./apps/server/Dockerfile
-      target: runner
+      args:
+        - NODE_ENV=${NODE_ENV:-prodcution}
+      target: ${NODE_ENV:-prodcution}
+    environment:
+      - NODE_ENV=${NODE_ENV:-prodcution}
     ports:
       - 3000:3000
     networks:
