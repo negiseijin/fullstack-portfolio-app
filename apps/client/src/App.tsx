@@ -4,11 +4,20 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 
-function App() {
+function CustomButton() {
   const [count, setCount] = useState(0);
+  const handleClick = () => setCount((count) => count + 1);
 
   return (
-    <>
+    <Button type="button" onClick={handleClick}>
+      count is {count}
+    </Button>
+  );
+}
+
+function App() {
+  return (
+    <div className="font-sans">
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -18,10 +27,8 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div className="card">
-        <Button type="button" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
+      <div className="card bg-custom2">
+        <CustomButton />
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
@@ -29,7 +36,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </>
+    </div>
   );
 }
 

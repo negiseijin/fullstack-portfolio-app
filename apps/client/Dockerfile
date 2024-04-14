@@ -2,8 +2,8 @@ FROM node:20.12.1-alpine AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
 ENV NODE_ENV $NODE_ENV
+RUN corepack enable
 
 # The web Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update this Dockerfile, the Dockerfile in the web workspace and copy that over to Dockerfile in the docs.
@@ -29,7 +29,7 @@ WORKDIR /app
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=builder /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
-RUN pnpm install
+RUN pnpm install --no-frozen-lockfile
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
@@ -44,7 +44,7 @@ WORKDIR /app
 RUN chown -R node:node /app
 USER node
 COPY --from=installer --chown=node:node /app .
-RUN pnpm install
+RUN pnpm install --no-frozen-lockfile
 CMD [ "pnpm", "turbo", "dev", "--filter", "client" ]
 
 # FROM base AS runner

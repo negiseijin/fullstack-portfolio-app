@@ -17,7 +17,7 @@ services:
       - app_network
     volumes:
       - ./apps/client:/app/apps/client
-      - client_data:/app/apps/client/node_modules
+      - client-data:/app/apps/client/node_modules
   server:
     container_name: server
     build:
@@ -36,12 +36,30 @@ services:
       - app_network
     volumes:
       - ./apps/server:/app/apps/server
-      - server_data:/app/apps/server/node_modules
+      - server-data:/app/apps/server/node_modules
+    depends_on:
+      - db
+  db:
+    container_name: db
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - TZ=Asia/Tokyo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - app_network
+    ports:
+      - "5432:5432"
 
 networks:
   app_network:
     driver: bridge
 
 volumes:
-  client_data:
-  server_data:
+  client-data:
+  server-data:
+  db-data:
