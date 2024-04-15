@@ -8,12 +8,14 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    screens: {
+      mobile: { max: "960px" },
+      pc: { min: "960px", max: "1064px" },
+    },
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+      screens: {},
     },
     extend: {
       colors: {

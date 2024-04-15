@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { hc } from "hono/client";
-import type { InferResponseType } from "hono/client";
 import { useEffect, useState } from "react";
 import viteLogo from "/vite.svg";
-import type { AppType } from "../../server/src/index";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
+
+import { Button } from "@/components/ui/button";
+import type { RequestPost, ResponsePost } from "@repo/schema";
 
 function CustomButton() {
   const [count, setCount] = useState(0);
@@ -19,58 +18,35 @@ function CustomButton() {
 }
 
 function App() {
-  const client = hc<AppType>("http://localhost:3000/");
-  const $post = client.posts.$post;
-  // type PostReqType = InferRequestType<typeof $post>["form"];
-  type PostResType = InferResponseType<typeof $post>;
-
-  const $books = client.books.$post;
-  // type BooksReqType = InferRequestType<typeof $books>["form"];
-  type BooksResType = InferResponseType<typeof $books>;
-
-  const [data, setData] = useState<PostResType>({
+  const [data, setData] = useState<ResponsePost>({
     ok: false,
     message: "",
   });
 
-  const [books, setBooks] = useState<BooksResType>({
-    ok: false,
-    message: "",
-  });
+  const param: RequestPost = {
+    title: "Hello",
+    body: "Hono is a cool project",
+  };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await client.posts.$post({
-        form: {
-          title: "Hello",
-          body: "Hono is a cool project",
+    (async () => {
+      const response = await fetch("http://localhost:3000/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(param),
       });
-      if (res.ok) {
-        const data = await res.json();
+      if (response.ok) {
+        const data = await response.json();
         setData(data);
         console.log(data.message);
       }
-
-      const res2 = await client.books.$post({
-        form: {
-          title2: "Hello",
-          body2: "Hono is a cool project",
-        },
-      });
-      if (res2.ok) {
-        const data = await res2.json();
-        setBooks(data);
-        console.log(data.message);
-      }
-    };
-
-    fetchData();
+    })();
   }, []);
 
   return (
-    <div className="font-sans">
+    <div className="font-sans container bg-green-300 mobile:bg-orange-600">
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -87,7 +63,6 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">{data.message}</p>
-      <p className="read-the-docs">{books.message}</p>
     </div>
   );
 }
