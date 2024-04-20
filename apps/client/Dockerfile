@@ -47,14 +47,6 @@ COPY --from=installer --chown=node:node /app .
 RUN pnpm install --no-frozen-lockfile
 CMD [ "pnpm", "turbo", "dev", "--filter", "client" ]
 
-# FROM base AS runner
-# WORKDIR /app
-# # Don't run production as root
-# RUN addgroup --system --gid 1001 client
-# RUN adduser --system --uid 1001 client
-# USER client
-# COPY --from=installer /app .
-
 FROM nginx:alpine AS Prodcution
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=installer /app/apps/client/dist /usr/share/nginx/html
