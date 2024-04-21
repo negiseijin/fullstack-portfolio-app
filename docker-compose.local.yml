@@ -52,10 +52,11 @@ services:
       - TZ=Asia/Tokyo
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./initdb.d:/docker-entrypoint-initdb.d
     networks:
       - app_network
     ports:
-      - "5432:5432"
+      - 5432:5432
 
 networks:
   app_network:

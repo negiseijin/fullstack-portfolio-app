@@ -10,12 +10,15 @@
     "check": "biome check ./src",
     "check:fix": "biome check --apply ./src",
     "format": "biome format ./src",
-    "lint": "biome lint ./src"
+    "lint": "biome lint ./src",
+    "migrate:init": "dotenv -e ../../.env -- pnpm dlx prisma migrate dev --name init"
   },
   "dependencies": {
     "@hono/node-server": "^1.9.0",
     "@hono/zod-validator": "^0.2.1",
+    "@prisma/client": "5.12.1",
     "@repo/schema": "workspace:^",
+    "dotenv-cli": "^7.4.1",
     "hono": "^4.2.2",
     "zod": "^3.22.4"
   },
@@ -23,6 +26,7 @@
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^20.11.17",
     "esbuild": "^0.20.2",
+    "prisma": "^5.12.1",
     "tsx": "^4.7.1",
     "typescript": "^5.2.2"
   }

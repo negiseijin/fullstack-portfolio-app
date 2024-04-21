@@ -10,7 +10,6 @@ const app = new Hono();
 app.use(cors());
 const routes = app
   .post("/posts", zValidator("json", RequestPost), (c) => {
-    // ...
     return c.json<ResponsePost>(
       {
         ok: true,
