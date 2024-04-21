@@ -7,7 +7,7 @@ This is an official starter Turborepo.
 Install dependencies:
 
 ```sh
-cd
+cd monorepo
 pnpm install
 ```
 
