@@ -38,3 +38,14 @@ model User {
   posts   Post[]
   profile Profile?
 }
+
+model UserRating {
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  messageId String   @map("message_id") @db.Uuid
+  comment   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("user_rating")
+}
