@@ -3,6 +3,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .appearance-none {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .user-select-none {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
 @layer base {
   html {
     font-family: Proxima Nova, system-ui, sans-serif;
@@ -76,6 +91,7 @@
 @layer base {
   * {
     @apply border-border;
+    @apply appearance-none;
   }
   body {
     @apply bg-background text-foreground;
