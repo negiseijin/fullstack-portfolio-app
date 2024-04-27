@@ -5,6 +5,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import authors from "./route/authors";
 import books from "./route/books";
+import users from "./route/users";
 
 const app = new Hono();
 app.use(cors());
@@ -19,7 +20,8 @@ const routes = app
     );
   })
   .route("/authors", authors)
-  .route("/books", books);
+  .route("/books", books)
+  .route("/users", users);
 
 const port = 3000;
 console.log(`Server is running on port ${port}`);

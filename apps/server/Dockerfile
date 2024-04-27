@@ -33,7 +33,6 @@ RUN pnpm install --no-frozen-lockfile
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
-COPY turbo.json turbo.json
 
 RUN pnpm turbo build --filter=server...
 
