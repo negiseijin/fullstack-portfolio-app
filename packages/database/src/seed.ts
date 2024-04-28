@@ -1,33 +1,33 @@
-import { PrismaClient } from "@prisma/client";
+import { type Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function main() {
-  await prisma.user.create({
-    data: {
-      name: "Alice",
-      email: "alice@prisma.io",
-      Post: {
-        create: [
-          {
-            title: "Hello World",
-            updatedAt: new Date().toISOString(),
-          },
-        ],
-      },
-      Profile: {
-        create: { bio: "I like turtles" },
-      },
+const userData: Prisma.UserCreateInput[] = [
+  {
+    name: "Alice6",
+    email: "alice6@prisma.io",
+    Post: {
+      create: [
+        {
+          title: "Join the Prisma Discord",
+          content: "https://pris.ly/discord",
+          published: true,
+          updatedAt: new Date().toISOString(),
+        },
+      ],
     },
-  });
+  },
+];
 
-  const allUsers = await prisma.user.findMany({
-    include: {
-      Post: true,
-      Profile: true,
-    },
-  });
-  console.dir(allUsers, { depth: null });
+async function main() {
+  console.log("Start seeding ...");
+  for (const u of userData) {
+    const user = await prisma.user.create({
+      data: u,
+    });
+    console.log(`Created user with id: ${user.id}`);
+  }
+  console.log("Seeding finished.");
 }
 
 main()

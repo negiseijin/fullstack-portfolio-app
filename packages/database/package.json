@@ -10,13 +10,10 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:pull": "prisma db pull",
     "db:push": "prisma db push",
-    "db:seed": "tsx src/seed.ts",
-    "dev": "tsup --watch",
+    "db:seed": "ts-node src/seed.ts",
     "format": "prisma format",
     "generate": "prisma generate",
     "lint": "biome lint ./src",
-    "prebuild": "pnpm run generate",
-    "predev": "pnpm run generate",
     "studio": "prisma studio"
   },
   "dependencies": {
