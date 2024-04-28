@@ -18,7 +18,8 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "files.associations": {
-    "*json": "jsonc"
+    "*json": "jsonc",
+    "*.css": "tailwindcss"
   },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
