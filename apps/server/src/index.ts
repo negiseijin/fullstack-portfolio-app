@@ -1,8 +1,9 @@
 import { serve } from "@hono/node-server";
 import { zValidator } from "@hono/zod-validator";
-import { RequestPost, type ResponsePost } from "@repo/schema";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+
+import { RequestPost, type ResponsePost } from "@repo/schema";
 import authors from "./route/authors";
 import books from "./route/books";
 import users from "./route/users";

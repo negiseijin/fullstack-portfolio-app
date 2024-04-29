@@ -6,7 +6,7 @@ const userData: Prisma.UserCreateInput[] = [
   {
     name: "Alice6",
     email: "alice6@prisma.io",
-    Post: {
+    posts: {
       create: [
         {
           title: "Join the Prisma Discord",

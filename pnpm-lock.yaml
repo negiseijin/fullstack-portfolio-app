@@ -124,9 +124,6 @@ importers:
       esbuild:
         specifier: ^0.20.2
         version: 0.20.2
-      prisma:
-        specifier: ^5.12.1
-        version: 5.12.1
       tsx:
         specifier: ^4.7.1
         version: 4.7.2
@@ -139,6 +136,9 @@ importers:
       '@prisma/client':
         specifier: 5.12.1
         version: 5.12.1(prisma@5.12.1)
+      dotenv-cli:
+        specifier: ^7.4.1
+        version: 7.4.1
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*

@@ -10,34 +10,36 @@ datasource db {
 model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
   title     String   @db.VarChar(255)
   content   String?
   published Boolean  @default(false)
   authorId  Int
-  User      User     @relation(fields: [authorId], references: [id])
+  author    User     @relation(fields: [authorId], references: [id])
 }
 
 model Profile {
   id     Int     @id @default(autoincrement())
   bio    String?
   userId Int     @unique
-  User   User    @relation(fields: [userId], references: [id])
+  user   User    @relation(fields: [userId], references: [id])
 }
 
 model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
   name    String?
-  Post    Post[]
-  Profile Profile?
+  posts   Post[]
+  profile Profile?
 }
 
-model UserRating {
-  rating     Int
-  message_id String   @db.Uuid
-  comment    String
-  created_at DateTime @default(now())
-  updated_at DateTime
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+model TUserRating {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  rating    Int
+  messageId String   @map("message_id") @db.Uuid
+  comment   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("t_user_rating")
 }
