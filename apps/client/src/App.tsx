@@ -1,5 +1,7 @@
+import { Textarea } from "@/components/ui/textarea";
 import viteLogo from "/vite.svg";
 import reactLogo from "./assets/react.svg";
+import { Button } from "./components/ui/button";
 
 function App() {
   return (
@@ -27,8 +29,11 @@ function App() {
         メインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメイン
         メインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメインメイン
       </main>
-      <footer className="max-w-screen-pc fixed bottom-0 left-0 right-0 w-full mx-auto bg-lime-200">
-        フッター
+      <footer className="max-w-screen-pc sticky w-full mx-auto p-4">
+        <div className="grid grid-cols-[1fr_auto] place-items-center gap-2">
+          <Textarea placeholder="入力する..." className="resize-none" />
+          <Button>Send message</Button>
+        </div>
       </footer>
     </div>
   );
