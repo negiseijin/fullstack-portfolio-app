@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 
-import { prisma } from "@repo/database";
+import { prisma } from "@/lib/prisma";
 
 const app = new Hono().get("/", async (c) => {
   const users = await prisma.user.findMany();
