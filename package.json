@@ -12,6 +12,7 @@
     "docker": "docker compose up --build",
     "docker:dev": "docker compose -f docker-compose.local.yml up --build",
     "docker:down": "docker compose down",
+    "generate": "turbo run generate",
     "prepare": "husky",
     "studio": "turbo run studio"
   },

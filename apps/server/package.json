@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "dev": "dotenv -e ../../.env tsx watch src/index.ts",
-    "start": "dotenv -e ../../.env node dist/index.js",
-    "build": "tsc && esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc && esbuild src/index.ts --bundle --minify --platform=node --outfile=dist/index.js",
     "check": "biome check ./src",
     "check:fix": "biome check --apply ./src",
     "format": "biome format ./src",
@@ -15,9 +15,7 @@
   "dependencies": {
     "@hono/node-server": "^1.9.0",
     "@hono/zod-validator": "^0.2.1",
-    "@prisma/client": "5.12.1",
     "@repo/schema": "workspace:*",
-    "dotenv-cli": "^7.4.1",
     "hono": "^4.2.2",
     "zod": "^3.22.4"
   },

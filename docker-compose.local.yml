@@ -26,6 +26,8 @@ services:
       args:
         - NODE_ENV=${NODE_ENV:-development}
       target: ${NODE_ENV:-development}
+    env_file:
+      - .env
     environment:
       - NODE_ENV=${NODE_ENV:-development}
     tty: true
