@@ -3,18 +3,14 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "db:generate": "turbo run db:generate",
-    "db:migrate:deploy": "turbo run db:migrate:deploy",
-    "db:push": "turbo run db:push",
-    "db:seed": "turbo run db:seed",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "docker": "docker compose up --build",
     "docker:dev": "docker compose -f docker-compose.local.yml up --build",
     "docker:down": "docker compose down",
-    "generate": "turbo run generate",
     "prepare": "husky",
-    "studio": "turbo run studio"
+    "generate": "turbo generate",
+    "studio": "turbo studio"
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [

@@ -4,28 +4,18 @@
   "globalEnv": ["NODE_ENV"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "^generate"],
+      "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
     },
     "dev": {
-      "dependsOn": ["^db:generate"],
+      "dependsOn": ["^generate"],
       "cache": false,
       "persistent": true
     },
-    "db:generate": {
-      "cache": false
-    },
-    "generate": {
-      "dependsOn": ["^generate"]
-    },
-    "db:push": {
-      "cache": false
-    },
-    "db:migrate:deploy": {},
-    "db:seed": {},
+    "generate": {},
     "studio": {}
   }
 }
