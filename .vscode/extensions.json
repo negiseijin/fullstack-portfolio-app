@@ -2,6 +2,7 @@
   "recommendations": [
     "biomejs.biome",
     "editorconfig.editorconfig",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "prisma.prisma"
   ]
 }
