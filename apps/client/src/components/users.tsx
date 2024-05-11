@@ -1,12 +1,19 @@
 import { useUser } from "@/hooks/useUser";
-import { Fragment } from "react/jsx-runtime";
+import { Fragment, useEffect, useState } from "react";
 
 export function Users() {
-  const { user } = useUser();
+  const [show, setShow] = useState(false);
+  const { user, trigger } = useUser();
+
+  useEffect(() => {
+    if (show) return;
+    trigger({ username: "Bret" });
+    setShow(true);
+  }, [show, trigger]);
 
   return (
     <>
-      {user ? (
+      {show && user ? (
         user.map((user) => (
           <Fragment key={user.id}>
             <p>{user.name}</p>
@@ -16,7 +23,7 @@ export function Users() {
           </Fragment>
         ))
       ) : (
-        <p>undefined</p>
+        <div>...LOADING</div>
       )}
     </>
   );

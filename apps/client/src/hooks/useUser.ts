@@ -1,12 +1,19 @@
-import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
 
 import type { ResponseUser } from "@repo/schema";
 
 const url = "http://localhost:3000/users";
 
-const fetcher = async (url: string | URL | Request) => {
+const fetcher = async (
+  url: string | URL | Request,
+  { arg }: { arg: { username: string } },
+) => {
   try {
-    const response = await fetch(url, { method: "POST" });
+    const body = { ...arg };
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
     const users: ResponseUser = await response.json();
     return users;
   } catch (error) {
@@ -15,19 +22,11 @@ const fetcher = async (url: string | URL | Request) => {
 };
 
 export function useUser() {
-  const { data, error, isLoading, isValidating, mutate } = useSWR(
-    `${url}`,
-    fetcher,
-    {
-      suspense: true,
-    },
-  );
+  const { data, error, trigger } = useSWRMutation(`${url}`, fetcher);
 
   return {
     user: data,
-    isLoading,
     isError: error,
-    isValidating,
-    mutate,
+    trigger,
   };
 }
