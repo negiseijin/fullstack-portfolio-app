@@ -6,14 +6,18 @@ export function Users() {
 
   return (
     <>
-      {user.map((user) => (
-        <Fragment key={user.id}>
-          <p>{user.name}</p>
-          <p>{user.username}</p>
-          <p>{user.email}</p>
-          <p>{user.website}</p>
-        </Fragment>
-      ))}
+      {user ? (
+        user.map((user) => (
+          <Fragment key={user.id}>
+            <p>{user.name}</p>
+            <p>{user.username}</p>
+            <p>{user.email}</p>
+            <p>{user.website}</p>
+          </Fragment>
+        ))
+      ) : (
+        <p>undefined</p>
+      )}
     </>
   );
 }

@@ -4,10 +4,15 @@ import type { ResponseUser } from "@repo/schema";
 
 const url = "http://localhost:3000/users";
 
-const fetcher = (url: string | URL | Request) =>
-  fetch(url, { method: "POST" }).then(
-    (r) => r.json() as unknown as ResponseUser,
-  );
+const fetcher = async (url: string | URL | Request) => {
+  try {
+    const response = await fetch(url, { method: "POST" });
+    const users: ResponseUser = await response.json();
+    return users;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export function useUser() {
   const { data, error, isLoading, isValidating, mutate } = useSWR(
