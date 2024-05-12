@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 // Cookieを取得する関数
-function getCookie(name: string): string | undefined {
+function getCookie(name: string): string | null {
   const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
-  return cookieValue ? cookieValue.pop() : "";
+  return cookieValue ? cookieValue.pop() || null : null;
 }
 
+// Cookieを削除する関数
 function deleteCookie(name: string) {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
 
 // カスタムフック
 export const useCookie = (cookieName: string) => {
-  const [cookie, setCookie] = useState("");
+  const [cookie, setCookie] = useState<string | null>(() =>
+    getCookie(cookieName),
+  );
 
-  useEffect(() => {
-    const value = getCookie(cookieName) ?? "";
-    setCookie(value);
-  }, [cookieName]);
+  const handleSetCookie = useCallback(
+    (value: string) => {
+      document.cookie = `${cookieName}=${value}; path=/`;
+      setCookie(value);
+    },
+    [cookieName],
+  );
 
-  const handleSetCookie = (value: string) => {
-    document.cookie = `${cookieName}=${value}; path=/`;
-    setCookie(value);
-  };
-
-  const handleDeleteCookie = () => {
+  const handleDeleteCookie = useCallback(() => {
     deleteCookie(cookieName);
-    setCookie("");
-  };
+    setCookie(null);
+  }, [cookieName]);
 
   return [cookie, handleSetCookie, handleDeleteCookie] as const;
 };
-
 // usage
 
 // const [cookie, setCookie, deletedCookie] = useCookie("myCookie");

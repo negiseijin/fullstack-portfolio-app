@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 // ジェネリックな型パラメータTを定義
 export const useLocalStorage = <T>(key: string, initialValue: T) => {
-  // ローカルストレージからデータを取得する
+  // ステートを初期化
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -14,38 +14,29 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
   });
 
   // ローカルストレージにデータを保存する
-  const setValue = (value: T | ((val: T) => T)) => {
-    try {
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)) => {
+      try {
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [key, storedValue],
+  );
 
-  const removeValue = () => {
+  // ローカルストレージからデータを削除する
+  const removeValue = useCallback(() => {
     try {
       window.localStorage.removeItem(key);
       setStoredValue(initialValue);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [initialValue, key]);
 
   return [storedValue, setValue, removeValue] as const;
 };
-
-// USage
-// const [name, setName, removeName] = useLocalStorage<string>('name', '');
-// const [age, setAge, removeAge] = useLocalStorage<number>('age', 0);
-// const [user, setUser, removeUser] = useLocalStorage<{ name: string; age: number }>(
-//   'user',
-//   { name: '', age: 0 }
-// );
-
-// // 値を削除する
-// removeName();
-// removeAge();
-// removeUser();
