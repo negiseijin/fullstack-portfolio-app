@@ -1,12 +1,17 @@
 import { useCallback, useState } from "react";
 
 // ジェネリックな型パラメータTを定義
-export const useLocalStorage = <T>(key: string, initialValue: T) => {
+export function useLocalStorage<T>(key: string, initialValue: T) {
   // ステートを初期化
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      if (item) {
+        return JSON.parse(item);
+      }
+
+      window.localStorage.setItem(key, JSON.stringify(initialValue));
+      return initialValue;
     } catch (error) {
       console.error(error);
       return initialValue;
@@ -39,4 +44,4 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
   }, [initialValue, key]);
 
   return [storedValue, setValue, removeValue] as const;
-};
+}

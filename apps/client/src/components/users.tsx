@@ -1,33 +1,39 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, Suspense, useEffect, useState } from "react";
+
+import type { ResponseUser } from "@repo/schema";
 
 import { useUser } from "@/hooks/useUser";
 
 type Props = {
   username: string;
+  localUser: ResponseUser[number];
 };
 
-export function Users({ username }: Props) {
-  const [isReady, setIsReady] = useState(false);
-  const { user, trigger } = useUser();
+export function Users({ username, localUser }: Props) {
+  const { user, isLoading } = useUser({ username });
 
-  useEffect(() => {
-    if (isReady) return;
-    setIsReady(true);
-    (async () => {
-      await trigger({ username });
-    })();
-  }, [isReady, trigger, username]);
+  if (isLoading) return null;
 
   return (
     <>
       {user?.map((user) => (
         <Fragment key={user.id}>
-          <p>{user.name}</p>
-          <p>{user.username}</p>
-          <p>{user.email}</p>
-          <p>{user.website}</p>
+          <ul className="bg-white grid gap-2 rounded-xl">
+            <li>{user.name}</li>
+            <li>{user.username}</li>
+            <li>{user.email}</li>
+            <li>{user.website}</li>
+            <li>{user.website}</li>
+          </ul>
         </Fragment>
       ))}
+      <ul className="bg-white grid gap-2 rounded-xl">
+        <li>{localUser.name}</li>
+        <li>{localUser.username}</li>
+        <li>{localUser.email}</li>
+        <li>{localUser.website}</li>
+        <li>{localUser.website}</li>
+      </ul>
     </>
   );
 }

@@ -1,47 +1,48 @@
 import { Suspense, lazy, useEffect, useState } from "react";
+import { useCookie } from "./hooks/useCookie";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
-import { Textarea } from "@/components/ui/textarea";
-import viteLogo from "/vite.svg";
-import reactLogo from "./assets/react.svg";
-import { Button } from "./components/ui/button";
-
-import { Users } from "./components/users";
-
-// const Users = lazy(() =>
-//   import("./components/users").then((module) => ({ default: module.Users })),
-// );
+const Home = lazy(() =>
+  import("./app/home").then((module) => ({ default: module.Home })),
+);
 
 function App() {
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    if (name) return;
-    setName("Bret");
-  }, [name]);
+  useCookie("my-cookie", "Bret");
+  useLocalStorage("my-LocalStorage", {
+    id: 5,
+    name: "Chelsey Dietrich",
+    username: "Kamren",
+    email: "Lucio_Hettinger@annie.ca",
+    address: {
+      street: "Skiles Walks",
+      suite: "Suite 351",
+      city: "Roscoeview",
+      zipcode: "33263",
+      geo: {
+        lat: "-31.8129",
+        lng: "62.5342",
+      },
+    },
+    phone: "(254)954-1289",
+    website: "demarco.info",
+    company: {
+      name: "Keebler LLC",
+      catchPhrase: "User-centric fault-tolerant solution",
+      bs: "revolutionize end-to-end systems",
+    },
+  });
 
   return (
-    <div className="h-screen container grid grid-rows-[auto_1fr_auto] gap-4 font-sans">
-      <header className="sticky top-0 z-10 grid grid-cols-[auto_1fr_auto] place-items-center p-4">
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <h1>Vite + React</h1>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </header>
-      <main className="overflow-auto bg-red-500 p-4">
-        <Suspense fallback={<div>...LOADING!!!!!!!!!!!</div>}>
-          <Users username={name} />
-        </Suspense>
-      </main>
-      <footer className="max-w-screen-pc sticky w-full mx-auto p-4">
-        <div className="grid grid-cols-[1fr_auto] place-items-center gap-2">
-          <Textarea placeholder="入力する..." className="resize-none" />
-          <Button>Send message</Button>
+    <Suspense
+      fallback={
+        <div className="h-screen grid grid-flow-col justify-center items-center gap-3">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900" />
+          Processing...
         </div>
-      </footer>
-    </div>
+      }
+    >
+      <Home />
+    </Suspense>
   );
 }
 

@@ -5,6 +5,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "check": "turbo check",
     "docker": "docker compose up --build",
     "docker:dev": "docker compose -f docker-compose.local.yml up --build",
     "docker:down": "docker compose down",

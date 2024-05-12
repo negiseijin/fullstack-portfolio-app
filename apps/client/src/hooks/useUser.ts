@@ -1,6 +1,7 @@
 import useSWRMutation from "swr/mutation";
 
 import type { ResponseUser } from "@repo/schema";
+import useSWR from "swr";
 
 const url = "http://localhost:3000/users";
 
@@ -9,12 +10,8 @@ const fetcher = async ({
   req: { username },
 }: { url: string | null; req: ReqBody }) => {
   try {
-    console.log("body", url);
-
     if (url === null) return;
     const body = { username };
-    console.log(body);
-
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(body),
@@ -40,12 +37,25 @@ type ReqBody = {
   username: string;
 };
 
-export function useUser() {
-  const { trigger, data, error } = useSWRMutation(url, sendRequest);
+export function useUser(req: ReqBody) {
+  const { data, error, isLoading, isValidating, mutate } = useSWR(
+    () => [url, req],
+    ([url, req]) => fetcher({ url, req }),
+    {
+      suspense: true,
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+
+  // const { trigger, data, error } = useSWRMutation(url, sendRequest);
 
   return {
     user: data,
     isError: error,
-    trigger,
+    isLoading,
+    mutate,
+    // trigger,
   };
 }

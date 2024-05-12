@@ -11,8 +11,8 @@ const app = new Hono().get("/", async (c) => {
 app.post("/", async (c) => {
   const body = await c.req.json();
   console.log(body);
-  // const url = `https://jsonplaceholder.typicode.com/users?username=${body.username}`;
-  const url = "https://jsonplaceholder.typicode.com/users";
+  const url = `https://jsonplaceholder.typicode.com/users?username=${body.username}`;
+  // const url = "https://jsonplaceholder.typicode.com/users";
   const users: ResponseUser = await fetch(url).then((r) => r.json());
   await new Promise((r) => setTimeout(r, 5000));
   return c.json(users);
