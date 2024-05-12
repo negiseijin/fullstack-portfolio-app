@@ -38,6 +38,9 @@ importers:
       clsx:
         specifier: ^2.1.0
         version: 2.1.0
+      hono:
+        specifier: ^4.2.2
+        version: 4.2.5
       lucide-react:
         specifier: ^0.365.0
         version: 0.365.0(react@18.2.0)
@@ -81,6 +84,9 @@ importers:
       postcss-100vh-fix:
         specifier: ^1.0.2
         version: 1.0.2(postcss@8.4.38)
+      server:
+        specifier: workspace:*
+        version: link:../server
       tailwindcss:
         specifier: ^3.4.3
         version: 3.4.3(ts-node@10.9.2(@swc/core@1.4.16)(@types/node@20.12.7)(typescript@5.4.5))

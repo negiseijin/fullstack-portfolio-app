@@ -1,4 +1,4 @@
-import { Fragment, Suspense, useEffect, useState } from "react";
+import { Fragment } from "react";
 
 import type { ResponseUser } from "@repo/schema";
 

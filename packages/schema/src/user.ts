@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const RequestUser = z.object({
-  id: z.string(),
+  username: z.string(),
 });
 export type RequestUser = z.infer<typeof RequestUser>;
 

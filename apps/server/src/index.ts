@@ -20,8 +20,10 @@ const routes = app
       201,
     );
   })
+  // authors
   .route("/authors", authors)
   .route("/books", books)
+  // user
   .route("/users", users);
 
 const port = 3000;

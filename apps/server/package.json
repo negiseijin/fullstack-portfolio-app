@@ -3,10 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
+  "exports": "./src/index.ts",
   "scripts": {
     "dev": "dotenv -e ../../.env.local tsx watch src/index.ts",
     "start": "dotenv -e ../../.env.local node dist/index.js",
-    "build": "tsc && esbuild src/index.ts --bundle --minify --platform=node --outfile=dist/index.js",
+    "build": "tsc --noEmit && esbuild src/index.ts --bundle --minify --platform=node --outfile=dist/index.js",
     "check": "biome check ./src",
     "check:fix": "biome check --apply ./src",
     "format": "biome format ./src",

@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense } from "react";
 
 import type { ResponseUser } from "@repo/schema";
 

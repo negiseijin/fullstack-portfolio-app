@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy } from "react";
 import { useCookie } from "./hooks/useCookie";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
