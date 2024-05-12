@@ -4,12 +4,17 @@ import type { ResponseUser } from "@repo/schema";
 
 const url = "http://localhost:3000/users";
 
-const fetcher = async (
-  url: string | URL | Request,
-  { arg }: { arg: { username: string } },
-) => {
+const fetcher = async ({
+  url,
+  req: { username },
+}: { url: string | null; req: ReqBody }) => {
   try {
-    const body = { ...arg };
+    console.log("body", url);
+
+    if (url === null) return;
+    const body = { username };
+    console.log(body);
+
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(body),
@@ -21,8 +26,22 @@ const fetcher = async (
   }
 };
 
+async function sendRequest(
+  url: string | URL | Request,
+  { arg }: { arg: { username: string } },
+): Promise<ResponseUser> {
+  return fetch(url, {
+    method: "POST",
+    body: JSON.stringify(arg),
+  }).then((res) => res.json());
+}
+
+type ReqBody = {
+  username: string;
+};
+
 export function useUser() {
-  const { data, error, trigger } = useSWRMutation(`${url}`, fetcher);
+  const { trigger, data, error } = useSWRMutation(url, sendRequest);
 
   return {
     user: data,

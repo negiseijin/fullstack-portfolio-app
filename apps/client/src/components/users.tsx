@@ -1,30 +1,33 @@
-import { useUser } from "@/hooks/useUser";
 import { Fragment, useEffect, useState } from "react";
 
-export function Users() {
-  const [show, setShow] = useState(false);
+import { useUser } from "@/hooks/useUser";
+
+type Props = {
+  username: string;
+};
+
+export function Users({ username }: Props) {
+  const [isReady, setIsReady] = useState(false);
   const { user, trigger } = useUser();
 
   useEffect(() => {
-    if (show) return;
-    trigger({ username: "Bret" });
-    setShow(true);
-  }, [show, trigger]);
+    if (isReady) return;
+    setIsReady(true);
+    (async () => {
+      await trigger({ username });
+    })();
+  }, [isReady, trigger, username]);
 
   return (
     <>
-      {show && user ? (
-        user.map((user) => (
-          <Fragment key={user.id}>
-            <p>{user.name}</p>
-            <p>{user.username}</p>
-            <p>{user.email}</p>
-            <p>{user.website}</p>
-          </Fragment>
-        ))
-      ) : (
-        <div>...LOADING</div>
-      )}
+      {user?.map((user) => (
+        <Fragment key={user.id}>
+          <p>{user.name}</p>
+          <p>{user.username}</p>
+          <p>{user.email}</p>
+          <p>{user.website}</p>
+        </Fragment>
+      ))}
     </>
   );
 }

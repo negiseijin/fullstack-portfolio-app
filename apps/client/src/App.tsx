@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 
 import { Textarea } from "@/components/ui/textarea";
 import viteLogo from "/vite.svg";
@@ -7,7 +7,18 @@ import { Button } from "./components/ui/button";
 
 import { Users } from "./components/users";
 
+// const Users = lazy(() =>
+//   import("./components/users").then((module) => ({ default: module.Users })),
+// );
+
 function App() {
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    if (name) return;
+    setName("Bret");
+  }, [name]);
+
   return (
     <div className="h-screen container grid grid-rows-[auto_1fr_auto] gap-4 font-sans">
       <header className="sticky top-0 z-10 grid grid-cols-[auto_1fr_auto] place-items-center p-4">
@@ -20,8 +31,8 @@ function App() {
         </a>
       </header>
       <main className="overflow-auto bg-red-500 p-4">
-        <Suspense fallback={<div>...LOADING</div>}>
-          <Users />
+        <Suspense fallback={<div>...LOADING!!!!!!!!!!!</div>}>
+          <Users username={name} />
         </Suspense>
       </main>
       <footer className="max-w-screen-pc sticky w-full mx-auto p-4">
