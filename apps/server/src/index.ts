@@ -10,6 +10,9 @@ import users from "./route/users";
 
 const app = new Hono();
 app.use(cors());
+
+app.route("/books", books);
+
 const routes = app
   .post("/posts", zValidator("json", RequestPost), (c) => {
     return c.json<ResponsePost>(
@@ -22,7 +25,6 @@ const routes = app
   })
   // authors
   .route("/authors", authors)
-  .route("/books", books)
   // user
   .route("/users", users);
 
