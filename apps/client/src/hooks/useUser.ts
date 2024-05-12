@@ -5,11 +5,10 @@ import { client } from "@/lib/utils";
 const url = "http://localhost:3000/users";
 
 const fetcher = async ({
-  url,
   req: { username },
 }: { url: string | null; req: ReqBody }) => {
   try {
-    if (url === null) return;
+    if (!username) return;
     const res = await client.users.$post({
       json: {
         username: username,
@@ -28,9 +27,9 @@ type ReqBody = {
   username: string;
 };
 
-export function useUser(req: ReqBody) {
+export function useUser({ isReady, ...req }: ReqBody & { isReady: boolean }) {
   const { data, error, isLoading, isValidating, mutate } = useSWR(
-    () => [url, req],
+    () => [isReady ? url : null, req],
     ([url, req]) => fetcher({ url, req }),
     {
       suspense: true,

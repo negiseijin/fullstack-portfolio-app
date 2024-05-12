@@ -7,10 +7,11 @@ import { useUser } from "@/hooks/useUser";
 type Props = {
   username: string;
   localUser: ResponseUser[number];
+  isReady: boolean;
 };
 
-export function Users({ username, localUser }: Props) {
-  const { user, isLoading } = useUser({ username });
+export function Users({ username, localUser, isReady }: Props) {
+  const { user, isLoading } = useUser({ username, isReady });
 
   if (isLoading) return null;
 
