@@ -12,10 +12,18 @@ const app = new Hono()
   .post("/", zValidator("json", RequestUser), async (c) => {
     const body = await c.req.json();
     console.log(body);
-    const url = `https://jsonplaceholder.typicode.com/users?username=${body.username}`;
-    // const url = "https://jsonplaceholder.typicode.com/users";
+    // const url = `https://jsonplaceholder.typicode.com/users?username=${body.username}`;
+    const url = "https://jsonplaceholder.typicode.com/users";
     const users: ResponseUser = await fetch(url).then((r) => r.json());
-    await new Promise((r) => setTimeout(r, 5000));
+    const map = new Map<number, Omit<ResponseUser[number], "id">>();
+    users.map(({ id, ...rest }) => map.set(id, rest));
+    // await new Promise((r) => setTimeout(r, 5000));
+    for (const [key, value] of map) {
+      console.log(key, value);
+      if (key === 5) {
+        console.log("key=", key);
+      }
+    }
     return c.json(users);
   });
 
