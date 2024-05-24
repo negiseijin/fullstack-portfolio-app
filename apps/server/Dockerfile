@@ -52,5 +52,6 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 server
 USER server
-COPY --from=installer --chown=server:nodejs /app/apps/server/dist .
-CMD [ "node", "index.js" ]
+COPY --from=installer --chown=server:nodejs /app/apps/server/dist ./apps/server/dist
+COPY --from=installer --chown=server:nodejs /app/packages/database/src/generated/client .prisma/client
+CMD [ "node", "apps/server/dist/index.js" ]

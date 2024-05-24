@@ -1,4 +1,3 @@
-import type { RequestPost } from "@repo/schema";
 import { type ClassValue, clsx } from "clsx";
 import { hc } from "hono/client";
 import type { AppType } from "server";

@@ -1,12 +1,14 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 
-// import { prisma } from "@/lib/prisma";
+import prisma from "@repo/database";
 import { RequestUser, type ResponseUser } from "@repo/schema";
 
 const app = new Hono()
   .get("/", async (c) => {
-    // const users = await prisma.userInfo.findMany();
+    const userInfo = await prisma.userInfo.findMany();
+    console.log({ userInfo });
+
     return c.json("users");
   })
   .post("/", zValidator("json", RequestUser), async (c) => {
