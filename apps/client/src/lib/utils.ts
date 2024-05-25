@@ -1,3 +1,5 @@
+import { useCookie } from "@/hooks/useCookie";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { type ClassValue, clsx } from "clsx";
 import { hc } from "hono/client";
 import type { AppType } from "server";
@@ -43,4 +45,11 @@ function isEmployee(people: People): people is Employee {
 
 function isUser(people: People): people is User {
   return "name" in people;
+}
+
+export function stubInit() {
+  useCookie("name", "Bret");
+  useLocalStorage<{ name: string }>("user", {
+    name: "Antonette",
+  });
 }

@@ -1,57 +1,12 @@
-import { Suspense, useEffect, useState } from "react";
-
-import type { ResponseUser } from "@repo/schema";
+import { Suspense } from "react";
 
 import reactLogo from "@/assets/react.svg";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Users } from "@/components/users";
-// import { useCookie } from "@/hooks/useCookie";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import viteLogo from "/vite.svg";
 
-// const Users = lazy(() =>
-//   import("./components/users").then((module) => ({ default: module.Users })),
-// );
-
 export function Home() {
-  // const [name] = useCookie("my-cookie");
-  const [user] = useLocalStorage<ResponseUser[number]>("my-LocalStorage", {
-    id: 0,
-    name: "",
-    username: "",
-    email: "",
-    address: {
-      street: "",
-      suite: "",
-      city: "",
-      zipcode: "",
-      geo: {
-        lat: 0,
-        lng: 0,
-      },
-    },
-    phone: "",
-    website: "",
-    company: {
-      name: "",
-      catchPhrase: "",
-      bs: "",
-    },
-  });
-
-  const [isReady, setIsReady] = useState(false);
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    if (isReady) return;
-    setName("Bret");
-    (async () => {
-      await new Promise((r) => setTimeout(r, 2000));
-    })();
-    setIsReady(true);
-  }, [isReady]);
-
   return (
     <div className="h-screen container grid grid-rows-[auto_1fr_auto] gap-4 font-sans">
       <header className="sticky top-0 z-10 grid grid-cols-[auto_1fr_auto] place-items-center p-4">
@@ -65,7 +20,7 @@ export function Home() {
       </header>
       <main className="grid grid-flow-col gap-4 overflow-auto overflow-y-hidden bg-red-500 p-4">
         <Suspense fallback={<div>...LOADING!!!!!!!!!!!</div>}>
-          <Users username={`${name}`} localUser={user} isReady />
+          <Users username="Bret" isReady />
         </Suspense>
       </main>
       <footer className="max-w-screen-pc sticky w-full mx-auto p-4">

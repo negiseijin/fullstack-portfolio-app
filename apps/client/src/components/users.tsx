@@ -1,16 +1,13 @@
 import { Fragment } from "react";
 
-import type { ResponseUser } from "@repo/schema";
-
 import { useUser } from "@/hooks/useUser";
 
 type Props = {
   username: string;
-  localUser: ResponseUser[number];
   isReady: boolean;
 };
 
-export function Users({ username, localUser, isReady }: Props) {
+export function Users({ username, isReady }: Props) {
   const { user, isLoading } = useUser({ username, isReady });
 
   if (isLoading) return null;
@@ -28,13 +25,6 @@ export function Users({ username, localUser, isReady }: Props) {
           </ul>
         </Fragment>
       ))}
-      <ul className="bg-white grid gap-2 rounded-xl">
-        <li>{localUser.name}</li>
-        <li>{localUser.username}</li>
-        <li>{localUser.email}</li>
-        <li>{localUser.website}</li>
-        <li>{localUser.website}</li>
-      </ul>
     </>
   );
 }
