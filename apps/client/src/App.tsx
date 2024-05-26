@@ -6,8 +6,7 @@ import { useInit } from "./hooks/useInit";
 // );
 
 function App() {
-  const { data, init, isLoading } = useInit();
-  console.log({ data }, { init }, { isLoading });
+  const { isLoading } = useInit();
 
   if (isLoading) {
     return (

@@ -17,9 +17,6 @@ export function Home() {
         </a>
       </header>
       <main className="grid grid-flow-col gap-4 overflow-auto overflow-y-hidden bg-red-500 p-4">
-        {/* <Suspense fallback={<div>...LOADING!!!!!!!!!!!</div>}>
-          <Users username="Bret" />
-        </Suspense> */}
         <Users />
       </main>
       <footer className="max-w-screen-pc sticky w-full mx-auto p-4">

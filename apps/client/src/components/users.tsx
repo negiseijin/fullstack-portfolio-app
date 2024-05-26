@@ -8,23 +8,21 @@ import { useUser } from "@/hooks/useUser";
 // };
 
 export function Users() {
-  const { init, isLoading: initLoading } = useInit();
-  console.log(init, initLoading);
+  const { init: user, isLoading } = useInit();
+  // const { user, isLoading } = useUser({ username: init?.name as string });
 
-  const { user, isLoading } = useUser({ username: init?.name as string });
-
-  if (isLoading) return null;
+  if (isLoading) return <div>Loading</div>;
 
   return (
     <>
       {user?.map((user) => (
-        <Fragment key={user.id}>
+        <Fragment key={user?.id}>
           <ul className="bg-white grid gap-2 rounded-xl">
-            <li>{user.name}</li>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>{user.website}</li>
-            <li>{user.website}</li>
+            <li>{user?.name}</li>
+            <li>{user?.username}</li>
+            <li>{user?.email}</li>
+            <li>{user?.website}</li>
+            <li>{user?.website}</li>
           </ul>
         </Fragment>
       ))}
