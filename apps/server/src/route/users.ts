@@ -20,12 +20,12 @@ const app = new Hono()
     const map = new Map<number, Omit<ResponseUser[number], "id">>();
     users.map(({ id, ...rest }) => map.set(id, rest));
     // await new Promise((r) => setTimeout(r, 5000));
-    for (const [key, value] of map) {
-      console.log(key, value);
-      if (key === 5) {
-        console.log("key=", key);
-      }
-    }
+    // for (const [key, value] of map) {
+    //   console.log(key, value);
+    //   if (key === 5) {
+    //     console.log("key=", key);
+    //   }
+    // }
     return c.json(users);
   });
 

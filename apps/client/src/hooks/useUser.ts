@@ -2,13 +2,10 @@ import useSWR from "swr";
 
 import { client } from "@/lib/utils";
 
-const url = "http://localhost:3000/users";
+const key = "users" as const;
 
-const fetcher = async ({
-  req: { username },
-}: { url: string | null; req: ReqBody }) => {
+const fetcher = async ({ req: { username } }: { req: ReqBody }) => {
   try {
-    if (!username) return;
     const res = await client.users.$post({
       json: {
         username: username,
@@ -29,12 +26,11 @@ type ReqBody = {
   username: string;
 };
 
-export function useUser({ isReady, ...req }: ReqBody & { isReady: boolean }) {
+export function useUser({ username }: ReqBody) {
   const { data, error, isLoading, isValidating, mutate } = useSWR(
-    () => [isReady ? url : null, req],
-    ([url, req]) => fetcher({ url, req }),
+    key,
+    () => fetcher({ req: { username } }),
     {
-      suspense: true,
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,

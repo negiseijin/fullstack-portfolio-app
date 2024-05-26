@@ -30,12 +30,14 @@ const people: People[] = [
   { id: "4", email: "bbbb.com" },
 ];
 
-for (const person of people) {
-  if (isEmployee(person)) {
-    console.log(person.email);
-  }
-  if (isUser(person)) {
-    console.log(person.name);
+export function name() {
+  for (const person of people) {
+    if (isEmployee(person)) {
+      console.log(person.email);
+    }
+    if (isUser(person)) {
+      console.log(person.name);
+    }
   }
 }
 

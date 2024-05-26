@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import reactLogo from "@/assets/react.svg";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,9 +17,10 @@ export function Home() {
         </a>
       </header>
       <main className="grid grid-flow-col gap-4 overflow-auto overflow-y-hidden bg-red-500 p-4">
-        <Suspense fallback={<div>...LOADING!!!!!!!!!!!</div>}>
-          <Users username="Bret" isReady />
-        </Suspense>
+        {/* <Suspense fallback={<div>...LOADING!!!!!!!!!!!</div>}>
+          <Users username="Bret" />
+        </Suspense> */}
+        <Users />
       </main>
       <footer className="max-w-screen-pc sticky w-full mx-auto p-4">
         <div className="grid grid-cols-[1fr_auto] place-items-center gap-2">

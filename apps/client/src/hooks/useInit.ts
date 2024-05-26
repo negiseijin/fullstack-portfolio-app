@@ -7,10 +7,12 @@ import { useUser } from "./useUser";
 const fetcher =
   (arg: { cookie: string | null; name: string }) =>
   async (): Promise<{ cookie: string | null; name: string }> => {
-    console.log(arg);
+    // async (): Promise<boolean> => {
+    console.log({ arg });
 
     // await new Promise((resolve) => setTimeout(resolve, 3000));
     return arg;
+    // return true;
   };
 
 const key = "init" as const;
@@ -23,19 +25,35 @@ export function useInit() {
   const [user] = useLocalStorage<{ name: string }>("user", {
     name: "",
   });
-  const { user: fetchUser } = useUser({
+  const { user: fetchUser, isLoading: userLoading } = useUser({
     username: name ?? user.name,
-    isReady: true,
+  });
+
+  const {
+    data: init,
+    mutate: setInit,
+    isLoading: initLoading,
+  } = useSWR<{
+    cookie: string | null;
+    name: string;
+  }>(key, null, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
   });
 
   const { data, error, isLoading, isValidating, mutate } = useSWR(
-    key,
+    userLoading ? null : key,
     fetcher({
       cookie: fetchUser?.[3]?.username ?? "",
       name: fetchUser?.[2]?.name ?? "",
     }),
     {
-      suspense: true,
+      onSuccess(data, key, config) {
+        console.log(data, key, config);
+        setInit({ ...data });
+      },
+      // suspense: true,
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
@@ -44,8 +62,9 @@ export function useInit() {
 
   return {
     data,
+    init,
     isError: error,
-    isLoading,
+    isLoading: isLoading || userLoading || initLoading,
     mutate,
     isValidating,
   };
