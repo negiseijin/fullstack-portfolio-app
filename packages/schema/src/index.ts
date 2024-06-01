@@ -1,2 +1,2 @@
-export * from "./post";
-export * from "./user";
+export { RequestPost, ResponsePost } from "./post";
+export { RequestUser, ResponseUser } from "./user";
