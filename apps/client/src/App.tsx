@@ -1,10 +1,6 @@
 import { Home } from "./app/home";
 import { useInit } from "./hooks/useInit";
 
-// const Home = lazy(() =>
-//   import("./app/home").then((module) => ({ default: module.Home })),
-// );
-
 function App() {
   const { isLoading } = useInit();
 

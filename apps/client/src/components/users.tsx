@@ -1,15 +1,9 @@
 import { Fragment } from "react";
 
 import { useInit } from "@/hooks/useInit";
-import { useUser } from "@/hooks/useUser";
-
-// type Props = {
-//   username: string;
-// };
 
 export function Users() {
   const { init: user, isLoading } = useInit();
-  // const { user, isLoading } = useUser({ username: init?.name as string });
 
   if (isLoading) return <div>Loading</div>;
 

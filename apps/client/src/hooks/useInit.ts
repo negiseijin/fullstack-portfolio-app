@@ -1,15 +1,13 @@
-import { stubInit } from "@/lib/utils";
 import useSWR from "swr";
-import { useCookie } from "./useCookie";
-import { useLocalStorage } from "./useLocalStorage";
-import { useUser } from "./useUser";
+
+import { useCookie } from "@/hooks/useCookie";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useUser } from "@/hooks/useUser";
+import { stubInit } from "@/lib/utils";
 
 const fetcher =
   (arg: ReturnType<typeof useUser>["user"]) =>
   async (): Promise<ReturnType<typeof useUser>["user"]> => {
-    console.log({ arg });
-
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
     return arg;
   };
 
