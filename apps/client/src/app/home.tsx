@@ -22,7 +22,10 @@ export function Home() {
       </main>
       <footer className="max-w-screen-pc sticky w-full mx-auto p-4">
         <div className="grid grid-cols-[1fr_auto] place-items-center gap-2">
-          <Textarea placeholder="入力する..." className="resize-none" />
+          <Textarea
+            placeholder="入力する..."
+            className="resize-none focus:text-base"
+          />
           <Button>Send message</Button>
         </div>
       </footer>
