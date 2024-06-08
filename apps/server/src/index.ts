@@ -6,6 +6,7 @@ import { cors } from "hono/cors";
 import { RequestPost, type ResponsePost } from "@repo/schema";
 import authors from "./route/authors";
 import books from "./route/books";
+import comments from "./route/comments";
 import users from "./route/users";
 
 const app = new Hono();
@@ -25,6 +26,7 @@ const routes = app
   })
   // authors
   .route("/authors", authors)
+  .route("/comments", comments)
   // user
   .route("/users", users);
 

@@ -55,3 +55,12 @@ export function stubInit() {
     name: "Antonette",
   });
 }
+
+export function generateKey(key: string) {
+  const splitKey = key.split("-");
+  const number = Number(splitKey[splitKey.length - 1]);
+  const newNumber = number + 1;
+  splitKey[splitKey.length - 1] = newNumber.toString();
+  const newKey = splitKey.join("-");
+  return newKey;
+}
