@@ -26,7 +26,7 @@ export function Home() {
           <img
             src="https://via.placeholder.com/64x64/"
             alt=""
-            className="row-start-1 col-start-1"
+            className="row-start-1 col-start-1 aspect-square object-cover"
           />
         </a>
       </header>
