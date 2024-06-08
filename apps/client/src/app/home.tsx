@@ -12,8 +12,22 @@ export function Home() {
           <Icon name="ViteLogo" className="logo" ariaLabel="Vite logo" />
         </a>
         <h1>Vite + React</h1>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <Icon name="ReactLogo" className="logo react" ariaLabel="ReactLogo" />
+        <a
+          href="https://react.dev"
+          target="_blank"
+          rel="noreferrer"
+          className="grid"
+        >
+          <Icon
+            name="ReactLogo"
+            className="row-start-1 col-start-1 justify-self-end z-10"
+            ariaLabel="ReactLogo"
+          />
+          <img
+            src="https://via.placeholder.com/64x64/"
+            alt=""
+            className="row-start-1 col-start-1"
+          />
         </a>
       </header>
       <main className="grid gap-4 overflow-auto bg-red-500 p-4">
