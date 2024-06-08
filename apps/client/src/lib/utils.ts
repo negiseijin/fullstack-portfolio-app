@@ -56,11 +56,15 @@ export function stubInit() {
   });
 }
 
-export function generateKey(key: string) {
+export function generateKey(key: string): string {
   const splitKey = key.split("-");
-  const number = Number(splitKey[splitKey.length - 1]);
-  const newNumber = number + 1;
+  const lastSegment = Number(splitKey[splitKey.length - 1]);
+
+  if (Number.isNaN(Number(lastSegment))) {
+    throw new Error("The last segment is not a number.");
+  }
+
+  const newNumber = lastSegment + 1;
   splitKey[splitKey.length - 1] = newNumber.toString();
-  const newKey = splitKey.join("-");
-  return newKey;
+  return splitKey.join("-");
 }
