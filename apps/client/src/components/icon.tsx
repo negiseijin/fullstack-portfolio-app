@@ -1,4 +1,5 @@
 import ReactLogo from "@/assets/react.svg";
+import ReactLogo2 from "@/assets/react2.svg";
 import ViteLogo from "/public/vite.svg";
 
 const ICON = {
