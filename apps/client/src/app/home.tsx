@@ -1,3 +1,5 @@
+import ReactLogo2 from "@/assets/react2.svg";
+import ReactLogo3 from "@/assets/react3.svg";
 import { Comments } from "@/components/comments";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
@@ -10,6 +12,8 @@ export function Home() {
       <header className="sticky top-0 z-10 grid grid-cols-[auto_1fr_auto] place-items-center p-4">
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <Icon name="ViteLogo" className="logo" ariaLabel="Vite logo" />
+          <img src={ReactLogo2} className="logo react" alt="React logo" />
+          <img src={ReactLogo3} className="logo react" alt="React logo" />
         </a>
         <h1>Vite + React</h1>
         <a
