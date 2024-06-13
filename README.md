@@ -1,3 +1,61 @@
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+
+// Memoized Message component
+const Message = React.memo(({ message }) => (
+  <div className="message">
+    <p>{message.text}</p>
+  </div>
+));
+
+// MessageList component
+const MessageList = ({ messages }) => {
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  return (
+    <div className="message-list">
+      {messages.map((message, index) => (
+        <Message key={index} message={message} />
+      ))}
+      <div ref={messagesEndRef} />
+    </div>
+  );
+};
+
+// ChatApp component
+const ChatApp = () => {
+  const [messages, setMessages] = useState([]);
+  const inputRef = useRef();
+
+  const sendMessage = useCallback(() => {
+    const newMessage = { text: inputRef.current.value };
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    inputRef.current.value = '';
+  }, []);
+
+  // Using useMemo to memoize the messages array
+  const memoizedMessages = useMemo(() => messages, [messages]);
+
+  return (
+    <div className="chat-app">
+      <MessageList messages={memoizedMessages} />
+      <input type="text" ref={inputRef} />
+      <button onClick={sendMessage}>Send</button>
+    </div>
+  );
+};
+
+export default ChatApp;
+
+
+
 # Turborepo starter
 
 This is an official starter Turborepo.
