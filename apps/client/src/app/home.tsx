@@ -4,7 +4,6 @@ import { Comments } from "@/components/comments";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Users } from "@/components/users";
 
 export function Home() {
   return (

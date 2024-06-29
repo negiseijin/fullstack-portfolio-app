@@ -20,7 +20,7 @@ export function useComments() {
   const {
     data: comment,
     error,
-    mutate,
+    // mutate,
     size,
     setSize,
     isValidating,
@@ -43,7 +43,8 @@ export function useComments() {
     comment: issues,
     isError: error,
     isLoading,
-    mutate,
+    // mutate,
+    isLoadingMore,
     setSize,
     isValidating,
   };
