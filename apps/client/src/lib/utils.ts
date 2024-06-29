@@ -68,3 +68,7 @@ export function generateKey(key: string): string {
   splitKey[splitKey.length - 1] = newNumber.toString();
   return splitKey.join("-");
 }
+
+export async function sleep(seconds: number) {
+  await new Promise((resolve) => setTimeout(resolve, seconds));
+}

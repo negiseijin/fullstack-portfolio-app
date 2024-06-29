@@ -1,24 +1,8 @@
-import useSWR from "swr";
-
-import { client } from "@/lib/utils";
 import useSWRInfinite from "swr/infinite";
 
-const key = "comments" as const;
-const PAGE_SIZE = 20;
+import { client } from "@/lib/utils";
 
-const fetcher = async () => {
-  try {
-    const res = await client.comments.$get();
-    if (res.ok) {
-      const data = await res.json();
-      return data;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const fetcher2 = async (commentId: string) => {
+const fetcher = async (commentId: string) => {
   try {
     const res = await client.comments[":commentId"].$get({
       param: { commentId: commentId },
@@ -34,23 +18,14 @@ const fetcher2 = async (commentId: string) => {
 
 export function useComments() {
   const {
-    data: comments,
-    error,
-    isLoading,
-    isValidating,
-    mutate,
-  } = useSWR(key, fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
-
-  // const { data, mutate, size, setSize, isValidating, isLoading } =
-  const {
     data: comment,
+    error,
+    mutate,
     size,
     setSize,
-  } = useSWRInfinite((index) => `${index + 1}`, fetcher2, {
+    isValidating,
+    isLoading,
+  } = useSWRInfinite((index) => `${index + 1}`, fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
@@ -65,7 +40,6 @@ export function useComments() {
   // const isRefreshing = isValidating && comment && comment.length === size;
 
   return {
-    comments: comments,
     comment: issues,
     isError: error,
     isLoading,

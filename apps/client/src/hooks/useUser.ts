@@ -11,8 +11,6 @@ const fetcher = async ({ req: { username } }: { req: ReqBody }) => {
         username: username,
       },
     });
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     if (res.ok) {
       const data = await res.json();
       return data;
@@ -36,7 +34,6 @@ export function useUser({ username }: ReqBody) {
       revalidateOnReconnect: false,
     },
   );
-
   return {
     user: data,
     isError: error,

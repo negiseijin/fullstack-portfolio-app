@@ -1,24 +1,13 @@
 import { Fragment } from "react";
 
 import { useComments } from "@/hooks/useComments";
-import { generateKey } from "@/lib/utils";
 import { Button } from "./ui/button";
 
 export function Comments() {
   const { comment, setSize } = useComments();
 
   const handleSetSize = () => {
-    setSize(10);
-
-    const randomUUID = crypto.randomUUID();
-    for (let index = 0; index < 5; index++) {
-      const string = `${randomUUID}-${index}`;
-      const key = generateKey(string);
-      console.log(index, { key });
-    }
-
-    const initKey = generateKey("aaaaaa");
-    console.log({ initKey }, initKey === Number.NaN.toString());
+    setSize((prev) => prev + 1);
   };
 
   const handleClear = () => {
