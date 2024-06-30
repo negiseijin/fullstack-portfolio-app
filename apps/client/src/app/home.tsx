@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import ReactLogo2 from "@/assets/react2.svg";
 import ReactLogo3 from "@/assets/react3.svg";
 import { Comments } from "@/components/comments";
@@ -6,6 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 export function Home() {
+  const handleScroll = useCallback((e: React.UIEvent): void => {
+    const { scrollHeight, scrollTop, clientHeight } = e.currentTarget;
+
+    console.log({ scrollHeight }, { scrollTop }, { clientHeight });
+  }, []);
+
   return (
     <div className="h-screen py-3 container grid grid-rows-[1fr_auto] gap-4 font-sans">
       <header className="sticky top-0 z-10 grid grid-cols-[auto_1fr_auto] place-items-center p-4">
@@ -33,7 +41,10 @@ export function Home() {
           />
         </a>
       </header>
-      <main className="grid gap-4 overflow-auto bg-red-500 p-4">
+      <main
+        onScroll={handleScroll}
+        className="grid gap-4 overflow-auto bg-red-500 p-4 scroll-mt-16"
+      >
         {/* <Users /> */}
         <Comments />
       </main>
