@@ -13,7 +13,8 @@
     "prepare": "husky",
     "generate": "turbo generate",
     "studio": "turbo studio",
-    "version:patch": "pnpm version patch && turbo version:patch"
+    "version:patch": "pnpm version patch && turbo version:patch",
+    "tag": "pnpm version patch && cd apps/client && pnpm version patch && cd ../client/server && pnpm version patch"
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
