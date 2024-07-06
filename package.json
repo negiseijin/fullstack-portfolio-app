@@ -12,7 +12,9 @@
     "docker:down": "docker compose down",
     "prepare": "husky",
     "generate": "turbo generate",
-    "studio": "turbo studio"
+    "studio": "turbo studio",
+    "version:patch": "pnpm version patch",
+    "tag": "turbo version:patch"
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [

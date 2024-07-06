@@ -15,7 +15,8 @@
     "lint": "biome lint ./src",
     "generate": "prisma generate",
     "build": "prisma generate",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "version:patch": "pnpm version patch"
   },
   "dependencies": {
     "@prisma/client": "5.12.1"

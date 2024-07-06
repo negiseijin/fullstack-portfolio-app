@@ -11,7 +11,8 @@
     "check": "biome check ./src",
     "check:fix": "biome check --apply ./src",
     "format": "biome format ./src",
-    "lint": "biome lint ./src"
+    "lint": "biome lint ./src",
+    "version:patch": "pnpm version patch"
   },
   "dependencies": {
     "@hono/node-server": "^1.9.0",

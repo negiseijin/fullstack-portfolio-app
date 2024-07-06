@@ -11,7 +11,8 @@
     "check:fix": "biome check --apply ./src",
     "format": "biome format ./src",
     "lint": "biome lint ./src",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "version:patch": "pnpm version patch"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
