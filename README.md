@@ -1,6 +1,36 @@
 # Turborepo starter
 
-https://stackoverflow.com/questions/76844744/when-implementing-reverse-infinite-scrolling-and-wanting-to-keep-the-scroll-posi
+window.scrollToを使う方法
+window.scrollTo()メソッドを使うと、ページ全体を指定した位置にスクロールさせることができます。
+javascript
+// ページトップにスクロール
+window.scrollTo(0, 0);
+
+// スムーズにスクロール
+window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
+
+Element.scrollIntoViewを使う方法
+特定の要素まで自動的にスクロールさせたい場合は、Element.scrollIntoView()メソッドが便利です。
+javascript
+const element = document.getElementById('target');
+element.scrollIntoView({behavior: 'smooth'});
+
+要素内でスクロールする方法
+特定の要素内でスクロールさせたい場合は、その要素のscrollTopプロパティを操作します。
+javascript
+const element = document.querySelector('#scrollable-element');
+element.scrollTop = 1000; // 1000ピクセル下にスクロール
+
+scrollByを使う方法
+現在の位置から相対的にスクロールさせたい場合は、scrollBy()メソッドが使えます。
+javascript
+// 現在の位置から100px下にスクロール
+window.scrollBy(0, 100);
+
+これらの方法を使い分けることで、様々なスクロール操作を実現できます。ブラウザの互換性や具体的な要件に応じて、最適な方法を選択してください。
 
 This is an official starter Turborepo.
 
