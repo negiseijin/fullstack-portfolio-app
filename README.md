@@ -1,5 +1,18 @@
 # Turborepo starter
 
+useRefフックとscrollToを使用する:
+新しい要素が追加される前のスクロール位置を保存し、要素追加後に元の位置に戻すことができます[4]。
+
+```jsx
+const containerRef = useRef(null);
+
+// 要素追加前
+const scrollPosition = containerRef.current.scrollTop;
+
+// 要素追加後
+containerRef.current.scrollTo(0, scrollPosition);
+```
+
 window.scrollToを使う方法
 window.scrollTo()メソッドを使うと、ページ全体を指定した位置にスクロールさせることができます。
 javascript
