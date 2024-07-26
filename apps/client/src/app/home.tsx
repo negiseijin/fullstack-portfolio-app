@@ -1,4 +1,3 @@
-import { Comments } from "@/components/comments";
 import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -46,8 +45,7 @@ export function Home() {
         onScroll={handleScroll}
         className="grid gap-4 overflow-auto bg-red-500 p-4 scroll-mt-16"
       >
-        {/* <Users /> */}
-        <Comments />
+        MAIN
       </main>
       <footer className="max-w-screen-pc sticky w-full mx-auto p-4">
         <div className="grid grid-cols-[1fr_auto] place-items-center gap-2">
