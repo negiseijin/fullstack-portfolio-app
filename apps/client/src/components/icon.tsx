@@ -10,26 +10,26 @@ type Name = keyof typeof ICON;
 
 type Props = {
   name: Name;
-  size?: number;
-  className?: string;
   ariaLabel: string;
-};
+} & Omit<React.SVGProps<SVGElement>, "aria-label">;
 
 const DEFAULT_SIZE = 24;
 
 export function Icon({
   name,
-  size = DEFAULT_SIZE,
-  className,
+  height = DEFAULT_SIZE,
+  width = DEFAULT_SIZE,
   ariaLabel,
+  ...rest
 }: Props) {
   const SvgComponent = ICON[name];
 
   return (
     <SvgComponent
-      style={{ height: `${size}px`, width: `${size}px` }}
-      className={className}
+      height={height}
+      width={width}
       aria-label={ariaLabel}
+      {...rest}
     />
   );
 }
