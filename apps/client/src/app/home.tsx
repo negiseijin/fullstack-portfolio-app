@@ -19,7 +19,7 @@ export function Home() {
             height={40}
             width={40}
             className="logo"
-            ariaLabel="Vite logo"
+            aria-label="Vite logo"
           />
         </a>
         <h1>Vite + React</h1>
@@ -32,7 +32,7 @@ export function Home() {
           <Icon
             name="ReactLogo"
             className="row-start-1 col-start-1 justify-self-end z-10"
-            ariaLabel="ReactLogo"
+            aria-label="ReactLogo"
           />
           <img
             src="https://via.placeholder.com/64x64/"
