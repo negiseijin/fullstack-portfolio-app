@@ -1,7 +1,7 @@
 {
   "name": "server",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.0",
   "type": "commonjs",
   "exports": "./src/index.ts",
   "scripts": {
@@ -11,8 +11,7 @@
     "check": "biome check ./src",
     "check:fix": "biome check --apply ./src",
     "format": "biome format ./src",
-    "lint": "biome lint ./src",
-    "version:patch": "pnpm version patch"
+    "lint": "biome lint ./src"
   },
   "dependencies": {
     "@hono/node-server": "^1.9.0",
