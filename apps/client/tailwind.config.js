@@ -26,6 +26,18 @@ module.exports = {
       maxHeight: {
         screen: ["100vh", "100dvh"],
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(circle, var(--tw-gradient-stops))",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 1s",
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require("postcss-100vh-fix")],
