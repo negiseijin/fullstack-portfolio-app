@@ -36,7 +36,7 @@ COPY --from=builder /app/out/full/ .
 
 RUN pnpm turbo build --filter=server...
 
-FROM base AS Development
+FROM base AS development
 RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
@@ -46,7 +46,7 @@ COPY --from=installer --chown=node:node /app .
 RUN pnpm install --no-frozen-lockfile
 CMD [ "pnpm", "turbo", "dev", "--filter", "server" ]
 
-FROM base AS Prodcution
+FROM base AS prodcution
 WORKDIR /app
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
