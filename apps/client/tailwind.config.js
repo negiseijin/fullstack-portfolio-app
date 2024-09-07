@@ -1,3 +1,5 @@
+const { Screens } = require("./src/hooks/useScreen");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -9,7 +11,7 @@ module.exports = {
   prefix: "",
   theme: {
     screens: {
-      pc: "1024px",
+      ...Screens,
     },
     container: {
       center: true,
