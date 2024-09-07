@@ -1,4 +1,5 @@
 import { Icon } from "@/components/icon";
+import { MediaQuery } from "@/components/media-query";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Welcome } from "@/components/welcome";
@@ -36,6 +37,7 @@ export function Home() {
         </a>
       </header>
       <main className="grid gap-4 overflow-auto bg-red-500 p-4 scroll-mt-16">
+        <MediaQuery />
         <Welcome />
       </main>
       <footer className="max-w-screen-pc sticky w-full mx-auto p-4">

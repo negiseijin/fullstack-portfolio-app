@@ -1,4 +1,4 @@
-const { Screens } = require("./src/hooks/useScreen");
+const { Screens } = require("./src/hooks/useMediaQuery");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
