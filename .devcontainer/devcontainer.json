@@ -1,0 +1,64 @@
+{
+  "name": "${localWorkspaceFolderBasename}",
+  "dockerComposeFile": [
+    "./compose.yaml"
+  ],
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "remoteEnv": {
+    "NODE_OPTIONS": "--max-old-space-size=4096"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true,
+      "username": "devcontainer"
+    },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22",
+      "pnpmVersion": "10",
+      "installYarnUsingApt": false
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bierner.markdown-mermaid",
+        "bierner.markdown-preview-github-styles",
+        "christian-kohler.path-intellisense",
+        "DavidAnson.vscode-markdownlint",
+        "docker.docker",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        "EditorConfig.EditorConfig",
+        "github.vscode-github-actions",
+        "mhutchie.git-graph",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode.github-issues-prs",
+        "oderwat.indent-rainbow",
+        "shd101wyy.markdown-preview-enhanced",
+        "streetsidesoftware.code-spell-checker",
+        "VisualStudioExptTeam.intellicode-api-usage-examples",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "yzhang.markdown-all-in-one",
+        "ms-vscode.live-server",
+        "esbenp.prettier-vscode",
+        "google.geminicodeassist"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit"
+        }
+      }
+    }
+  },
+  "forwardPorts": [],
+  "remoteUser": "devcontainer",
+  "updateRemoteUserUID": true,
+  "shutdownAction": "stopCompose",
+  "overrideCommand": true,
+  "postAttachCommand": "/bin/zsh .devcontainer/postAttachCommand.sh"
+}

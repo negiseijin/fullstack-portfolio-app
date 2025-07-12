@@ -1,0 +1,15 @@
+services:
+  app:
+    container_name: monorepo
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UBUNTU_VERSION: ${UBUNTU_VERSION-22.04}
+    env_file:
+      - devcontainer.env
+    volumes:
+      - ../.:/workspace:cached
+    hostname: monorepo
+    tty: true
+    stdin_open: true
