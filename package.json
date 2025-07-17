@@ -1,0 +1,17 @@
+{
+  "name": "fullstack-portfolio-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "claude": "claude",
+    "gemini": "gemini"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "@anthropic-ai/claude-code": "^1.0.55",
+    "@google/gemini-cli": "^0.1.12"
+  }
+}

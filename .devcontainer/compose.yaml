@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: monorepo
+    container_name: fullstack-portfolio-app
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,6 +10,6 @@ services:
       - devcontainer.env
     volumes:
       - ../.:/workspace:cached
-    hostname: monorepo
+    hostname: fullstack-portfolio-app
     tty: true
     stdin_open: true

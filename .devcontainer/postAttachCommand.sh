@@ -53,6 +53,20 @@ else
   log "ℹ️ package.json not found. スキップします。"
 fi
 
+if [ -f .env ]; then
+    echo "🔧 Loading environment variables..."
+    source .env
+
+    if [ -n "${GEMINI_API_KEY:-}" ]; then
+        echo "GEMINI_API_KEY: $GEMINI_API_KEY"
+        export GEMINI_API_KEY
+    else
+        echo "⚠️  GEMINI_API_KEY not set in .env file"
+    fi
+else
+    echo "⚠️  .env file not found. Please create one from .env.example"
+fi
+
 # ── 追加スクリプトをここに追記可能 ─────────────────────
 # 例）データベース起動確認、Lint実行、Playwright install など
 # if [ -f "playwright.config.ts" ]; then

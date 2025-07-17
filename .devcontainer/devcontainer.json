@@ -6,7 +6,9 @@
   "service": "app",
   "workspaceFolder": "/workspace",
   "remoteEnv": {
-    "NODE_OPTIONS": "--max-old-space-size=4096"
+    "NODE_OPTIONS": "--max-old-space-size=4096",
+    "CHOKIDAR_USEPOLLING": "true",
+    "WATCHPACK_POLLING": "true"
   },
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
@@ -45,7 +47,8 @@
         "yzhang.markdown-all-in-one",
         "ms-vscode.live-server",
         "esbenp.prettier-vscode",
-        "google.geminicodeassist"
+        "google.geminicodeassist",
+        "Anthropic.claude-code"
       ],
       "settings": {
         "editor.formatOnSave": true,
