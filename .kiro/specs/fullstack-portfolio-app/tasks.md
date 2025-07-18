@@ -1,6 +1,8 @@
 # Implementation Plan
 
 - [ ] 1. プロジェクト基盤とモノレポ構造の構築
+  - Turborepo 設定ファイル (turbo.json) を作成
+  - pnpm workspace 設定 (pnpm-workspace.yaml) を作成
   - apps/web (Next.js) と apps/api (Hono) ディレクトリ構造を作成
   - packages/* 共有ライブラリの基本構造を設定
   - TypeScript設定ファイルとTurborepo設定を更新
