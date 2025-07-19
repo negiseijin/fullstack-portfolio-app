@@ -1,11 +1,10 @@
 {
   "name": "${localWorkspaceFolderBasename}",
-  "dockerComposeFile": [
-    "./compose.yaml"
-  ],
+  "dockerComposeFile": ["./compose.yaml"],
   "service": "app",
   "workspaceFolder": "/workspace",
   "remoteEnv": {
+    "NODE_ENV": "development",
     "NODE_OPTIONS": "--max-old-space-size=4096",
     "CHOKIDAR_USEPOLLING": "true",
     "WATCHPACK_POLLING": "true"
@@ -58,11 +57,14 @@
           "source.fixAll": "explicit",
           "source.removeUnusedImports": "explicit",
           "source.sortImports": "explicit"
+        },
+        "[prisma]": {
+          "editor.defaultFormatter": "Prisma.prisma"
         }
       }
     }
   },
-  "forwardPorts": [],
+  "forwardPorts": [3000, 5432, 8787],
   "remoteUser": "devcontainer",
   "updateRemoteUserUID": true,
   "shutdownAction": "stopCompose",

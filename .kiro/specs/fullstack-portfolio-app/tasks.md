@@ -15,7 +15,7 @@
   - Zodスキーマによるバリデーション型を定義
   - _Requirements: 1.3_
 
-- [ ] 2.2 データベースパッケージの実装
+- [x] 2.2 データベースパッケージの実装
   - packages/database でPrismaスキーマを実装
   - User、Post、Tag、Account、Sessionモデルを定義
   - PostgreSQL接続設定とマイグレーション設定を構築
@@ -104,8 +104,8 @@
   - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
 - [ ] 5. データベース設定とマイグレーション
-- [ ] 5.1 PostgreSQL環境構築
-  - Docker Composeによる開発環境PostgreSQL設定
+- [ ] 5.1 devcontainerを利用したPostgreSQL環境構築
+  - devcontainer.json と Docker Compose でPostgreSQLのサービスを定義
   - pgvector拡張の設定と全文検索インデックス作成
   - Prismaマイグレーションファイルの作成と実行
   - _Requirements: 4.4_

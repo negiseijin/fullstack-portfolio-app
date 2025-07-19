@@ -46,6 +46,8 @@ if [ -f "package.json" ]; then
   if command -v pnpm &> /dev/null; then
     log "📦 Installing Node.js dependencies via pnpm..."
     pnpm install
+    pnpm --filter @repo/database db:generate
+    pnpm --filter @repo/database db:push
   else
     log "⚠️ pnpm が見つかりませんでした。依存は手動でインストールしてください。"
   fi

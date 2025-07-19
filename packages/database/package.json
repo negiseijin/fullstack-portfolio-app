@@ -2,19 +2,24 @@
   "name": "@repo/database",
   "version": "0.0.0",
   "private": true,
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
-    "lint": "biome lint .",
+    "lint": "biome lint ./src",
     "db:generate": "prisma generate",
-    "db:push": "prisma db push"
+    "db:push": "prisma db push",
+    "build": "prisma generate",
+    "studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^6.12.0"
   },
   "devDependencies": {
+    "@repo/biome-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^24.0.14",
     "prisma": "^6.12.0",
-    "typescript": "^5.8.3",
-    "@repo/biome-config": "workspace:*"
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   }
 }
