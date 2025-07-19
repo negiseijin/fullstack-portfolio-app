@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "build": "wrangler deploy",
+    "start": "wrangler dev src/index.ts",
+    "lint": "biome lint ."
+  },
+  "dependencies": {
+    "hono": "^4.8.5",
+    "@repo/database": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250718.0",
+    "wrangler": "^4.25.0",
+    "typescript": "^5.8.3",
+    "@repo/biome-config": "workspace:*"
+  }
+}

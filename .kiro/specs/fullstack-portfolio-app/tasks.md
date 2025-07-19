@@ -1,6 +1,6 @@
 # Implementation Plan
 
-- [ ] 1. プロジェクト基盤とモノレポ構造の構築
+- [x] 1. プロジェクト基盤とモノレポ構造の構築
   - Turborepo 設定ファイル (turbo.json) を作成
   - pnpm workspace 設定 (pnpm-workspace.yaml) を作成
   - apps/web (Next.js) と apps/api (Hono) ディレクトリ構造を作成

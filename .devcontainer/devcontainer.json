@@ -48,12 +48,16 @@
         "ms-vscode.live-server",
         "esbenp.prettier-vscode",
         "google.geminicodeassist",
-        "Anthropic.claude-code"
+        "Anthropic.claude-code",
+        "biomejs.biome",
+        "Prisma.prisma"
       ],
       "settings": {
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-          "source.fixAll": "explicit"
+          "source.fixAll": "explicit",
+          "source.removeUnusedImports": "explicit",
+          "source.sortImports": "explicit"
         }
       }
     }

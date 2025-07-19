@@ -2,16 +2,26 @@
   "name": "fullstack-portfolio-app",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "biome format --write .",
     "claude": "claude",
     "gemini": "gemini"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.13.1",
   "devDependencies": {
     "@anthropic-ai/claude-code": "^1.0.55",
-    "@google/gemini-cli": "^0.1.12"
+    "@biomejs/biome": "2.1.2",
+    "@google/gemini-cli": "^0.1.12",
+    "@repo/biome-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "turbo": "^2.5.5",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=22"
   }
 }
