@@ -10,7 +10,7 @@
   - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6_
 
 - [ ] 2. 共有パッケージの実装
-- [ ] 2.1 TypeScript型定義パッケージの作成
+- [x] 2.1 TypeScript型定義パッケージの作成
   - packages/types でAPI、User、Post、認証関連の型定義を実装
   - Zodスキーマによるバリデーション型を定義
   - _Requirements: 1.3_
