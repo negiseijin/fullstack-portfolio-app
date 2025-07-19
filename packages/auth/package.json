@@ -2,16 +2,20 @@
   "name": "@repo/auth",
   "version": "0.0.0",
   "private": true,
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
-    "lint": "biome lint ."
+    "lint": "biome lint ./src"
   },
   "dependencies": {
-    "next-auth": "^4.24.11"
+    "@auth/core": "^0.40.0",
+    "@auth/prisma-adapter": "^2.10.0",
+    "next-auth": "5.0.0-beta.29"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "@repo/biome-config": "workspace:*"
+    "@repo/biome-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/database": "workspace:*",
+    "typescript": "^5.8.3"
   }
 }

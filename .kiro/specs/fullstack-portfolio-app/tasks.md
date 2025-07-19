@@ -21,7 +21,7 @@
   - PostgreSQL接続設定とマイグレーション設定を構築
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7_
 
-- [ ] 2.3 認証パッケージの実装
+- [x] 2.3 認証パッケージの実装
   - packages/auth でNextAuth.js設定を実装
   - GitHub、Google OAuth プロバイダー設定
   - RBAC (ADMIN/USER) ロール管理機能を実装
