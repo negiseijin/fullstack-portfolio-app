@@ -1,5 +1,6 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "root": false,
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -43,7 +44,7 @@
     "actions": {
       "source": {
         "organizeImports": "on",
-        "useSortedKeys": "on",
+        "useSortedKeys": "off",
         "useSortedAttributes": "on",
         "useSortedProperties": "on"
       }

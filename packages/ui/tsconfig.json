@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["index.tsx"],
+  "include": ["src/index.tsx"],
   "exclude": ["node_modules", "dist"]
 }
