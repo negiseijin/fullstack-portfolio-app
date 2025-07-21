@@ -1,5 +1,5 @@
-import '@repo/ui/styles.css'
-import { withThemeByClassName } from '@storybook/addon-themes'
+import '@repo/ui/styles.css';
+import { withThemeByClassName } from '@storybook/addon-themes';
 
 export const decorators = [
   withThemeByClassName({
@@ -9,4 +9,4 @@ export const decorators = [
     },
     defaultTheme: 'light',
   }),
-]
+];

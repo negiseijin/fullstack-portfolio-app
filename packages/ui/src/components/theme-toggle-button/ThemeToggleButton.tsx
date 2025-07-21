@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import type * as React from 'react'
-import { Button } from '../button/Button' // Assuming a Button component exists
+import type * as React from 'react';
+import { Button } from '../button/Button'; // Assuming a Button component exists
 
 interface ThemeToggleButtonProps {
-  theme: string | undefined
-  toggleTheme: () => void
+  theme: string | undefined;
+  toggleTheme: () => void;
 }
 
 export function ThemeToggleButton({ toggleTheme }: ThemeToggleButtonProps) {
@@ -15,7 +15,7 @@ export function ThemeToggleButton({ toggleTheme }: ThemeToggleButtonProps) {
       <MoonIcon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
       <span className="sr-only">Toggle theme</span>
     </Button>
-  )
+  );
 }
 
 function SunIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -44,7 +44,7 @@ function SunIcon(props: React.SVGProps<SVGSVGElement>) {
       <path d="m6.34 17.66-1.41 1.41" />
       <path d="m19.07 4.93-1.41 1.41" />
     </svg>
-  )
+  );
 }
 
 function MoonIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -65,5 +65,5 @@ function MoonIcon(props: React.SVGProps<SVGSVGElement>) {
     >
       <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
     </svg>
-  )
+  );
 }

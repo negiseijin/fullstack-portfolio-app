@@ -233,6 +233,9 @@ importers:
 
   packages/tailwind-config:
     devDependencies:
+      '@repo/biome-config':
+        specifier: workspace:*
+        version: link:../biome-config
       postcss:
         specifier: ^8.5.6
         version: 8.5.6

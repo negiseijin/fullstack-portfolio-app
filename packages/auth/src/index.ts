@@ -1,8 +1,8 @@
-import GitHub from '@auth/core/providers/github'
-import Google from '@auth/core/providers/google'
-import { PrismaAdapter } from '@auth/prisma-adapter'
-import { prisma, type Role } from '@repo/database'
-import NextAuth, { type NextAuthConfig, type NextAuthResult } from 'next-auth'
+import GitHub from '@auth/core/providers/github';
+import Google from '@auth/core/providers/google';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { prisma, type Role } from '@repo/database';
+import NextAuth, { type NextAuthConfig, type NextAuthResult } from 'next-auth';
 
 const authConfig = {
   adapter: PrismaAdapter(prisma),
@@ -22,30 +22,30 @@ const authConfig = {
   callbacks: {
     session({ session, token }) {
       if (token.role && session.user) {
-        session.user.role = token.role as Role
+        session.user.role = token.role as Role;
       }
       if (session.user) {
-        session.user.id = token.id as string
+        session.user.id = token.id as string;
       }
-      return session
+      return session;
     },
     jwt({ token, user }) {
       if (user) {
-        token.id = user.id
-        token.role = user.role
+        token.id = user.id;
+        token.role = user.role;
       }
-      return token
+      return token;
     },
   },
   pages: {
     signIn: '/login',
     // error: '/error',
   },
-} satisfies NextAuthConfig
+} satisfies NextAuthConfig;
 
-const handler = NextAuth(authConfig)
+const handler = NextAuth(authConfig);
 
-export const GET: NextAuthResult['handlers']['GET'] = handler.handlers.GET
-export const POST: NextAuthResult['handlers']['POST'] = handler.handlers.POST
-export const auth: NextAuthResult['auth'] = handler.auth
-export const { signIn, signOut } = handler
+export const GET: NextAuthResult['handlers']['GET'] = handler.handlers.GET;
+export const POST: NextAuthResult['handlers']['POST'] = handler.handlers.POST;
+export const auth: NextAuthResult['auth'] = handler.auth;
+export const { signIn, signOut } = handler;

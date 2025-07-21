@@ -1,4 +1,4 @@
-import type { User } from "./user";
+import type { User } from './user';
 
 // Type for the session object returned by the API
 export type SessionResponse = {
@@ -17,8 +17,8 @@ export type SignOutResponse = {
 
 // Supported OAuth providers
 export const AuthProvider = {
-  GITHUB: "github",
-  GOOGLE: "google",
+  GITHUB: 'github',
+  GOOGLE: 'google',
 } as const satisfies Record<string, string>;
 export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider];
 

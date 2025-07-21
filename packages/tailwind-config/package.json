@@ -8,6 +8,7 @@
     "./postcss": "./postcss.config.js"
   },
   "devDependencies": {
+    "@repo/biome-config": "workspace:*",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.11",
     "tailwindcss-animate": "^1.0.7"

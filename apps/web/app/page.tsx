@@ -1,6 +1,6 @@
-import { ThemeSwitcher } from '@components/theme-switcher'
-import { Button } from '@repo/ui/button'
-import type { JSX } from 'react'
+import { ThemeSwitcher } from '@components/theme-switcher';
+import { Button } from '@repo/ui/button';
+import type { JSX } from 'react';
 
 export default function Page(): JSX.Element {
   return (
@@ -28,5 +28,5 @@ export default function Page(): JSX.Element {
         </div>
       </div>
     </main>
-  )
+  );
 }

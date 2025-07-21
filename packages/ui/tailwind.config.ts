@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   prefix: 'ui-',
@@ -7,6 +7,6 @@ const config: Config = {
     extend: {},
   },
   plugins: [],
-}
+};
 
-export default config
+export default config;
