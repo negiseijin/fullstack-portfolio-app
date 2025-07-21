@@ -54,6 +54,7 @@
       ],
       "settings": {
         "editor.formatOnSave": true,
+        "editor.defaultFormatter": "biomejs.biome",
         "editor.codeActionsOnSave": {
           "source.fixAll": "explicit",
           "source.removeUnusedImports": "explicit",
@@ -61,6 +62,10 @@
         },
         "[prisma]": {
           "editor.defaultFormatter": "Prisma.prisma"
+        },
+        "tailwindCSS.classFunctions": ["cva", "cn"],
+        "files.associations": {
+          "*.css": "tailwindcss"
         }
       }
     }

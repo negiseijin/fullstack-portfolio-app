@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@components/theme-provider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import type { JSX } from 'react'
@@ -12,8 +13,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
-    <html lang="ja">
-      <body className={inter.className}>{children}</body>
+    <html lang="ja" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
