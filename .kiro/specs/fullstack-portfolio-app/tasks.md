@@ -27,7 +27,7 @@
   - RBAC (ADMIN/USER) ロール管理機能を実装
   - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-- [ ] 2.4 共有UIコンポーネントパッケージの実装
+- [x] 2.4 共有UIコンポーネントパッケージの実装
   - packages/ui でshadcn/ui基盤コンポーネントを実装
   - Button、Input、Card、Table等の基本コンポーネント
   - Tailwind CSS設定とテーマ設定を構築

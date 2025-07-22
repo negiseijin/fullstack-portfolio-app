@@ -1,7 +1,7 @@
 'use client';
 
 import type * as React from 'react';
-import { Button } from '../button/Button'; // Assuming a Button component exists
+import { Button } from '../button';
 
 interface ThemeToggleButtonProps {
   theme: string | undefined;
