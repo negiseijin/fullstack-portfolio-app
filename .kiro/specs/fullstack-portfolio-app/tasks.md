@@ -34,8 +34,8 @@
   - _Requirements: 7.5, 8.1, 8.2, 8.3, 8.4_
 
 - [ ] 3. Next.js フロントエンドアプリケーションの実装
-- [ ] 3.1 Next.js App Routerの基本構造実装
-  - apps/web でNext.js 14 App Router設定
+- [x] 3.1 Next.js App Routerの基本構造実装
+  - apps/web でNext.js 15 App Router設定
   - レイアウトコンポーネントとナビゲーション実装
   - 国際化 (i18n) 設定とlanguage switcher実装
   - _Requirements: 5.1, 5.2, 5.3, 5.4_
