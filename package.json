@@ -15,7 +15,7 @@
   "devDependencies": {
     "@anthropic-ai/claude-code": "^1.0.55",
     "@biomejs/biome": "2.1.2",
-    "@google/gemini-cli": "^0.1.12",
+    "@google/gemini-cli": "^0.1.13",
     "@repo/biome-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "lefthook": "^1.12.2",
