@@ -6,7 +6,7 @@ export default function Page(): JSX.Element {
     <div className="space-y-4">
       <h1 className="text-5xl font-bold">Welcome to the Portfolio</h1>
       <p>This is the home page.</p>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 flex-wrap">
         <Button type="button">Primary</Button>
         <Button type="button" variant="secondary">
           Secondary

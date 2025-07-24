@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { JSX } from 'react';
 
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
