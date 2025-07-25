@@ -1,34 +1,31 @@
 {
-  "name": "monorepo",
-  "version": "0.0.0",
+  "name": "fullstack-portfolio-app",
+  "version": "1.0.0",
+  "description": "",
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "start": "turbo start",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "check": "turbo check",
-    "docker": "docker compose up --build",
-    "docker:dev": "docker compose -f docker-compose.local.yml up --build",
-    "docker:down": "docker compose down",
-    "prepare": "husky",
-    "generate": "turbo generate",
-    "studio": "turbo studio"
-  },
-  "lint-staged": {
-    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
-      "biome check --staged . --apply --no-errors-on-unmatched --files-ignore-unknown=true"
-    ]
+    "format": "biome format --write .",
+    "claude": "claude",
+    "gemini": "gemini",
+    "prepare": "lefthook install"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
+    "@anthropic-ai/claude-code": "^1.0.55",
+    "@biomejs/biome": "2.1.2",
+    "@google/gemini-cli": "^0.1.13",
+    "@repo/biome-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "turbo": "^2.0.6"
+    "lefthook": "^1.12.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "turbo": "^2.5.5",
+    "typescript": "^5.8.3"
   },
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@10.13.1",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }

@@ -1,54 +1,102 @@
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["views"]
-  output          = "../src/generated/client"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  authorId  Int
-  author    User     @relation(fields: [authorId], references: [id])
+generator client {
+  provider = "prisma-client-js"
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  userId Int     @unique
-  user   User    @relation(fields: [userId], references: [id])
+// Enum for user roles
+enum Role {
+  USER
+  ADMIN
 }
 
+// User model
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  image         String?
+  bio           String?
+  githubUrl     String?   @map("github_url")
+  twitterUrl    String?   @map("twitter_url")
+  linkedinUrl   String?   @map("linkedin_url")
+  role          Role      @default(USER)
+  emailVerified DateTime? @map("email_verified")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  accounts Account[]
+  sessions Session[]
+  posts    Post[]
+
+  @@map("users")
 }
 
-model TUserRating {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  rating    Int
-  messageId String   @map("message_id") @db.Uuid
-  comment   String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+// Post model
+model Post {
+  id         String   @id @default(cuid())
+  title      String
+  content    String
+  excerpt    String?
+  published  Boolean  @default(false)
+  slug       String   @unique
+  coverImage String?  @map("cover_image")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
 
-  @@map("t_user_rating")
+  authorId String @map("author_id")
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  tags     Tag[]
+
+  // Full-text search vector
+  searchVector Unsupported("tsvector")? @map("search_vector")
+
+  @@map("posts")
 }
 
-view UserInfo {
-  id    Int     @unique
-  email String  @unique
-  name  String?
-  bio   String?
+// Tag model
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  slug  String @unique
+  color String @default("#3B82F6")
+
+  posts Post[]
+
+  @@map("tags")
+}
+
+// NextAuth.js required models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refreshToken      String? @map("refresh_token") @db.Text
+  accessToken       String? @map("access_token") @db.Text
+  expiresAt         Int?    @map("expires_at")
+  tokenType         String? @map("token_type")
+  scope             String?
+  idToken           String? @map("id_token") @db.Text
+  sessionState      String? @map("session_state")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
 }

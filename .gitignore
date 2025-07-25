@@ -4,6 +4,7 @@
 node_modules
 .pnp
 .pnp.js
+.pnpm-store
 
 # Local env files
 .env
@@ -37,4 +38,6 @@ yarn-error.log*
 .DS_Store
 *.pem
 
-packages/database/src/generated/
+.wrangler
+
+*storybook.log

@@ -1,18 +1,5 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  },
-  "formatter": {
-    "indentStyle": "space"
-  },
-  "files": {
-    "ignore": ["dist", "node_modules"]
-  }
+  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "root": true,
+  "extends": ["./packages/biome-config/biome.json"]
 }
