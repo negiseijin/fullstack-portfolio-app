@@ -7,14 +7,17 @@ import { requestId } from 'hono/request-id';
 import { secureHeaders } from 'hono/secure-headers';
 
 import { serve } from '@hono/node-server';
+import { pinoMw } from './middleware/logger';
+import type { HonoVariables } from './types';
 
 const app = new Hono<{
-  Variables: {
-    startTime: number;
-  };
+  Variables: HonoVariables;
 }>().basePath('/api');
 
-app.use('*', logger());
+if (process.env.NODE_ENV !== 'production') {
+  app.use(logger());
+}
+app.use(pinoMw);
 app.use('*', requestId());
 app.use(
   '*',
