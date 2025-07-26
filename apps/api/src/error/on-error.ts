@@ -1,6 +1,7 @@
 import type { Context } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 
+import { Prisma } from '@repo/database';
 import type { Err, ProblemDetailsInput } from '@repo/types';
 import { ZodError } from 'zod';
 
@@ -33,6 +34,26 @@ export function onError(err: unknown, c: Context) {
     logger.error({ res });
 
     return c.json(res, 400);
+  }
+
+  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    const status = 500;
+    const res = {
+      ok,
+      error: {
+        title: err.name,
+        message: err.message,
+        traceId,
+        status,
+        detail: err.stack,
+        code: err.code,
+        instance,
+        meta: err.meta,
+      },
+    } satisfies Err;
+    logger.error({ res });
+
+    return c.json(res, status);
   }
 
   if (err instanceof HTTPException) {
