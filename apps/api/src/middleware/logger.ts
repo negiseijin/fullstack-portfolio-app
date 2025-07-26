@@ -2,6 +2,7 @@ import type { Context, Next } from 'hono';
 import { createMiddleware } from 'hono/factory';
 
 import pino from 'pino';
+import { config } from '../config';
 import type { HonoVariables } from '../types/hono';
 
 type Env = {
@@ -9,9 +10,9 @@ type Env = {
 };
 
 const transport =
-  process.env.NODE_ENV !== 'production'
+  config.NODE_ENV !== 'production'
     ? pino.transport({
-        level: process.env.LOG_LEVEL ?? 'info',
+        level: config.LOG_LEVEL,
         target: 'pino-pretty',
         options: {
           ignore: 'pid,hostname',
@@ -23,15 +24,17 @@ const transport =
 const logger = transport
   ? pino(transport)
   : pino({
-      level: process.env.LOG_LEVEL ?? 'info',
+      level: config.LOG_LEVEL,
       timestamp: pino.stdTimeFunctions.isoTime,
       redact: { paths: ['req.headers.authorization', '*.password'], censor: '***' },
     });
 
 export const pinoMw = createMiddleware<Env>(async (c: Context, next: Next) => {
-  const reqId = crypto.randomUUID();
+  const reqId = c.get('requestId');
   const child = logger.child({ reqId, path: c.req.path, method: c.req.method });
   c.set('logger', child);
+
+  child.info({ header: c.req.header(), queries: c.req.queries() }, 'request');
 
   const start = performance.now();
   try {

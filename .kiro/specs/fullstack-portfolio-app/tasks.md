@@ -37,8 +37,9 @@
 - [x] 3.1 Next.js App Routerの基本構造実装
   - [x] apps/web でNext.js 15 App Router設定
   - [x] レイアウトコンポーネントとナビゲーション実装
+  - [x] React 19統合とServer Components設定
   - [ ] 国際化 (i18n) 設定とlanguage switcher実装
-  - _Requirements: 5.1, 5.2, 5.3, 5.4_
+  - _Requirements: 5.1, 5.2, 5.3, 5.4, 26.1, 26.2, 26.3_
 
 - [ ] 3.2 認証関連ページとコンポーネントの実装
   - [ ] ログイン、ログアウトページの実装
@@ -72,20 +73,20 @@
   - _Requirements: 7.1, 7.2, 7.3, 7.4_
 
 - [ ] 4. Hono APIアプリケーションの実装
-- [ ] 4.1 Hono API基盤の構築
+- [x] 4.1 Hono API基盤の構築
   - [x] apps/api でHonoアプリケーション基本構造を実装
-  - [ ] CORS、ロガー、レート制限ミドルウェアを実装
+  - [x] CORS、ロガー、レート制限ミドルウェアを実装
   - [x] エラーハンドリングミドルウェアとトレースID生成を実装
-  - [ ] 環境変数・設定ファイルの管理と型安全なバリデーションの実装（dotenv, zod等）
-  - [ ] APIバージョニング（例: /api/v1 など）のルーティング設計
-  - [ ] OpenAPI（Swagger）仕様の自動生成・APIドキュメントエンドポイントの用意
-  - [ ] Zod等によるリクエストbody/paramsのバリデーションとエラーハンドリング
-  - [ ] 共通レスポンスフォーマット・エラーコード設計
-  - [ ] ヘルスチェックエンドポイント（/healthz等）の実装
-  - [ ] CORSの詳細設定（オリジン・メソッド・ヘッダー制御、プリフライト対応）
-  - [ ] セキュリティヘッダー（Helmet等）の追加
-  - [ ] 開発用ホットリロード・デバッグ設定（tsx, pino-pretty等）
-  - [ ] APIルートの自動登録・モジュール分割の仕組み
+  - [x] 環境変数・設定ファイルの管理と型安全なバリデーションの実装（dotenv, zod等）
+  - [x] APIバージョニング（例: /api/v1 など）のルーティング設計
+  - [x] OpenAPI（Swagger）仕様の自動生成・APIドキュメントエンドポイントの用意
+  - [x] Zod等によるリクエストbody/paramsのバリデーションとエラーハンドリング
+  - [x] 共通レスポンスフォーマット・エラーコード設計
+  - [x] ヘルスチェックエンドポイント（/healthz等）の実装
+  - [x] CORSの詳細設定（オリジン・メソッド・ヘッダー制御、プリフライト対応）
+  - [x] セキュリティヘッダー（Helmet等）の追加
+  - [x] 開発用ホットリロード・デバッグ設定（tsx, pino-pretty等）
+  - [x] APIルートの自動登録・モジュール分割の仕組み
   - _Requirements: 12.5_
 
 - [ ] 4.2 認証・認可APIエンドポイントの実装
@@ -200,9 +201,9 @@
 
 - [ ] 11. CI/CDパイプラインの構築
 - [ ] 11.1 GitHub Actions ワークフローの実装
-  - [ ]lint、test、buildチェックのワークフロー作成
-  - [ ]Vercel Preview環境デプロイの自動化
-  - [ ]本番環境デプロイの自動化
+  - [ ] lint、test、buildチェックのワークフロー作成
+  - [ ] Vercel Preview環境デプロイの自動化
+  - [ ] 本番環境デプロイの自動化
   - _Requirements: 10.1, 10.2, 10.3_
 
 - [ ] 11.2 セキュリティスキャンの統合
@@ -242,3 +243,61 @@
   - [ ] ヘルスチェックエンドポイントの実装
   - [ ] デプロイ後の動作確認とパフォーマンステスト
   - _Requirements: 11.1, 11.2_
+
+- [ ] 14. React 19 & Next.js 15 最新機能の実装
+- [ ] 14.1 Server Components & Actions の実装
+  - [ ] Server Componentsによる非同期データフェッチングの実装
+  - [ ] Server Actionsによるフォーム処理の実装
+  - [ ] useActionStateフックによる状態管理の実装
+  - [ ] useOptimisticフックによる楽観的更新の実装
+  - _Requirements: 26.1, 26.2, 26.3, 26.4_
+
+- [ ] 14.2 Next.js 15 高度なキャッシュ戦略の実装
+  - [ ] unstable_cacheによるデータキャッシングの実装
+  - [ ] revalidatePathとrevalidateTagによる再検証の実装
+  - [ ] generateMetadataによる動的メタデータ生成の実装
+  - [ ] Suspense boundariesによるストリーミングの実装
+  - _Requirements: 26.4, 26.5, 26.6_
+
+- [ ] 15. 高度なテスト戦略の実装
+- [ ] 15.1 モダンテストツールの統合
+  - [ ] Vitest + React Testing Libraryによるコンポーネントテスト
+  - [ ] MSW (Mock Service Worker) によるAPIモッキング
+  - [ ] Storybook Interaction Testingの実装
+  - [ ] Chromatic Visual Regression Testingの設定
+  - _Requirements: 27.1, 27.2, 27.3, 27.5_
+
+- [ ] 15.2 Playwright E2Eテストの強化
+  - [ ] 並列実行とシャーディングの設定
+  - [ ] クロスブラウザテストの実装
+  - [ ] モバイルデバイステストの追加
+  - [ ] パフォーマンステストの統合
+  - _Requirements: 27.4, 27.6_
+
+- [ ] 16. 高度なセキュリティ対策の実装
+- [ ] 16.1 NextAuth.js v5 セキュリティ強化
+  - [ ] PKCE flowによるOAuth認証の実装
+  - [ ] JWT refresh token rotationの実装
+  - [ ] セッション管理の強化
+  - _Requirements: 28.1, 28.2_
+
+- [ ] 16.2 Content Security Policy & セキュリティヘッダー
+  - [ ] Strict CSP with nonceの実装
+  - [ ] セキュリティヘッダーの強化
+  - [ ] 自動脆弱性スキャンの設定
+  - [ ] セキュリティ監査ログの実装
+  - _Requirements: 28.3, 28.4, 28.5, 28.6_
+
+- [ ] 17. AI駆動開発ワークフローの実装
+- [ ] 17.1 AI開発ツールの統合
+  - [ ] Claude CLI & Gemini CLIの設定と活用
+  - [ ] GitHub Copilotの最適化設定
+  - [ ] AI支援によるコード生成ワークフローの構築
+  - _Requirements: 25.1, 25.2_
+
+- [ ] 17.2 AI自動化パイプラインの構築
+  - [ ] PR作成時の自動リリースノート生成
+  - [ ] テストカバレッジ低下時の自動テスト生成
+  - [ ] ADR自動生成システムの構築
+  - [ ] プライバシーガードレールの実装
+  - _Requirements: 25.2, 25.3, 25.5, 25.6_

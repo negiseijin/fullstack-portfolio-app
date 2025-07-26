@@ -3,5 +3,6 @@ packages:
   - packages/*
 
 ignoredBuiltDependencies:
+  - '@scarf/scarf'
   - esbuild
   - workerd

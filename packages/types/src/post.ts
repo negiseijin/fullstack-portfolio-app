@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import type { User } from './user';
 
-// Base Tag type
 export type Tag = {
   id: string;
   name: string;
@@ -9,7 +8,6 @@ export type Tag = {
   color: string;
 };
 
-// Base Post type, aligning with Prisma schema
 export type Post = {
   id: string;
   title: string;
@@ -25,7 +23,6 @@ export type Post = {
   tags: Tag[];
 };
 
-// Zod schema for creating a new post
 export const CreatePostSchema = z
   .object({
     title: z.string().min(1, 'Title is required').max(200),
@@ -35,12 +32,10 @@ export const CreatePostSchema = z
     tags: z.array(z.string()).max(10, 'You can add up to 10 tags').optional(),
     coverImage: z.url('Invalid URL').optional(),
   })
-  .brand('CreatePostSchema');
+  .brand<'CreatePostSchema'>();
 
-// Type inferred from the CreatePostSchema
 export type CreatePostRequest = z.infer<typeof CreatePostSchema>;
 
-// Zod schema for updating an existing post
 export const UpdatePostSchema = z
   .object({
     title: z.string().min(1, 'Title is required').max(200).optional(),
@@ -50,7 +45,6 @@ export const UpdatePostSchema = z
     tags: z.array(z.string()).max(10, 'You can add up to 10 tags').optional(),
     coverImage: z.url('Invalid URL').optional(),
   })
-  .brand('UpdatePostSchema');
+  .brand<'UpdatePostSchema'>();
 
-// Type inferred from the UpdatePostSchema
 export type UpdatePostRequest = z.infer<typeof UpdatePostSchema>;

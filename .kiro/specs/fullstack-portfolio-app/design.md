@@ -2,20 +2,26 @@
 
 ## Overview
 
-エンジニア転職活動において「実務即戦力」を証明するためのフルスタックWebアプリケーションを構築します。Next.js + Honoを使用したモノレポ構成で、認証・投稿管理・国際化を含む包括的なポートフォリオアプリケーションを開発し、技術力・設計力・運用力を総合的にアピールします。  
+エンジニア転職活動において「実務即戦力」を証明するためのフルスタックWebアプリケーションを構築します。Next.js + Honoを使用したモノレポ構成で、認証・投稿管理・国際化を含む包括的なポートフォリオアプリケーションを開発し、技術力・設計力・運用力を総合的にアピールします。
 さらに、GPT‑4o / GitHub Copilot を活用した **AI 駆動開発 (AI‑Driven Development)** ― コード生成・テスト生成・ドキュメント自動化、ならびに voice / video coding ワークフロー ― を導入し、生産性と品質向上を定量的に示すことを目的とします。
 
 ### 技術選定理由
 
-- **Next.js 15**: App Routerによる最新のReact開発体験、SSR/SSG対応、優れたパフォーマンス、PWA対応
-- **Hono**: 軽量で高速なWeb API フレームワーク、Edge Runtime対応、優れたミドルウェアサポート
-- **Prisma**: 型安全なORM、優れた開発者体験、マイグレーション管理
+- **Next.js 15**: App Routerによる最新のReact開発体験、SSR/SSG対応、優れたパフォーマンス、PWA対応、React 19統合
+- **React 19**: Server Components、Actions、useActionState、useOptimistic等の最新機能
+- **Hono**: 軽量で高速なWeb API フレームワーク、Edge Runtime対応、優れたミドルウェアサポート、OpenAPI統合
+- **Prisma**: 型安全なORM、優れた開発者体験、マイグレーション管理、PostgreSQL最適化
 - **PostgreSQL**: 堅牢なリレーショナルデータベース、pgvector拡張による全文検索・ベクトル検索
-- **Turborepo**: 効率的なモノレポ管理、インクリメンタルビルド、並列実行
-- **Biome**: 高速なリンター・フォーマッター、ESLint/Prettier代替
-- **pnpm**: 効率的なパッケージ管理、ディスク容量節約、モノレポ対応
-- **Resend**: 信頼性の高いメール配信サービス、開発者フレンドリーなAPI
-- **Vercel**: Next.js最適化されたホスティング、自動デプロイ、プレビュー環境
+- **Turborepo**: 効率的なモノレポ管理、インクリメンタルビルド、並列実行、キャッシュ最適化
+- **Biome**: 高速なリンター・フォーマッター、ESLint/Prettier代替、統一された開発体験
+- **pnpm**: 効率的なパッケージ管理、ディスク容量節約、モノレポ対応、高速インストール
+- **Tailwind CSS v4**: ユーティリティファーストCSS、高度なカスタマイゼーション、パフォーマンス最適化
+- **shadcn/ui**: モダンなコンポーネントライブラリ、Radix UI基盤、カスタマイズ性
+- **NextAuth.js v5**: 最新の認証ライブラリ、OAuth 2.0/OIDC対応、セキュリティ強化
+- **Vitest**: 高速なテストランナー、ESM対応、優れた開発者体験
+- **Playwright**: 信頼性の高いE2Eテスト、並列実行、クロスブラウザ対応
+- **Storybook**: コンポーネント開発・テスト・ドキュメント化の統合環境
+- **Vercel**: Next.js最適化されたホスティング、自動デプロイ、プレビュー環境、Edge Functions
 
 ## Architecture
 
@@ -28,31 +34,31 @@ graph TB
         A --> C[Tailwind CSS]
         A --> D[NextAuth.js]
     end
-    
+
     subgraph "API Layer"
         E[Next.js API Routes] --> F[Hono Handlers]
         F --> G[Zod Validation]
         F --> H[Middleware Stack]
     end
-    
+
     subgraph "Data Layer"
         I[Prisma ORM] --> J[(PostgreSQL)]
         I --> K[pgvector Extension]
     end
-    
+
     subgraph "External Services"
         L[GitHub OAuth]
         M[Google OAuth]
         N[Resend Email]
         O[Vercel Deployment]
     end
-    
+
     A --> E
     E --> I
     D --> L
     D --> M
     F --> N
-    
+
     subgraph "Development Tools"
         P[Vitest Testing]
         Q[Playwright E2E]
@@ -100,24 +106,24 @@ graph TD
     A[App Layout] --> B[Navigation]
     A --> C[Main Content]
     A --> D[Footer]
-    
+
     C --> E[Dashboard]
     C --> F[Posts]
     C --> G[Profile]
     C --> H[Admin]
-    
+
     E --> I[Stats Cards]
     E --> J[Recent Posts]
     E --> K[Activity Feed]
-    
+
     F --> L[Post List]
     F --> M[Post Detail]
     F --> N[Post Editor]
-    
+
     G --> O[Profile Form]
     G --> P[Avatar Upload]
     G --> Q[Social Links]
-    
+
     H --> R[User Management]
     H --> S[Post Moderation]
     H --> T[Analytics]
@@ -278,11 +284,11 @@ model User {
   emailVerified DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  
+
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
-  
+
   @@map("users")
 }
 
@@ -297,14 +303,14 @@ model Post {
   coverImage  String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  
+
   authorId    String
   author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   tags        Tag[]
-  
+
   // Full-text search vector
   searchVector Unsupported("tsvector")?
-  
+
   @@map("posts")
 }
 
@@ -314,9 +320,9 @@ model Tag {
   name  String @unique
   slug  String @unique
   color String @default("#3B82F6")
-  
+
   posts Post[]
-  
+
   @@map("tags")
 }
 
@@ -334,9 +340,9 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-  
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
@@ -346,9 +352,9 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   @@map("sessions")
 }
 
@@ -412,7 +418,7 @@ export const errorHandler = (): MiddlewareHandler => {
       await next()
     } catch (error) {
       const traceId = c.get('traceId') || generateTraceId()
-      
+
       if (error instanceof ZodError) {
         return c.json({
           error: {
@@ -424,7 +430,7 @@ export const errorHandler = (): MiddlewareHandler => {
           }
         }, 400)
       }
-      
+
       if (error instanceof PrismaClientKnownRequestError) {
         return c.json({
           error: {
@@ -435,10 +441,10 @@ export const errorHandler = (): MiddlewareHandler => {
           }
         }, 500)
       }
-      
+
       // Log unexpected errors
       console.error('Unexpected error:', error, { traceId })
-      
+
       return c.json({
         error: {
           code: 'INTERNAL_ERROR',
@@ -461,7 +467,7 @@ graph TD
     A[E2E Tests - Playwright] --> B[Integration Tests - Vitest]
     B --> C[Unit Tests - Vitest]
     C --> D[Component Tests - Testing Library]
-    
+
     E[Storybook] --> F[Visual Regression Tests]
     E --> G[Component Documentation]
 ```
@@ -620,7 +626,7 @@ export const securityMiddleware = {
     max: 100, // limit each IP to 100 requests per windowMs
     message: 'Too many requests from this IP'
   }),
-  
+
   csrf: csrf({
     cookie: {
       httpOnly: true,
@@ -628,7 +634,7 @@ export const securityMiddleware = {
       sameSite: 'strict'
     }
   }),
-  
+
   helmet: helmet({
     contentSecurityPolicy: {
       directives: {
@@ -657,7 +663,7 @@ export const performanceConfig = {
     cls: { target: 0.1, warning: 0.05 },
     ttfb: { target: 200, warning: 100 }
   },
-  
+
   lighthouse: {
     performance: 90,
     accessibility: 90,
@@ -682,13 +688,13 @@ export const databaseConfig = {
 export const cacheStrategy = {
   // Browser cache
   staticAssets: 'public, max-age=31536000, immutable',
-  
+
   // CDN cache
   pages: 'public, max-age=3600, s-maxage=86400',
-  
+
   // API cache
   apiResponses: 'private, max-age=300',
-  
+
   // Database query cache
   prismaCache: {
     ttl: 300, // 5 minutes
@@ -742,7 +748,7 @@ export const metricsConfig = {
       help: 'Duration of HTTP requests in seconds',
       labelNames: ['method', 'route', 'status']
     }),
-    
+
     databaseQueryDuration: new Histogram({
       name: 'database_query_duration_seconds',
       help: 'Duration of database queries in seconds',
@@ -771,7 +777,7 @@ export const a11yConfig = {
       }
     }
   },
-  
+
   components: {
     focusManagement: true,
     screenReaderSupport: true,
@@ -810,7 +816,7 @@ jobs:
     - Security scanning with Trivy and CodeQL
     - Accessibility testing with axe-core
     - Performance testing with Lighthouse CI
-  
+
   build-and-deploy:
     - Build Next.js application
     - Build Hono API
@@ -839,7 +845,7 @@ export const infrastructureConfig = {
       RESEND_API_KEY: '${var.resend_api_key}'
     }
   },
-  
+
   database: {
     provider: 'postgresql',
     backupRetention: 14, // days
@@ -859,7 +865,7 @@ export const dockerConfig = {
         POSTGRES_PASSWORD: 'dev'
       }
     },
-    
+
     redis: {
       image: 'redis:7-alpine',
       ports: ['6379:6379']
@@ -883,7 +889,7 @@ export const aiWorkflowConfig = {
       suggestions: 'automatic',
       languages: ['typescript', 'javascript', 'prisma']
     },
-    
+
     gptCli: {
       model: 'gpt-4o',
       contextWindow: 128000,
@@ -891,25 +897,25 @@ export const aiWorkflowConfig = {
       maxTokens: 4000
     }
   },
-  
+
   automation: {
     testGeneration: {
       trigger: 'coverage_below_80',
       framework: 'vitest',
       types: ['unit', 'integration']
     },
-    
+
     documentationGeneration: {
       trigger: 'pr_created',
       formats: ['release_notes', 'api_docs', 'adr']
     },
-    
+
     codeReview: {
       trigger: 'pr_opened',
       checks: ['security', 'performance', 'accessibility']
     }
   },
-  
+
   privacyGuardrails: {
     piiDetection: true,
     secretScanning: true,
@@ -924,7 +930,7 @@ export const voiceCodingConfig = {
     language: 'ja-JP',
     confidence: 0.8
   },
-  
+
   videoDocumentation: {
     recording: 'automatic',
     transcription: true,
@@ -933,7 +939,118 @@ export const voiceCodingConfig = {
 }
 ```
 
-**設計決定**: AI駆動開発により生産性向上を定量化。GitHub Copilot、GPT-4o、音声コーディングの統合により、コード生成・テスト作成・ドキュメント自動化を実現。プライバシーガードレールにより、機密情報の漏洩を防止する。
+**設計決定**: AI駆動開発により生産性向上を定量化。GitHub Copilot、Claude CLI、Gemini CLI、音声コーディングの統合により、コード生成・テスト作成・ドキュメント自動化を実現。プライバシーガードレールにより、機密情報の漏洩を防止する。
+
+## React 19 & Next.js 15 最新機能設計
+
+### Server Components & Actions アーキテクチャ
+
+```typescript
+// Server Components with async data fetching
+export async function PostList() {
+  const posts = await getPosts() // Server-side data fetching
+
+  return (
+    <div>
+      {posts.map(post => (
+        <PostCard key={post.id} post={post} />
+      ))}
+    </div>
+  )
+}
+
+// Server Actions for form handling
+export async function createPost(formData: FormData) {
+  'use server'
+
+  const title = formData.get('title') as string
+  const content = formData.get('content') as string
+
+  const post = await db.post.create({
+    data: { title, content, authorId: getCurrentUserId() }
+  })
+
+  revalidatePath('/posts')
+  return { success: true, post }
+}
+
+// Client component with useActionState
+'use client'
+export function CreatePostForm() {
+  const [state, formAction, isPending] = useActionState(createPost, null)
+
+  return (
+    <form action={formAction}>
+      <input name="title" required />
+      <textarea name="content" required />
+      <button type="submit" disabled={isPending}>
+        {isPending ? 'Creating...' : 'Create Post'}
+      </button>
+    </form>
+  )
+}
+
+// Optimistic updates with useOptimistic
+export function PostActions({ post }: { post: Post }) {
+  const [optimisticLikes, addOptimisticLike] = useOptimistic(
+    post.likes,
+    (state, newLike) => [...state, newLike]
+  )
+
+  return (
+    <button
+      onClick={async () => {
+        addOptimisticLike({ id: 'temp', userId: getCurrentUserId() })
+        await likePost(post.id)
+      }}
+    >
+      Likes: {optimisticLikes.length}
+    </button>
+  )
+}
+```
+
+### Next.js 15 キャッシュ戦略
+
+```typescript
+// Advanced caching with unstable_cache
+import { unstable_cache } from 'next/cache'
+
+export const getCachedPosts = unstable_cache(
+  async () => {
+    return await db.post.findMany({
+      include: { author: true, tags: true }
+    })
+  },
+  ['posts'],
+  {
+    revalidate: 3600, // 1 hour
+    tags: ['posts']
+  }
+)
+
+// Incremental Static Regeneration with revalidation
+export async function generateStaticParams() {
+  const posts = await db.post.findMany({ select: { slug: true } })
+  return posts.map(post => ({ slug: post.slug }))
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = await getPostBySlug(params.slug)
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [post.coverImage]
+    }
+  }
+}
+```
+
+**設計決定**: React 19とNext.js 15の最新機能を活用し、Server ComponentsとActionsによる効率的なデータフェッチング、useActionStateとuseOptimisticによる優れたUX、advanced cachingによる高速化を実現する。
 
 ## PWA・オフライン対応設計
 
@@ -1008,7 +1125,7 @@ export const seoConfig = {
       creator: '@username'
     }
   },
-  
+
   sitemap: {
     generateRobotsTxt: true,
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
@@ -1023,7 +1140,7 @@ export const analyticsConfig = {
     enabled: true,
     debug: process.env.NODE_ENV === 'development'
   },
-  
+
   plausible: {
     domain: process.env.NEXT_PUBLIC_SITE_URL,
     trackLocalhost: false,
@@ -1047,7 +1164,7 @@ export const databaseManagement = {
     rollbackStrategy: 'manual-verification',
     testingRequired: true
   },
-  
+
   backups: {
     frequency: 'daily',
     retention: 14, // days
@@ -1055,7 +1172,7 @@ export const databaseManagement = {
     verification: 'weekly',
     restoreTesting: 'quarterly'
   },
-  
+
   monitoring: {
     connectionPool: true,
     queryPerformance: true,
@@ -1072,7 +1189,7 @@ export const dataPrivacyConfig = {
     rightToErasure: true,
     dataPortability: true
   },
-  
+
   dataMinimization: {
     collectOnlyNecessary: true,
     anonymizeAnalytics: true,
@@ -1083,4 +1200,232 @@ export const dataPrivacyConfig = {
 
 **設計決定**: 自動バックアップと定期的なリストア検証により、データ損失リスクを最小化。GDPR準拠とプライバシー��護を設計段階から組み込み、ユーザーの信頼を確保する。
 
-この設計書は、要件定義で定義された全ての機能要件と非機能要件を満たすための包括的な技術設計を提供しています。モノレポ構成、API設計、データモデル、エラーハンドリング、テスト戦略、セキュリティ、パフォーマンス、観測性、アクセシビリティ、CI/CD、インフラ、AI駆動開発、PWA、SEO、データ管理まで、実装に必要な全ての設計決定を含んでいます。
+## モダンな開発体験設計
+
+### 統合開発環境
+
+```typescript
+// Development tooling configuration
+export const devToolingConfig = {
+  linting: {
+    tool: 'biome',
+    config: '@repo/biome-config',
+    rules: {
+      typescript: 'strict',
+      react: 'recommended',
+      accessibility: 'strict'
+    }
+  },
+
+  packageManager: {
+    tool: 'pnpm',
+    version: '10.13.1',
+    features: ['workspaces', 'shamefully-hoist', 'strict-peer-dependencies']
+  },
+
+  buildSystem: {
+    tool: 'turborepo',
+    features: ['incremental-builds', 'remote-caching', 'parallel-execution'],
+    pipeline: {
+      build: { dependsOn: ['^build'] },
+      test: { dependsOn: ['^build'] },
+      lint: { dependsOn: [] }
+    }
+  },
+
+  containerization: {
+    devcontainer: {
+      base: 'ubuntu:22.04',
+      features: ['node:22', 'docker-in-docker', 'github-cli'],
+      extensions: ['ms-vscode.vscode-typescript-next', 'bradlc.vscode-tailwindcss']
+    }
+  }
+}
+```
+
+### AI駆動開発統合
+
+```typescript
+// Enhanced AI workflow configuration
+export const enhancedAiConfig = {
+  codeGeneration: {
+    claude: {
+      model: 'claude-3.5-sonnet',
+      contextWindow: 200000,
+      systemPrompt: `You are an expert fullstack developer specializing in:
+        - Next.js 15 with App Router and React 19
+        - TypeScript with strict mode
+        - Tailwind CSS and shadcn/ui
+        - Prisma with PostgreSQL
+        - Modern testing with Vitest and Playwright`,
+      capabilities: ['code-generation', 'refactoring', 'debugging', 'documentation']
+    },
+
+    gemini: {
+      model: 'gemini-pro',
+      contextWindow: 128000,
+      capabilities: ['code-review', 'optimization', 'security-analysis']
+    },
+
+    copilot: {
+      enabled: true,
+      suggestions: 'automatic',
+      languages: ['typescript', 'javascript', 'prisma', 'sql', 'css']
+    }
+  },
+
+  automation: {
+    prAnalysis: {
+      enabled: true,
+      features: ['risk-assessment', 'code-quality', 'security-scan', 'performance-impact']
+    },
+
+    testGeneration: {
+      trigger: 'coverage-below-threshold',
+      threshold: 80,
+      types: ['unit', 'integration', 'e2e']
+    },
+
+    documentation: {
+      autoGenerate: ['api-docs', 'component-docs', 'adr'],
+      formats: ['markdown', 'openapi', 'storybook']
+    }
+  }
+}
+```
+
+### パフォーマンス監視アーキテクチャ
+
+```typescript
+// Comprehensive performance monitoring
+export const performanceMonitoringConfig = {
+  webVitals: {
+    lcp: { target: 2500, warning: 2000, critical: 4000 },
+    fid: { target: 100, warning: 50, critical: 300 },
+    cls: { target: 0.1, warning: 0.05, critical: 0.25 },
+    ttfb: { target: 200, warning: 100, critical: 600 },
+    inp: { target: 200, warning: 100, critical: 500 }
+  },
+
+  analytics: {
+    vercel: {
+      enabled: true,
+      features: ['speed-insights', 'web-analytics', 'audience']
+    },
+
+    realUserMonitoring: {
+      provider: 'vercel-speed-insights',
+      sampleRate: 1.0,
+      trackInteractions: true
+    }
+  },
+
+  errorTracking: {
+    provider: 'vercel-error-tracking',
+    features: ['source-maps', 'release-tracking', 'user-context'],
+    filters: ['ignore-dev-errors', 'ignore-bot-traffic']
+  },
+
+  databaseMonitoring: {
+    queryPerformance: true,
+    connectionPooling: true,
+    slowQueryThreshold: 1000, // ms
+    metrics: ['query-count', 'connection-count', 'cache-hit-rate']
+  }
+}
+```
+
+### 高度なUI/UXパターン設計
+
+```typescript
+// Modern UI/UX patterns
+export const uiUxPatternsConfig = {
+  componentLibrary: {
+    base: 'shadcn/ui',
+    primitives: 'radix-ui',
+    styling: 'tailwind-css-v4',
+    animations: 'framer-motion',
+    icons: 'lucide-react'
+  },
+
+  formHandling: {
+    library: 'react-hook-form',
+    validation: 'zod',
+    patterns: ['optimistic-updates', 'real-time-validation', 'auto-save']
+  },
+
+  dataVisualization: {
+    tables: 'tanstack-table',
+    charts: 'recharts',
+    patterns: ['virtualization', 'infinite-scroll', 'real-time-updates']
+  },
+
+  loadingStates: {
+    skeletons: 'custom-skeleton-components',
+    suspense: 'react-suspense-boundaries',
+    progressIndicators: 'nprogress'
+  },
+
+  theming: {
+    provider: 'next-themes',
+    modes: ['light', 'dark', 'system'],
+    customization: 'css-variables',
+    persistence: 'localStorage'
+  },
+
+  accessibility: {
+    standards: 'wcag-2.1-aa',
+    testing: 'axe-core',
+    patterns: ['focus-management', 'screen-reader-support', 'keyboard-navigation']
+  }
+}
+```
+
+### セキュリティ強化アーキテクチャ
+
+```typescript
+// Enhanced security architecture
+export const enhancedSecurityConfig = {
+  authentication: {
+    provider: 'nextauth-v5',
+    flow: 'pkce',
+    features: ['refresh-token-rotation', 'session-management', 'multi-factor-auth']
+  },
+
+  contentSecurityPolicy: {
+    directives: {
+      'default-src': ["'self'"],
+      'script-src': ["'self'", "'nonce-{NONCE}'"],
+      'style-src': ["'self'", "'unsafe-inline'"],
+      'img-src': ["'self'", 'data:', 'https:'],
+      'connect-src': ["'self'", 'https://api.vercel.com']
+    },
+    reportUri: '/api/csp-report'
+  },
+
+  securityHeaders: {
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+    'X-Frame-Options': 'DENY',
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()'
+  },
+
+  vulnerabilityScanning: {
+    dependencies: 'dependabot',
+    code: 'codeql',
+    containers: 'trivy',
+    schedule: 'daily'
+  },
+
+  auditLogging: {
+    events: ['auth', 'admin-actions', 'data-access', 'security-events'],
+    storage: 'structured-logs',
+    retention: '90-days'
+  }
+}
+```
+
+この設計書は、要件定義で定義された全ての機能要件と非機能要件を満たすための包括的な技術設計を提供しています。モノレポ構成、API設計、データモデル、エラーハンドリング、テスト戦略、セキュリティ、パフォーマンス、観測性、アクセシビリティ、CI/CD、インフラ、AI駆動開発、PWA、SEO、データ管理、モダンな開発体験、高度なUI/UXパターンまで、実装に必要な全ての設計決定を含んでいます。
+
+React 19とNext.js 15の最新機能を活用し、現代的な開発ツールチェーンとAI駆動開発ワークフローを統合することで、生産性と品質の両方を向上させる設計となっています。

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-エンジニア転職活動において「実務即戦力」を証明するためのフルスタック Web アプリケーションを構築します。Next.js + Hono を使用したモノレポ構成で、認証・投稿管理・国際化を含む包括的なポートフォリオアプリケーションを開発し、技術力・設計力・運用力を総合的にアピールします。  
+エンジニア転職活動において「実務即戦力」を証明するためのフルスタック Web アプリケーションを構築します。Next.js + Hono を使用したモノレポ構成で、認証・投稿管理・国際化を含む包括的なポートフォリオアプリケーションを開発し、技術力・設計力・運用力を総合的にアピールします。
 さらに、GPT‑4o / GitHub Copilot を活用した **AI 駆動開発 (AI‑Driven Development)** ― コード生成・テスト生成・ドキュメント自動化、ならびに voice / video coding ワークフロー ― を導入し、生産性と品質向上を定量的に示すことを目的とします。
 
 ## Requirements
@@ -279,23 +279,107 @@
 
 ### Requirement 25: AI 駆動開発ワークフロー
 
-**User Story:**  
+**User Story:**
 As a developer, I want integrated AI assistants that generate code, tests, and documentation, so that I can deliver high-quality features faster.
 
 #### Acceptance Criteria
 
-1. WHEN VS Code is open in the DevContainer  
-   THEN `gpt-cli` or GitHub Copilot SHALL be available for inline code suggestions.
-2. WHEN a new PR is created  
+1. WHEN VS Code is open in the DevContainer
+   THEN `claude` CLI and GitHub Copilot SHALL be available for inline code suggestions.
+2. WHEN a new PR is created
    THEN an AI tool SHALL auto-generate **release notes** and **risk summaries** as comments.
-3. WHEN unit-test coverage for a file drops below 80 %  
+3. WHEN unit-test coverage for a file drops below 80 %
    THEN an AI script SHALL propose additional **Vitest** cases via a CLI command.
-4. WHEN database schema changes are detected  
+4. WHEN database schema changes are detected
    THEN an AI assistant SHALL draft the corresponding **Prisma migration** and rollback script.
-5. WHEN architectural decisions are discussed  
+5. WHEN architectural decisions are discussed
    THEN an ADR template SHALL be pre-filled by an AI summarizer based on PR conversation.
-6. WHEN secrets or PII risk is detected in prompts  
+6. WHEN secrets or PII risk is detected in prompts
    THEN the system SHALL block the request and log a warning (privacy guardrail).
+
+### Requirement 26: React 19 & Next.js 15 最新機能活用
+
+**User Story:**
+As a developer, I want to leverage the latest React 19 and Next.js 15 features, so that I can build a modern, performant application.
+
+#### Acceptance Criteria
+
+1. WHEN components are built THEN the system SHALL use React 19 Server Components and Actions
+2. WHEN forms are handled THEN the system SHALL use React 19 useActionState and useOptimistic hooks
+3. WHEN data is fetched THEN the system SHALL use Next.js 15 App Router with async components
+4. WHEN caching is implemented THEN the system SHALL use Next.js 15 unstable_cache and revalidation
+5. WHEN streaming is needed THEN the system SHALL use React 19 Suspense boundaries with streaming
+6. WHEN metadata is generated THEN the system SHALL use Next.js 15 generateMetadata API
+
+### Requirement 27: 高度なテスト戦略
+
+**User Story:**
+As a developer, I want comprehensive testing with modern tools, so that I can ensure application reliability.
+
+#### Acceptance Criteria
+
+1. WHEN unit tests are written THEN the system SHALL use Vitest with React Testing Library
+2. WHEN component tests are created THEN the system SHALL use Storybook with interaction testing
+3. WHEN API tests are implemented THEN the system SHALL use Vitest with MSW (Mock Service Worker)
+4. WHEN E2E tests are run THEN the system SHALL use Playwright with parallel execution
+5. WHEN visual regression tests are needed THEN the system SHALL use Chromatic with Storybook
+6. WHEN performance tests are executed THEN the system SHALL use Lighthouse CI in GitHub Actions
+
+### Requirement 28: 高度なセキュリティ対策
+
+**User Story:**
+As a security-conscious developer, I want enterprise-grade security measures, so that the application is protected against modern threats.
+
+#### Acceptance Criteria
+
+1. WHEN authentication is handled THEN the system SHALL use NextAuth.js v5 with PKCE flow
+2. WHEN API requests are made THEN the system SHALL implement JWT with refresh token rotation
+3. WHEN content is rendered THEN the system SHALL use strict CSP headers with nonce
+4. WHEN dependencies are managed THEN the system SHALL use automated vulnerability scanning
+5. WHEN secrets are stored THEN the system SHALL use encrypted environment variables
+6. WHEN audit logs are needed THEN the system SHALL implement comprehensive security logging
+
+### Requirement 29: モダンな開発体験
+
+**User Story:**
+As a developer, I want a modern development experience with the latest tooling, so that I can be productive and maintain code quality.
+
+#### Acceptance Criteria
+
+1. WHEN code is written THEN the system SHALL use Biome for unified linting and formatting
+2. WHEN dependencies are managed THEN the system SHALL use pnpm with workspace optimization
+3. WHEN builds are executed THEN the system SHALL use Turborepo for incremental builds
+4. WHEN containers are used THEN the system SHALL provide devcontainer configuration
+5. WHEN git hooks are needed THEN the system SHALL use lefthook for pre-commit checks
+6. WHEN AI assistance is used THEN the system SHALL integrate Claude and Gemini CLI tools
+
+### Requirement 30: パフォーマンス監視とメトリクス
+
+**User Story:**
+As a developer, I want comprehensive performance monitoring, so that I can identify and resolve performance issues proactively.
+
+#### Acceptance Criteria
+
+1. WHEN performance is measured THEN the system SHALL use Core Web Vitals monitoring
+2. WHEN metrics are collected THEN the system SHALL use Vercel Analytics and Speed Insights
+3. WHEN errors occur THEN the system SHALL implement error tracking and alerting
+4. WHEN database queries run THEN the system SHALL monitor query performance
+5. WHEN API responses are sent THEN the system SHALL track response times and error rates
+6. WHEN user interactions happen THEN the system SHALL measure interaction metrics
+
+### Requirement 31: 高度なUI/UXパターン
+
+**User Story:**
+As a user, I want a modern, accessible, and delightful user interface, so that I have an excellent experience using the application.
+
+#### Acceptance Criteria
+
+1. WHEN components are built THEN the system SHALL use shadcn/ui with Radix UI primitives
+2. WHEN animations are needed THEN the system SHALL use Framer Motion or CSS animations
+3. WHEN forms are created THEN the system SHALL use React Hook Form with Zod validation
+4. WHEN data is displayed THEN the system SHALL use TanStack Table for complex tables
+5. WHEN loading states are shown THEN the system SHALL use skeleton loaders and suspense
+6. WHEN themes are applied THEN the system SHALL support light/dark mode with next-themes
 
 ## Glossary
 

@@ -1,28 +1,35 @@
-import { Hono } from 'hono';
 import { rateLimiter } from 'hono-rate-limiter';
 import { cors } from 'hono/cors';
-import { HTTPException } from 'hono/http-exception';
 import { logger } from 'hono/logger';
+import { prettyJSON } from 'hono/pretty-json';
 import { requestId } from 'hono/request-id';
 import { secureHeaders } from 'hono/secure-headers';
 
 import { serve } from '@hono/node-server';
-import { pinoMw } from './middleware/logger';
+import { swaggerUI } from '@hono/swagger-ui';
+import { OpenAPIHono } from '@hono/zod-openapi';
+import { config } from './config';
+import { onError } from './error';
+import { pinoMw } from './middleware';
+import { health } from './routes';
 import type { HonoVariables } from './types';
+import { tags } from './utils';
 
-const app = new Hono<{
+const app = new OpenAPIHono<{
   Variables: HonoVariables;
-}>().basePath('/api');
+}>().basePath('/api/v1');
 
-if (process.env.NODE_ENV !== 'production') {
+// Middlewares
+app.use('*', requestId());
+if (config.NODE_ENV !== 'production') {
   app.use(logger());
+  app.use(prettyJSON());
 }
 app.use(pinoMw);
-app.use('*', requestId());
 app.use(
   '*',
   cors({
-    origin: ['http://localhost:3000', 'https://your-production-domain.com'],
+    origin: config.CORS_ORIGIN,
     credentials: true,
     maxAge: 86400,
   }),
@@ -37,34 +44,22 @@ app.use(
   }),
 );
 
-app.onError((err, c) => {
-  const requestId = c.get('requestId');
-  const errorResponse = {
-    message: 'Internal Server Error',
-    requestId,
-    error: {},
-  };
+// Routes
+const routes = app.route('/', health).onError(onError);
 
-  if (err instanceof HTTPException) {
-    errorResponse.message = err.message;
-    errorResponse.error = err.cause ?? {};
-    return c.json(errorResponse, err.status);
-  }
-
-  errorResponse.error = {
-    name: err.name,
-    message: err.message,
-  };
-
-  return c.json(errorResponse, 500);
+// OpenAPI Docs
+app.doc31('/doc', {
+  openapi: '3.1.0',
+  info: {
+    version: '1.0.0',
+    title: 'Portfolio API',
+    description: 'Portfolio API',
+  },
+  tags: tags,
 });
 
-const route = app.get('/', (c) => {
-  return c.json({
-    message: 'Hello Hono!',
-    requestId: c.get('requestId'),
-  });
-});
+// Swagger UI
+app.get('/ui', swaggerUI({ url: '/api/v1/doc' }));
 
 const port = 8787;
 
@@ -74,9 +69,10 @@ serve(
     port,
   },
   (info) => {
-    console.log(`Server is running on http://localhost:${info.port}`);
+    console.log(`🚀 Server is running on http://localhost:${info.port}`);
+    console.log(`🔗 Swagger UI is available at http://localhost:${info.port}/api/v1/ui`);
   },
 );
 
 export default app;
-export type AppType = typeof route;
+export type AppType = typeof routes;
