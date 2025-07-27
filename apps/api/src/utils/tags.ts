@@ -8,4 +8,9 @@ const health = {
   description: 'Health check',
 } satisfies TagsObject;
 
-export const tags = [health] satisfies TagsObject[];
+const auth = {
+  name: 'auth',
+  description: 'Returns the session information of the currently authenticated user.',
+} satisfies TagsObject;
+
+export const tags = [health, auth] satisfies TagsObject[];

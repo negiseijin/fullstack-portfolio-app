@@ -5,19 +5,16 @@ import { prettyJSON } from 'hono/pretty-json';
 import { requestId } from 'hono/request-id';
 import { secureHeaders } from 'hono/secure-headers';
 
+import { authHandler, verifyAuth } from '@hono/auth-js';
 import { serve } from '@hono/node-server';
 import { swaggerUI } from '@hono/swagger-ui';
 import { OpenAPIHono } from '@hono/zod-openapi';
-import { config } from './config';
 import { onError } from './error';
-import { pinoMw } from './middleware';
-import { health } from './routes';
-import type { HonoVariables } from './types';
+import { config, initAuth, pinoMw } from './middleware';
+import { auth, health } from './routes';
 import { tags } from './utils';
 
-const app = new OpenAPIHono<{
-  Variables: HonoVariables;
-}>().basePath('/api/v1');
+const app = new OpenAPIHono().basePath('/api/v1');
 
 // Middlewares
 app.use('*', requestId());
@@ -43,9 +40,12 @@ app.use(
     keyGenerator: (c) => c.req.header('cf-connecting-ip') ?? '', // Method to generate custom identifiers for clients.
   }),
 );
+app.use('*', initAuth);
+app.use('/auth/*', authHandler());
+app.use('*', verifyAuth());
 
 // Routes
-const routes = app.route('/', health).onError(onError);
+const routes = app.route('/', health).route('/auth', auth).onError(onError);
 
 // OpenAPI Docs
 app.doc31('/doc', {

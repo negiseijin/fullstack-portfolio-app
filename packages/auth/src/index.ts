@@ -2,7 +2,8 @@ import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma, type Role } from '@repo/database';
-import NextAuth, { type NextAuthConfig, type NextAuthResult } from 'next-auth';
+import NextAuth, { type NextAuthConfig, type NextAuthResult, type Session } from 'next-auth';
+import './types';
 
 const authConfig = {
   adapter: PrismaAdapter(prisma),
@@ -45,7 +46,9 @@ const authConfig = {
 
 const handler = NextAuth(authConfig);
 
-export const GET: NextAuthResult['handlers']['GET'] = handler.handlers.GET;
-export const POST: NextAuthResult['handlers']['POST'] = handler.handlers.POST;
-export const auth: NextAuthResult['auth'] = handler.auth;
-export const { signIn, signOut } = handler;
+const GET: NextAuthResult['handlers']['GET'] = handler.handlers.GET;
+const POST: NextAuthResult['handlers']['POST'] = handler.handlers.POST;
+const auth: NextAuthResult['auth'] = handler.auth;
+const { signIn, signOut } = handler;
+export { authConfig, GET, POST, auth, signIn, signOut };
+export type { Session };

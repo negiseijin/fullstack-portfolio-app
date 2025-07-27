@@ -1,0 +1,37 @@
+import { OpenAPIHono } from '@hono/zod-openapi';
+import { userAuth } from '../middleware';
+
+const app = new OpenAPIHono();
+
+app.use('/session', userAuth);
+
+app.openapi(
+  {
+    method: 'get',
+    path: '/session',
+    summary: 'Get current user session',
+    description: 'Returns the session information of the currently authenticated user.',
+    tags: ['auth'],
+    responses: {
+      200: {
+        description: 'User session data',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+            },
+          },
+        },
+      },
+      401: {
+        description: 'Unauthorized',
+      },
+    },
+  },
+  (c) => {
+    const auth = c.get('authUser');
+    return c.json(auth);
+  },
+);
+
+export default app;

@@ -2,12 +2,7 @@ import type { Context, Next } from 'hono';
 import { createMiddleware } from 'hono/factory';
 
 import pino from 'pino';
-import { config } from '../config';
-import type { HonoVariables } from '../types/hono';
-
-type Env = {
-  Variables: HonoVariables;
-};
+import { config } from './config';
 
 const transport =
   config.NODE_ENV !== 'production'
@@ -29,7 +24,7 @@ const logger = transport
       redact: { paths: ['req.headers.authorization', '*.password'], censor: '***' },
     });
 
-export const pinoMw = createMiddleware<Env>(async (c: Context, next: Next) => {
+export const pinoMw = createMiddleware(async (c: Context, next: Next) => {
   const reqId = c.get('requestId');
   const child = logger.child({ reqId, path: c.req.path, method: c.req.method });
   c.set('logger', child);

@@ -10,17 +10,18 @@
     "lint": "biome lint ./src"
   },
   "dependencies": {
+    "@hono/auth-js": "^1.1.0",
     "@hono/node-server": "^1.17.1",
     "@hono/swagger-ui": "^0.5.2",
     "@hono/zod-openapi": "^1.0.2",
     "@hono/zod-validator": "^0.7.2",
+    "@repo/auth": "workspace:*",
     "@repo/database": "workspace:*",
     "@repo/types": "workspace:*",
     "dotenv": "^17.2.1",
     "hono": "^4.8.5",
     "hono-rate-limiter": "^0.4.2",
     "pino": "^9.7.0",
-    "swagger-ui-dist": "^5.27.0",
     "zod": "^4.0.5"
   },
   "devDependencies": {
