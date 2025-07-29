@@ -3,10 +3,11 @@ import Google from '@auth/core/providers/google';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma, type Role } from '@repo/database';
 import NextAuth, { type NextAuthConfig, type NextAuthResult, type Session } from 'next-auth';
-import './types';
 
 const authConfig = {
+  debug: process.env.NODE_ENV !== 'production',
   adapter: PrismaAdapter(prisma),
+  secret: process.env.AUTH_SECRET,
   providers: [
     GitHub({
       clientId: process.env.AUTH_GITHUB_ID,
@@ -19,6 +20,18 @@ const authConfig = {
   ],
   session: {
     strategy: 'jwt',
+  },
+  cookies: {
+    sessionToken: {
+      name: 'session',
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+        secure: process.env.NODE === 'production',
+      },
+    },
   },
   callbacks: {
     session({ session, token }) {
@@ -38,10 +51,6 @@ const authConfig = {
       return token;
     },
   },
-  pages: {
-    signIn: '/login',
-    // error: '/error',
-  },
 } satisfies NextAuthConfig;
 
 const handler = NextAuth(authConfig);
@@ -50,5 +59,5 @@ const GET: NextAuthResult['handlers']['GET'] = handler.handlers.GET;
 const POST: NextAuthResult['handlers']['POST'] = handler.handlers.POST;
 const auth: NextAuthResult['auth'] = handler.auth;
 const { signIn, signOut } = handler;
-export { authConfig, GET, POST, auth, signIn, signOut };
+export { auth, authConfig, GET, POST, signIn, signOut };
 export type { Session };

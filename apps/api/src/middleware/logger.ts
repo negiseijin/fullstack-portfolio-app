@@ -2,12 +2,11 @@ import type { Context, Next } from 'hono';
 import { createMiddleware } from 'hono/factory';
 
 import pino from 'pino';
-import { config } from './config';
 
 const transport =
-  config.NODE_ENV !== 'production'
+  process.env.NODE_ENV !== 'production'
     ? pino.transport({
-        level: config.LOG_LEVEL,
+        level: process.env.LOG_LEVEL,
         target: 'pino-pretty',
         options: {
           ignore: 'pid,hostname',
@@ -19,7 +18,7 @@ const transport =
 const logger = transport
   ? pino(transport)
   : pino({
-      level: config.LOG_LEVEL,
+      level: process.env.LOG_LEVEL,
       timestamp: pino.stdTimeFunctions.isoTime,
       redact: { paths: ['req.headers.authorization', '*.password'], censor: '***' },
     });

@@ -1,9 +1,6 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
-import { userAuth } from '../middleware';
 
 const app = new OpenAPIHono();
-
-app.use('/session', userAuth);
 
 app.openapi(
   {
