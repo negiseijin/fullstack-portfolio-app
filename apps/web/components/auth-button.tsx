@@ -30,7 +30,7 @@ function SignOut({ children }: { children: React.ReactNode }) {
 
 export async function AuthButton() {
   const session = await auth();
-  const user = session?.user?.email;
+  const user = session?.user?.name;
 
   return (
     <section>

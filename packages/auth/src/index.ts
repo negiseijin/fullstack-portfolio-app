@@ -1,12 +1,11 @@
 import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { prisma, type Role } from '@repo/database';
-import NextAuth, { type NextAuthConfig, type NextAuthResult, type Session } from 'next-auth';
+import type { Role } from '@repo/database';
+import NextAuth, { type NextAuthConfig, type NextAuthResult } from 'next-auth';
 
 const authConfig = {
   debug: process.env.NODE_ENV !== 'production',
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   secret: process.env.AUTH_SECRET,
   providers: [
     GitHub({
@@ -60,4 +59,3 @@ const POST: NextAuthResult['handlers']['POST'] = handler.handlers.POST;
 const auth: NextAuthResult['auth'] = handler.auth;
 const { signIn, signOut } = handler;
 export { auth, authConfig, GET, POST, signIn, signOut };
-export type { Session };

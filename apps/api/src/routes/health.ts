@@ -1,8 +1,6 @@
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
 import { HealthSchema, RootSchema } from '@repo/types';
 
-const health = new OpenAPIHono();
-
 const healthzRoute = createRoute({
   method: 'get',
   path: '/healthz',
@@ -22,13 +20,6 @@ const healthzRoute = createRoute({
       },
     },
   },
-});
-
-health.openapi(healthzRoute, (c) => {
-  return c.json({
-    ok: true,
-    message: 'OK',
-  });
 });
 
 const rootRoute = createRoute({
@@ -52,11 +43,18 @@ const rootRoute = createRoute({
   },
 });
 
-health.openapi(rootRoute, (c) => {
-  return c.json({
-    message: 'Hello from Health!',
-    requestId: c.get('requestId'),
+const health = new OpenAPIHono()
+  .openapi(rootRoute, (c) => {
+    return c.json({
+      message: 'Hello from Health!',
+      requestId: c.get('requestId'),
+    });
+  })
+  .openapi(healthzRoute, (c) => {
+    return c.json({
+      ok: true,
+      message: 'OK',
+    });
   });
-});
 
 export default health;

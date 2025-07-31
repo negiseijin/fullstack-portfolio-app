@@ -1,11 +1,11 @@
 import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
   },
-  transpilePackages: ['@repo/auth'],
-};
+  transpilePackages: ['@repo/api', '@repo/auth'],
+} satisfies NextConfig;
 
 export default nextConfig;

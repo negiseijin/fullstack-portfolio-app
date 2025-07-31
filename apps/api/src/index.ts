@@ -60,17 +60,32 @@ app.get('/ui', swaggerUI({ url: '/api/v1/doc' }));
 app.use(
   '*',
   initAuthConfig(() => ({
-    ...authConfig,
+    secret: process.env.AUTH_SECRET,
+    basePath: '/api/v1/auth',
+    providers: authConfig.providers,
   })),
 );
 app.use('/auth/*', authHandler());
 
-const routes = app.route('/', health);
+app.route('/', health);
 
 app.use('*', verifyAuth());
 
+const authorsApp = new OpenAPIHono()
+  .get('/', (c) => c.json({ result: 'list authors' }))
+  .post('/', (c) => c.json({ result: 'create an author' }, 201))
+  .get('/:id', (c) => c.json({ result: `get ${c.req.param('id')}` }));
+const booksApp = new OpenAPIHono()
+  .get('/', (c) => c.json({ result: 'list books' }))
+  .post('/', (c) => c.json({ result: 'create a book' }, 201))
+  .get('/:id', (c) => c.json({ result: `get ${c.req.param('id')}` }));
+
 // Routes
-routes.route('/auth', auth).onError(onError);
+const routes = app
+  .route('/auth', auth)
+  .route('/authors', authorsApp)
+  .route('/books', booksApp)
+  .onError(onError);
 
 const port = 8787;
 
@@ -87,3 +102,4 @@ serve(
 
 export default app;
 export type AppType = typeof routes;
+export { hc } from 'hono/client';
