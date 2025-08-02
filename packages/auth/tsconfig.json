@@ -4,6 +4,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/next-auth.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -12,3 +12,15 @@ declare module 'next-auth' {
     role: Role;
   }
 }
+
+declare module 'next-auth/adapters' {
+  interface AdapterUser {
+    role: Role;
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    role: Role;
+  }
+}

@@ -3,6 +3,16 @@ packages:
   - packages/*
 
 ignoredBuiltDependencies:
+  - '@parcel/watcher'
   - '@scarf/scarf'
+  - '@tailwindcss/oxide'
   - esbuild
+  - protobufjs
   - workerd
+
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - lefthook
+  - prisma
+  - sharp
