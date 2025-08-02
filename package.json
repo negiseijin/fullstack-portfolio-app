@@ -21,7 +21,7 @@
   "devDependencies": {
     "@anthropic-ai/claude-code": "^1.0.55",
     "@biomejs/biome": "2.1.2",
-    "@google/gemini-cli": "^0.1.13",
+    "@google/gemini-cli": "^0.1.16",
     "@repo/biome-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "lefthook": "^1.12.2",
@@ -33,5 +33,10 @@
   "packageManager": "pnpm@10.13.1",
   "engines": {
     "node": ">=22"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "^6.0.0"
+    }
   }
 }
