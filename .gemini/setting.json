@@ -1,8 +1,0 @@
-{
-  "theme": "Default",
-  "contextFileName": [
-    "./../.kiro/specs/fullstack-portfolio-app/design.md",
-    "./../.kiro/specs/fullstack-portfolio-app/requirements.md",
-    "./../.kiro/specs/fullstack-portfolio-app/tasks.md"
-  ]
-}
