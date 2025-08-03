@@ -3,6 +3,12 @@ import { createMiddleware } from 'hono/factory';
 
 import pino from 'pino';
 
+declare module 'hono' {
+  interface ContextVariableMap {
+    logger: pino.Logger;
+  }
+}
+
 const transport =
   process.env.NODE_ENV !== 'production'
     ? pino.transport({

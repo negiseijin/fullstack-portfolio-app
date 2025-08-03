@@ -3,30 +3,36 @@ import { zValidator } from '@hono/zod-validator';
 import {
   type ProblemDetailsInput,
   ProblemDetailsSchema,
-  UserIdSchema,
+  UpdateUserSchema,
   UserSchema,
 } from '@repo/types';
-import { adminAuth } from '../../middleware';
+import { userAuth } from '../../middleware';
 
 const route = createRoute({
-  method: 'get',
-  path: '/{id}',
-  summary: 'Get a user by ID',
-  tags: ['users'],
+  method: 'patch',
+  path: '/',
+  summary: 'Update current user profile',
+  tags: ['profile'],
   middleware: [
-    zValidator('param', UserIdSchema, (result, _c) => {
+    zValidator('json', UpdateUserSchema, (result, _c) => {
       if (!result.success) {
         throw result.error;
       }
     }),
-    adminAuth(),
+    userAuth(),
   ],
   request: {
-    params: UserIdSchema,
+    body: {
+      content: {
+        'application/json': {
+          schema: UpdateUserSchema,
+        },
+      },
+    },
   },
   responses: {
     200: {
-      description: 'A user',
+      description: 'The updated user profile',
       content: {
         'application/json': {
           schema: UserSchema,
@@ -46,8 +52,13 @@ const route = createRoute({
 
 const app = new OpenAPIHono().openapi(route, async (c) => {
   const prisma = c.get('prisma');
-  const { id } = c.req.valid('param');
-  const user = await prisma.user.findUnique({ where: { id } });
+  const authUser = c.get('authUser');
+  const body = c.req.valid('json');
+
+  const user = await prisma.user.update({
+    where: { id: authUser.user?.id },
+    data: body,
+  });
 
   if (!user) {
     const res: ProblemDetailsInput = {

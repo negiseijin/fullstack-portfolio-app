@@ -1,4 +1,5 @@
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
+import { zValidator } from '@hono/zod-validator';
 import {
   type ProblemDetailsInput,
   ProblemDetailsSchema,
@@ -13,7 +14,14 @@ const route = createRoute({
   path: '/{id}',
   summary: 'Update a user',
   tags: ['users'],
-  middleware: [adminAuth()],
+  middleware: [
+    zValidator('param', UpdateUserSchema, (result, _c) => {
+      if (!result.success) {
+        throw result.error;
+      }
+    }),
+    adminAuth(),
+  ],
   request: {
     params: UserIdSchema,
     body: {
