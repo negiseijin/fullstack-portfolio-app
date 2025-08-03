@@ -11,9 +11,10 @@ import { serve } from '@hono/node-server';
 import { swaggerUI } from '@hono/swagger-ui';
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { authConfig } from '@repo/auth';
+import { PrismaClient } from '@repo/database';
 import { onError } from './error';
-import { pinoMw } from './middleware';
-import { auth, health } from './routes';
+import { pinoMw, prisma as prismaMw } from './middleware';
+import routes from './routes';
 import { tags } from './utils';
 
 const app = new OpenAPIHono().basePath('/api/v1');
@@ -57,6 +58,7 @@ app.doc31('/doc', {
 // Swagger UI
 app.get('/ui', swaggerUI({ url: '/api/v1/doc' }));
 
+// Auth.js
 app.use(
   '*',
   initAuthConfig(() => ({
@@ -66,26 +68,12 @@ app.use(
   })),
 );
 app.use('/auth/*', authHandler());
-
-app.route('/', health);
-
 app.use('*', verifyAuth());
 
-const authorsApp = new OpenAPIHono()
-  .get('/', (c) => c.json({ result: 'list authors' }))
-  .post('/', (c) => c.json({ result: 'create an author' }, 201))
-  .get('/:id', (c) => c.json({ result: `get ${c.req.param('id')}` }));
-const booksApp = new OpenAPIHono()
-  .get('/', (c) => c.json({ result: 'list books' }))
-  .post('/', (c) => c.json({ result: 'create a book' }, 201))
-  .get('/:id', (c) => c.json({ result: `get ${c.req.param('id')}` }));
+const prisma = new PrismaClient();
+app.use('*', prismaMw(prisma));
 
-// Routes
-const routes = app
-  .route('/auth', auth)
-  .route('/authors', authorsApp)
-  .route('/books', booksApp)
-  .onError(onError);
+const apiRoutes = app.route('/', routes).onError(onError);
 
 const port = 8787;
 
@@ -101,5 +89,5 @@ serve(
 );
 
 export default app;
-export type AppType = typeof routes;
+export type AppType = typeof apiRoutes;
 export { hc } from 'hono/client';

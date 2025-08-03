@@ -6,34 +6,52 @@ export const Role = {
 } as const satisfies Record<string, string>;
 export type Role = (typeof Role)[keyof typeof Role];
 
-export type User = {
-  id: string;
-  email: string;
-  name: string | null;
-  image: string | null;
-  bio: string | null;
-  githubUrl: string | null;
-  twitterUrl: string | null;
-  linkedinUrl: string | null;
-  role: Role;
-  emailVerified: Date | null;
-  createdAt: Date;
-  updatedAt: Date;
-};
+export const UserSchema = z.object({
+  id: z.cuid(),
+  email: z.email(),
+  name: z.string().nullable(),
+  image: z.url().nullable(),
+  bio: z.string().nullable(),
+  githubUrl: z.url().nullable(),
+  twitterUrl: z.url().nullable(),
+  linkedinUrl: z.url().nullable(),
+  role: z.enum(Role),
+  emailVerified: z.date().nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
 
-export type UserProfile = Pick<
-  User,
-  'id' | 'name' | 'image' | 'bio' | 'githubUrl' | 'twitterUrl' | 'linkedinUrl'
->;
+export const UserProfileSchema = UserSchema.pick({
+  id: true,
+  name: true,
+  image: true,
+  bio: true,
+  githubUrl: true,
+  twitterUrl: true,
+  linkedinUrl: true,
+});
 
-export const UpdateUserProfileSchema = z
-  .object({
-    name: z.string().min(1, 'Name is required').max(100).optional(),
-    bio: z.string().max(500).optional(),
-    githubUrl: z.url('Invalid GitHub URL').optional(),
-    twitterUrl: z.url('Invalid Twitter URL').optional(),
-    linkedinUrl: z.url('Invalid LinkedIn URL').optional(),
-  })
-  .brand<'UpdateUserProfileSchema'>();
+export const CreateUserSchema = z.object({
+  email: z.email('Invalid email address'),
+  name: z.string().min(1, 'Name is required'),
+  role: z.enum(Role).default(Role.USER),
+});
 
-export type UpdateUserProfileRequest = z.infer<typeof UpdateUserProfileSchema>;
+export const UpdateUserSchema = z.object({
+  name: z.string().min(1, 'Name is required').optional(),
+  email: z.email('Invalid email address').optional(),
+  bio: z.string().max(500).optional(),
+  githubUrl: z.url('Invalid GitHub URL').optional().or(z.literal('')),
+  twitterUrl: z.url('Invalid Twitter URL').optional().or(z.literal('')),
+  linkedinUrl: z.url('Invalid LinkedIn URL').optional().or(z.literal('')),
+  role: z.enum(Role).optional(),
+});
+
+export const UserIdSchema = z.object({
+  id: z.cuid('Invalid user ID'),
+});
+
+export type User = z.infer<typeof UserSchema>;
+export type UserProfile = z.infer<typeof UserProfileSchema>;
+export type CreateUserRequest = z.infer<typeof CreateUserSchema>;
+export type UpdateUserRequest = z.infer<typeof UpdateUserSchema>;
