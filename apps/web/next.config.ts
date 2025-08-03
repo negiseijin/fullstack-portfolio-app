@@ -5,7 +5,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  transpilePackages: ['@repo/api', '@repo/auth', '@repo/ui'],
+  transpilePackages: ['@repo/api', '@repo/auth', '@repo/database', '@repo/ui'],
+  serverComponentsExternalPackages: ['sharp', '@prisma/client'],
 } satisfies NextConfig;
 
 export default nextConfig;

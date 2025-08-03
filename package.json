@@ -16,7 +16,8 @@
     "format": "biome format --write .",
     "claude": "claude",
     "gemini": "gemini",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "studio": "turbo studio"
   },
   "devDependencies": {
     "@anthropic-ai/claude-code": "^1.0.55",

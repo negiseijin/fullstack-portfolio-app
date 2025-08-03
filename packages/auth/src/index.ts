@@ -1,20 +1,24 @@
 import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import type { Role } from '@repo/database';
+import { prisma } from '@repo/database';
 import NextAuth, { type NextAuthConfig, type NextAuthResult } from 'next-auth';
 
 const authConfig = {
   debug: process.env.NODE_ENV !== 'production',
-  // adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma),
   secret: process.env.AUTH_SECRET,
   providers: [
     GitHub({
       clientId: process.env.AUTH_GITHUB_ID,
       clientSecret: process.env.AUTH_GITHUB_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   session: {

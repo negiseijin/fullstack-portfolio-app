@@ -1,41 +1,32 @@
-import { auth, signIn, signOut } from '@repo/auth';
-
-function SignIn() {
-  return (
-    <form
-      action={async () => {
-        'use server';
-        await signIn('github');
-      }}
-    >
-      <p>You are not logged in</p>
-      <button type="submit">Sign in with GitHub</button>
-    </form>
-  );
-}
-
-function SignOut({ children }: { children: React.ReactNode }) {
-  return (
-    <form
-      action={async () => {
-        'use server';
-        await signOut();
-      }}
-    >
-      <p>{children}</p>
-      <button type="submit">Sign out</button>
-    </form>
-  );
-}
+import { auth, signOut } from '@repo/auth';
+import { Button } from '@repo/ui/components';
+import Link from 'next/link';
 
 export async function AuthButton() {
   const session = await auth();
-  const user = session?.user?.name;
+  const user = session?.user;
+
+  if (!user) {
+    return (
+      <Button asChild>
+        <Link href="/login">Sign In</Link>
+      </Button>
+    );
+  }
 
   return (
-    <section>
-      <h2>Home</h2>
-      <div>{user ? <SignOut>{`Welcome ${user}`}</SignOut> : <SignIn />}</div>
-    </section>
+    <div className="flex items-center gap-4">
+      <span className="text-sm text-muted-foreground">Welcome, {user.name}</span>
+      <form
+        action={async () => {
+          'use server';
+          await signOut({ redirectTo: '/' });
+        }}
+      >
+        <Button size="sm" type="submit" variant="outline">
+          Sign Out
+        </Button>
+      </form>
+    </div>
   );
 }
