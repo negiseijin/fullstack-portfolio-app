@@ -22,12 +22,13 @@
   "devDependencies": {
     "@anthropic-ai/claude-code": "^1.0.55",
     "@biomejs/biome": "2.1.2",
+    "@byterover/cipher": "^0.2.0",
     "@google/gemini-cli": "^0.1.16",
     "@repo/biome-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "lefthook": "^1.12.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "lefthook": "^1.12.2",
     "turbo": "^2.5.5",
     "typescript": "^5.8.3"
   },

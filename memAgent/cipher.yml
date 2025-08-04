@@ -1,0 +1,9 @@
+llm:
+  provider: gemini
+  model: gemini-2.5-pro
+  apiKey: $GEMINI_API_KEY
+
+embedding:
+  type: ollama
+  model: qwen2.5:32b
+  baseUrl: $OLLAMA_BASE_URL
