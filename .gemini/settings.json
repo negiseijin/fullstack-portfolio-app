@@ -1,6 +1,9 @@
 {
   "theme": "Default",
   "mcpServers": {
+    "context7": {
+      "httpUrl": "https://mcp.context7.com/mcp"
+    },
     "code-context": {
       "command": "npx",
       "args": ["@zilliz/code-context-mcp@latest"],
@@ -17,6 +20,14 @@
         "OPENAI_API_KEY": "${GEMINI_API_KEY}",
         "OLLAMA_BASE_URL": "${OLLAMA_BASE_URL}"
       }
+    },
+    "Prisma-Local": {
+      "command": "npx",
+      "args": ["-y", "prisma", "mcp"]
+    },
+    "Prisma-Remote": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.prisma.io/mcp"]
     }
   },
   "contextFileName": [

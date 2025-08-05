@@ -21,8 +21,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(typescript@5.9.2)(ws@8.18.3)(zod@3.25.76)
       '@google/gemini-cli':
-        specifier: ^0.1.16
-        version: 0.1.16(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)
+        specifier: ^0.1.17
+        version: 0.1.17(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)
       '@repo/biome-config':
         specifier: workspace:*
         version: link:packages/biome-config
@@ -887,12 +887,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@google/gemini-cli-core@0.1.16':
-    resolution: {integrity: sha512-4vt6tprtZ0Z3TgxpW191CN98gQVZmHMsXaUMi0dHXbSnXdLtOZ//C8Y1E7CoBJPDGttLAIGkWJXPHEJtnFp0Aw==}
+  '@google/gemini-cli-core@0.1.17':
+    resolution: {integrity: sha512-uTlt96mDKgEPSsBx4KwyQqmlXzyvWPw3WardF/kxlCEtkpjdyTNSEB9FfiaSH1SITIBKkdcd8HWnTlEz2KHFvg==}
     engines: {node: '>=20'}
 
-  '@google/gemini-cli@0.1.16':
-    resolution: {integrity: sha512-214HpIY+3WzQM6OLgu9bnSpx41UNC4uZ2VcexvG8NgNOlfUppIpXLFh2Hz/s8GGoqMu7AptTEGbZjRlHUjk5Yg==}
+  '@google/gemini-cli@0.1.17':
+    resolution: {integrity: sha512-VLS8G8bD/zVHVe7RKCP/cPzvuAlPqUk3PwyohUfr+bI8k5eYWF86nlAjqgysEKVcoCAYJ2Tr7OCh6Z/6W0OPLw==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -6053,7 +6053,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.8':
     optional: true
 
-  '@google/gemini-cli-core@0.1.16':
+  '@google/gemini-cli-core@0.1.17':
     dependencies:
       '@google/genai': 1.9.0(@modelcontextprotocol/sdk@1.17.1)
       '@modelcontextprotocol/sdk': 1.17.1
@@ -6088,9 +6088,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@google/gemini-cli@0.1.16(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)':
+  '@google/gemini-cli@0.1.17(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)':
     dependencies:
-      '@google/gemini-cli-core': 0.1.16
+      '@google/gemini-cli-core': 0.1.17
       '@google/genai': 1.9.0(@modelcontextprotocol/sdk@1.17.1)
       '@iarna/toml': 2.2.5
       '@types/update-notifier': 6.0.8

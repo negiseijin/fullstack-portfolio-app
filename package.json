@@ -23,7 +23,7 @@
     "@anthropic-ai/claude-code": "^1.0.55",
     "@biomejs/biome": "2.1.2",
     "@byterover/cipher": "^0.2.0",
-    "@google/gemini-cli": "^0.1.16",
+    "@google/gemini-cli": "^0.1.17",
     "@repo/biome-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "^19.1.8",
