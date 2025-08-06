@@ -21,8 +21,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(typescript@5.9.2)(ws@8.18.3)(zod@3.25.76)
       '@google/gemini-cli':
-        specifier: ^0.1.17
-        version: 0.1.17(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)
+        specifier: ^0.1.18
+        version: 0.1.18(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)
       '@repo/biome-config':
         specifier: workspace:*
         version: link:packages/biome-config
@@ -887,12 +887,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@google/gemini-cli-core@0.1.17':
-    resolution: {integrity: sha512-uTlt96mDKgEPSsBx4KwyQqmlXzyvWPw3WardF/kxlCEtkpjdyTNSEB9FfiaSH1SITIBKkdcd8HWnTlEz2KHFvg==}
+  '@google/gemini-cli-core@0.1.18':
+    resolution: {integrity: sha512-a6FVWR70LaNenjxThqaitizA/zoZy00zHyLunB3FZFldRs0D3vkFMAd3tZsEF7MLl0sWZCGRA38BK2LR/I0iww==}
     engines: {node: '>=20'}
 
-  '@google/gemini-cli@0.1.17':
-    resolution: {integrity: sha512-VLS8G8bD/zVHVe7RKCP/cPzvuAlPqUk3PwyohUfr+bI8k5eYWF86nlAjqgysEKVcoCAYJ2Tr7OCh6Z/6W0OPLw==}
+  '@google/gemini-cli@0.1.18':
+    resolution: {integrity: sha512-C50iWTra4GIi5RzK8di7gn3zxkPxSTufjAATqfZCCJCS7+MApgo7NWvHTCxCeACd1lTX3ZonUKxeoc/V2UeVYQ==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -6053,7 +6053,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.8':
     optional: true
 
-  '@google/gemini-cli-core@0.1.17':
+  '@google/gemini-cli-core@0.1.18':
     dependencies:
       '@google/genai': 1.9.0(@modelcontextprotocol/sdk@1.17.1)
       '@modelcontextprotocol/sdk': 1.17.1
@@ -6069,6 +6069,7 @@ snapshots:
       chardet: 2.1.0
       diff: 7.0.0
       dotenv: 17.2.1
+      fdir: 6.4.6(picomatch@4.0.3)
       glob: 10.4.5
       google-auth-library: 9.15.1
       html-to-text: 9.0.5
@@ -6077,6 +6078,7 @@ snapshots:
       marked: 15.0.12
       micromatch: 4.0.8
       open: 10.2.0
+      picomatch: 4.0.3
       shell-quote: 1.8.3
       simple-git: 3.28.0
       strip-ansi: 7.1.0
@@ -6088,9 +6090,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@google/gemini-cli@0.1.17(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)':
+  '@google/gemini-cli@0.1.18(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)':
     dependencies:
-      '@google/gemini-cli-core': 0.1.17
+      '@google/gemini-cli-core': 0.1.18
       '@google/genai': 1.9.0(@modelcontextprotocol/sdk@1.17.1)
       '@iarna/toml': 2.2.5
       '@types/update-notifier': 6.0.8
