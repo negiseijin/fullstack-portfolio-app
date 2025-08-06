@@ -36,6 +36,9 @@
     "./../.kiro/specs/fullstack-portfolio-app/tasks.md",
     "./../.kiro/steering/product.md",
     "./../.kiro/steering/structure.md",
-    "./../.kiro/steering/tech.md"
+    "./../.kiro/steering/tech.md",
+    "./../.kiro/specs/ui/design.md",
+    "./../.kiro/specs/ui/requirements.md",
+    "./../.kiro/specs/ui/tasks.md"
   ]
 }
