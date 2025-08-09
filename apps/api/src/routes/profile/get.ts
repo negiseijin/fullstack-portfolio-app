@@ -45,11 +45,11 @@ const app = new OpenAPIHono().openapi(route, async (c) => {
   });
 
   if (!user) {
-    const res: ProblemDetailsInput = {
+    const res = {
       title: 'Not Found',
       status: 404,
       detail: 'User not found',
-    };
+    } satisfies ProblemDetailsInput;
     return c.json(res, 404);
   }
 

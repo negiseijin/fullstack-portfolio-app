@@ -16,9 +16,9 @@ export const UserSchema = z.object({
   twitterUrl: z.url().nullable(),
   linkedinUrl: z.url().nullable(),
   role: z.enum(Role),
-  emailVerified: z.date().nullable(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  emailVerified: z.string().date().nullable(),
+  createdAt: z.string().date(),
+  updatedAt: z.string().date(),
 });
 
 export const UserProfileSchema = UserSchema.pick({

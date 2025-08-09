@@ -1,3 +1,4 @@
+export * from 'zod';
 export * from './auth';
 export * from './error-code';
 export * from './health';

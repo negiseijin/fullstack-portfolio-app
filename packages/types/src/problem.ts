@@ -45,7 +45,6 @@ export const ProblemDetailsSchema = z
       .describe('Field-level validation errors.'),
   })
   .strict()
-  .catchall(z.unknown())
   .meta({
     description: 'RFC 9457 Problem Details object. Use application/problem+json as Content-Type.',
   })

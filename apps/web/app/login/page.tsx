@@ -1,12 +1,12 @@
 import { signIn } from '@repo/auth';
+import { Button } from '@repo/ui/components/button';
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@repo/ui/components';
+} from '@repo/ui/components/card';
 
 export default function LoginPage() {
   return (

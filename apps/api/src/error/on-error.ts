@@ -3,8 +3,7 @@ import { HTTPException } from 'hono/http-exception';
 
 import { Prisma } from '@repo/database';
 import type { ProblemDetailsInput } from '@repo/types';
-import { err as setErr } from '@repo/types';
-import { ZodError } from 'zod';
+import { err as setErr, ZodError } from '@repo/types';
 
 export function onError(err: unknown, c: Context) {
   const traceId = c.get('requestId');

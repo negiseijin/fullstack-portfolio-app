@@ -1,6 +1,6 @@
 'use client';
 
-import { ThemeToggleButton } from '@repo/ui/components';
+import { ThemeToggleButton } from '@repo/ui/components/theme-toggle-button';
 import { useTheme } from 'next-themes';
 
 export function ThemeSwitcher() {

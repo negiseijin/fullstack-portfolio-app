@@ -1,6 +1,9 @@
-export * from './button';
-export * from './card';
-export * from './input';
-export * from './label';
-export * from './table';
-export * from './theme-toggle-button';
+export * as Button from './button';
+export * as Card from './card';
+export * as Form from './form';
+export * as Input from './input';
+export * as Label from './label';
+export * as Sonner from './sonner';
+export * as Table from './table';
+export * as Textarea from './textarea';
+export * as ThemeToggleButton from './theme-toggle-button';

@@ -15,6 +15,7 @@ import { PrismaClient } from '@repo/database';
 import { onError } from './error';
 import { pinoMw, prisma as prismaMw } from './middleware';
 import routes from './routes';
+import health from './routes/health';
 import { tags } from './utils';
 
 const app = new OpenAPIHono().basePath('/api/v1');
@@ -57,6 +58,8 @@ app.doc31('/doc', {
 
 // Swagger UI
 app.get('/ui', swaggerUI({ url: '/api/v1/doc' }));
+
+app.route('/', health);
 
 // Auth.js
 app.use(

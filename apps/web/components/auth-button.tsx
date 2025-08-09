@@ -1,5 +1,5 @@
 import { auth, signOut } from '@repo/auth';
-import { Button } from '@repo/ui/components';
+import { Button } from '@repo/ui/components/button';
 import Link from 'next/link';
 
 export async function AuthButton() {

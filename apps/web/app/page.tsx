@@ -1,4 +1,4 @@
-import { Button } from '@repo/ui/components';
+import { Button } from '@repo/ui/components/button';
 import type { JSX } from 'react';
 
 export default function Page(): JSX.Element {
