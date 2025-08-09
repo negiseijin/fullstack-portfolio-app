@@ -23,6 +23,9 @@ importers:
       '@google/gemini-cli':
         specifier: ^0.1.18
         version: 0.1.18(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)
+      '@openai/codex':
+        specifier: ^0.20.0
+        version: 0.20.0
       '@repo/biome-config':
         specifier: workspace:*
         version: link:packages/biome-config
@@ -1266,6 +1269,11 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
+
+  '@openai/codex@0.20.0':
+    resolution: {integrity: sha512-aFxTCOqsZxyk5IbDQulsuxo71qJnnorFD2oYJ9y/5Dq1NudKz0/AOwn/CagS9ABSPH+0kBIYdlv3+8kIzWo9HA==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   '@opentelemetry/api-logs@0.52.1':
     resolution: {integrity: sha512-qnSqB2DQ9TPP96dl8cDubDvrUyWc0/sK81xHTK8eSUspzDM3bsewX903qclQFvVhgStjRWdC5bLb3kQqMkfV5A==}
@@ -6455,6 +6463,8 @@ snapshots:
 
   '@next/swc-win32-x64-msvc@15.4.5':
     optional: true
+
+  '@openai/codex@0.20.0': {}
 
   '@opentelemetry/api-logs@0.52.1':
     dependencies:

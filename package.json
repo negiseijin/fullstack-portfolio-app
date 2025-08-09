@@ -15,6 +15,7 @@
     "lint": "turbo lint",
     "format": "biome format --write .",
     "claude": "claude",
+    "codex": "codex",
     "gemini": "gemini",
     "prepare": "lefthook install",
     "studio": "turbo studio"
@@ -24,6 +25,7 @@
     "@biomejs/biome": "2.1.2",
     "@byterover/cipher": "^0.2.0",
     "@google/gemini-cli": "^0.1.18",
+    "@openai/codex": "^0.20.0",
     "@repo/biome-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "^19.1.8",
