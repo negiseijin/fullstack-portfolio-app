@@ -1,11 +1,6 @@
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
 import { zValidator } from '@hono/zod-validator';
-import {
-  type ProblemDetailsInput,
-  ProblemDetailsSchema,
-  UserIdSchema,
-  UserSchema,
-} from '@repo/types';
+import { type ProblemDetails, ProblemDetailsSchema, UserIdSchema, UserSchema } from '@repo/types';
 import { adminAuth } from '../../middleware';
 
 const route = createRoute({
@@ -50,11 +45,11 @@ const app = new OpenAPIHono().openapi(route, async (c) => {
   const user = await prisma.user.findUnique({ where: { id } });
 
   if (!user) {
-    const res: ProblemDetailsInput = {
+    const res: ProblemDetails = {
       title: 'Not Found',
       status: 404,
       detail: 'User not found',
-    };
+    } satisfies ProblemDetails;
     return c.json(res, 404);
   }
 

@@ -2,8 +2,8 @@ import type { Context } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 
 import { Prisma } from '@repo/database';
-import type { ProblemDetailsInput } from '@repo/types';
-import { err as setErr, ZodError } from '@repo/types';
+import type { ProblemDetails } from '@repo/types';
+import { ZodError, zErr } from '@repo/types';
 
 export function onError(err: unknown, c: Context) {
   const traceId = c.get('requestId');
@@ -11,13 +11,13 @@ export function onError(err: unknown, c: Context) {
   const instance = c.req.url;
 
   if (err instanceof ZodError) {
-    const errors: ProblemDetailsInput['errors'] = {};
+    const errors: ProblemDetails['errors'] = {};
     for (const i of err.issues) {
       const path = i.path.join('.') || '_';
       errors[path] = [...(errors[path] ?? []), i.message];
     }
 
-    const res = setErr({
+    const res = zErr({
       title: err.name,
       message: err.message,
       traceId,
@@ -29,12 +29,12 @@ export function onError(err: unknown, c: Context) {
     });
     logger.error({ res });
 
-    return c.json(res, 400);
+    return c.json(res, 400, { 'Content-Type': 'application/problem+json' });
   }
 
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     const status = 500;
-    const res = setErr({
+    const res = zErr({
       title: err.name,
       message: err.message,
       traceId,
@@ -46,12 +46,12 @@ export function onError(err: unknown, c: Context) {
     });
     logger.error({ res });
 
-    return c.json(res, status);
+    return c.json(res, status, { 'Content-Type': 'application/problem+json' });
   }
 
   if (err instanceof HTTPException) {
     const status = err.status ?? 500;
-    const res = setErr({
+    const res = zErr({
       title: err.name,
       message: err.message,
       traceId,
@@ -62,11 +62,11 @@ export function onError(err: unknown, c: Context) {
     });
     logger.error({ res });
 
-    return c.json(res, status);
+    return c.json(res, status, { 'Content-Type': 'application/problem+json' });
   }
 
   if (err instanceof Error) {
-    const res = setErr({
+    const res = zErr({
       title: err.name,
       message: err.message,
       traceId,
@@ -78,10 +78,10 @@ export function onError(err: unknown, c: Context) {
     });
     logger.error({ res });
 
-    return c.json(res, 500);
+    return c.json(res, 500, { 'Content-Type': 'application/problem+json' });
   }
 
-  const res = setErr({
+  const res = zErr({
     title: 'INTERNAL_SERVER_ERROR',
     message: 'An unexpected error occurred',
     traceId,
@@ -90,5 +90,5 @@ export function onError(err: unknown, c: Context) {
   });
   logger.error({ res }, 'Unexpected error');
 
-  return c.json(res, 500);
+  return c.json(res, 500, { 'Content-Type': 'application/problem+json' });
 }

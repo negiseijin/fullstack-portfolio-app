@@ -44,12 +44,10 @@ export const ProblemDetailsSchema = z
       .meta({ description: 'Per-field validation errors.' })
       .describe('Field-level validation errors.'),
   })
-  .strict()
+  .catchall(z.unknown())
   .meta({
     description: 'RFC 9457 Problem Details object. Use application/problem+json as Content-Type.',
   })
-  .describe('RFC 9457 Problem Details object.')
-  .brand<'ProblemDetailsSchema'>();
+  .describe('RFC 9457 Problem Details object.');
 
 export type ProblemDetails = z.infer<typeof ProblemDetailsSchema>;
-export type ProblemDetailsInput = z.input<typeof ProblemDetailsSchema>;

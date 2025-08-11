@@ -18,6 +18,7 @@ import routes from './routes';
 import health from './routes/health';
 import { tags } from './utils';
 
+const port = 8787;
 const app = new OpenAPIHono().basePath('/api/v1');
 
 // Middlewares
@@ -53,6 +54,12 @@ app.doc31('/doc', {
     title: 'Portfolio API',
     description: 'Portfolio API',
   },
+  servers: [
+    {
+      url: `http://localhost:${port}`,
+      description: 'ローカルURL',
+    },
+  ],
   tags: tags,
 });
 
@@ -77,8 +84,6 @@ const prisma = new PrismaClient();
 app.use('*', prismaMw(prisma));
 
 const apiRoutes = app.route('/', routes).onError(onError);
-
-const port = 8787;
 
 serve(
   {
