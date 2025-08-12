@@ -67,11 +67,28 @@
         "tailwindCSS.classFunctions": ["cva", "cn"],
         "files.associations": {
           "*.css": "tailwindcss"
-        }
+        },
+        "remote.autoForwardPorts": false,
+        "remote.restoreForwardedPorts": false,
+        "remote.autoForwardPortsFallback": 0
       }
     }
   },
-  "forwardPorts": [3000, 8787],
+  "forwardPorts": [3000, 6006, 8787],
+  "portsAttributes": {
+    "3000": {
+      "label": "Next.js",
+      "onAutoForward": "notify"
+    },
+    "6006": {
+      "label": "Storybook",
+      "onAutoForward": "notify"
+    },
+    "8787": {
+      "label": "Hono",
+      "onAutoForward": "notify"
+    }
+  },
   "remoteUser": "devcontainer",
   "updateRemoteUserUID": true,
   "shutdownAction": "stopCompose",
