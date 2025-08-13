@@ -21,8 +21,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(typescript@5.9.2)(ws@8.18.3)(zod@3.25.76)
       '@google/gemini-cli':
-        specifier: ^0.1.18
-        version: 0.1.18(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)
+        specifier: ^0.1.20
+        version: 0.1.20(@types/react@19.1.9)
       '@openai/codex':
         specifier: ^0.20.0
         version: 0.20.0
@@ -905,12 +905,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@google/gemini-cli-core@0.1.18':
-    resolution: {integrity: sha512-a6FVWR70LaNenjxThqaitizA/zoZy00zHyLunB3FZFldRs0D3vkFMAd3tZsEF7MLl0sWZCGRA38BK2LR/I0iww==}
+  '@google/gemini-cli-core@0.1.20':
+    resolution: {integrity: sha512-AndaSBfh0bUUlUUgsD52KB2C8Oc6UNZHXtOhvGQOTuaQUZoiIvEBHgKWAzfK8jvbgpEW7MxejctE5p36lvhXJg==}
     engines: {node: '>=20'}
 
-  '@google/gemini-cli@0.1.18':
-    resolution: {integrity: sha512-C50iWTra4GIi5RzK8di7gn3zxkPxSTufjAATqfZCCJCS7+MApgo7NWvHTCxCeACd1lTX3ZonUKxeoc/V2UeVYQ==}
+  '@google/gemini-cli@0.1.20':
+    resolution: {integrity: sha512-sCqXwxJdBxjeEIINmDbPFVAH351cRbdX+FBEXcEx+/YBCTrGIDMh607vdnZvju3ujCDn36FC5E2VzZZYnomMiQ==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -3242,6 +3242,9 @@ packages:
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
+  fzf@0.5.2:
+    resolution: {integrity: sha512-Tt4kuxLXFKHy8KT40zwsUPUkg1CrsgY25FxA2U/j/0WgEDCk3ddc/zLTCCcbSHX9FcKtLuVaDGtGE/STWC+j3Q==}
+
   gaxios@6.7.1:
     resolution: {integrity: sha512-LDODD4TMYx7XXdpwxAVRAIAuB0bzv0s+ywFonY46k126qzQHT9ygyoa9tncmOiQmmDrik65UYsEkv3lbfqQ3yQ==}
     engines: {node: '>=14'}
@@ -3967,6 +3970,9 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  mnemonist@0.40.3:
+    resolution: {integrity: sha512-Vjyr90sJ23CKKH/qPAgUKicw/v6pRoamxIEDFOF8uSgFME7DqPRpHgRTejWVjkdGg5dXj0/NyxZHZ9bcjH+2uQ==}
+
   module-details-from-path@1.0.4:
     resolution: {integrity: sha512-EGWKgxALGMgzvxYF1UyGTy0HXX/2vHLkw6+NvDKW2jypWbHpjQuj4UMcqQWXHERJhVGKikolT06G3bcKe4fi7w==}
 
@@ -4095,6 +4101,9 @@ packages:
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
     engines: {node: '>= 0.4'}
+
+  obliterator@2.0.5:
+    resolution: {integrity: sha512-42CPE9AhahZRsMNslczq0ctAEtqk8Eka26QofnqC346BZdHDySk3LWka23LI7ULIw11NmltpiLagIq8gBozxTw==}
 
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
@@ -6096,7 +6105,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.8':
     optional: true
 
-  '@google/gemini-cli-core@0.1.18':
+  '@google/gemini-cli-core@0.1.20':
     dependencies:
       '@google/genai': 1.9.0(@modelcontextprotocol/sdk@1.17.1)
       '@modelcontextprotocol/sdk': 1.17.1
@@ -6113,6 +6122,7 @@ snapshots:
       diff: 7.0.0
       dotenv: 17.2.1
       fdir: 6.4.6(picomatch@4.0.3)
+      fzf: 0.5.2
       glob: 10.4.5
       google-auth-library: 9.15.1
       html-to-text: 9.0.5
@@ -6120,6 +6130,7 @@ snapshots:
       ignore: 7.0.5
       marked: 15.0.12
       micromatch: 4.0.8
+      mnemonist: 0.40.3
       open: 10.2.0
       picomatch: 4.0.3
       shell-quote: 1.8.3
@@ -6133,11 +6144,12 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@google/gemini-cli@0.1.18(@modelcontextprotocol/sdk@1.17.1)(@types/react@19.1.9)':
+  '@google/gemini-cli@0.1.20(@types/react@19.1.9)':
     dependencies:
-      '@google/gemini-cli-core': 0.1.18
+      '@google/gemini-cli-core': 0.1.20
       '@google/genai': 1.9.0(@modelcontextprotocol/sdk@1.17.1)
       '@iarna/toml': 2.2.5
+      '@modelcontextprotocol/sdk': 1.17.1
       '@types/update-notifier': 6.0.8
       command-exists: 1.2.9
       diff: 7.0.0
@@ -6159,11 +6171,11 @@ snapshots:
       string-width: 7.2.0
       strip-ansi: 7.1.0
       strip-json-comments: 3.1.1
+      undici: 7.13.0
       update-notifier: 7.3.1
       yargs: 17.7.2
       zod: 3.25.76
     transitivePeerDependencies:
-      - '@modelcontextprotocol/sdk'
       - '@types/react'
       - bufferutil
       - encoding
@@ -8605,6 +8617,8 @@ snapshots:
 
   function-bind@1.1.2: {}
 
+  fzf@0.5.2: {}
+
   gaxios@6.7.1:
     dependencies:
       extend: 3.0.2
@@ -9300,6 +9314,10 @@ snapshots:
 
   mkdirp@3.0.1: {}
 
+  mnemonist@0.40.3:
+    dependencies:
+      obliterator: 2.0.5
+
   module-details-from-path@1.0.4: {}
 
   mri@1.2.0: {}
@@ -9400,6 +9418,8 @@ snapshots:
   object-assign@4.1.1: {}
 
   object-inspect@1.13.4: {}
+
+  obliterator@2.0.5: {}
 
   ohash@2.0.11: {}
 
