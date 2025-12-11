@@ -1,5 +1,5 @@
 {
-  "name": "${localWorkspaceFolderBasename}",
+  "name": "fullstack-portfolio-app",
   "dockerComposeFile": ["./compose.yaml"],
   "service": "app",
   "workspaceFolder": "/workspace",
@@ -17,7 +17,7 @@
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "22",
+      "version": "lts",
       "pnpmVersion": "10",
       "installYarnUsingApt": false
     }
@@ -38,7 +38,6 @@
         "EditorConfig.EditorConfig",
         "github.vscode-github-actions",
         "google.geminicodeassist",
-        "mhutchie.git-graph",
         "ms-azuretools.vscode-docker",
         "ms-vscode-remote.remote-containers",
         "ms-vscode.github-issues-prs",
