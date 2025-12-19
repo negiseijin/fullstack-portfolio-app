@@ -9,11 +9,10 @@ services:
     env_file:
       - devcontainer.env
       - ../.env
-    volumes:
-      - ..:/workspace:cached
     hostname: fullstack-portfolio-app
     networks:
       - app_network
+    init: true
     tty: true
     stdin_open: true
     depends_on:

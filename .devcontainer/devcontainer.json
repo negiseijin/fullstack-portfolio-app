@@ -2,7 +2,10 @@
   "name": "fullstack-portfolio-app",
   "dockerComposeFile": ["./compose.yaml"],
   "service": "app",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached"
+  ],
   "remoteEnv": {
     "NODE_ENV": "development",
     "NODE_OPTIONS": "--max-old-space-size=4096",
