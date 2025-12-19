@@ -1,5 +1,17 @@
 {
-  "theme": "Default",
+  "context": {
+    "fileName": [
+      "./../.kiro/specs/fullstack-portfolio-app/design.md",
+      "./../.kiro/specs/fullstack-portfolio-app/requirements.md",
+      "./../.kiro/specs/fullstack-portfolio-app/tasks.md",
+      "./../.kiro/steering/product.md",
+      "./../.kiro/steering/structure.md",
+      "./../.kiro/steering/tech.md",
+      "./../.kiro/specs/ui/design.md",
+      "./../.kiro/specs/ui/requirements.md",
+      "./../.kiro/specs/ui/tasks.md"
+    ]
+  },
   "mcpServers": {
     "context7": {
       "httpUrl": "https://mcp.context7.com/mcp"
@@ -26,15 +38,7 @@
       "args": ["-y", "prisma", "mcp"]
     }
   },
-  "contextFileName": [
-    "./../.kiro/specs/fullstack-portfolio-app/design.md",
-    "./../.kiro/specs/fullstack-portfolio-app/requirements.md",
-    "./../.kiro/specs/fullstack-portfolio-app/tasks.md",
-    "./../.kiro/steering/product.md",
-    "./../.kiro/steering/structure.md",
-    "./../.kiro/steering/tech.md",
-    "./../.kiro/specs/ui/design.md",
-    "./../.kiro/specs/ui/requirements.md",
-    "./../.kiro/specs/ui/tasks.md"
-  ]
+  "ui": {
+    "theme": "Default"
+  }
 }
