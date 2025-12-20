@@ -7,13 +7,14 @@ import {
   UserIdSchema,
   UserSchema,
 } from '@repo/types';
+import { tagDefs } from '../../lib';
 import { adminAuth } from '../../middleware';
 
 const route = createRoute({
   method: 'patch',
   path: '/{id}',
   summary: 'Update a user',
-  tags: ['users'],
+  tags: [tagDefs.users.name],
   middleware: [
     zValidator('param', UpdateUserSchema, (result, _c) => {
       if (!result.success) {
@@ -21,7 +22,7 @@ const route = createRoute({
       }
     }),
     adminAuth(),
-  ],
+  ] as const,
   request: {
     params: UserIdSchema,
     body: {

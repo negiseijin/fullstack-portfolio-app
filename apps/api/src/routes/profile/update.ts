@@ -6,13 +6,14 @@ import {
   UpdateUserSchema,
   UserSchema,
 } from '@repo/types';
+import { tagDefs } from '../../lib';
 import { userAuth } from '../../middleware';
 
 const route = createRoute({
   method: 'patch',
   path: '/',
   summary: 'Update current user profile',
-  tags: ['profile'],
+  tags: [tagDefs.profile.name],
   middleware: [
     zValidator('json', UpdateUserSchema, (result, _c) => {
       if (!result.success) {
@@ -20,7 +21,7 @@ const route = createRoute({
       }
     }),
     userAuth(),
-  ],
+  ] as const,
   request: {
     body: {
       content: {

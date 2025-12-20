@@ -1,13 +1,14 @@
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
 import { zValidator } from '@hono/zod-validator';
 import { CreateUserSchema, UserSchema } from '@repo/types';
+import { tagDefs } from '../../lib';
 import { adminAuth } from '../../middleware';
 
 const route = createRoute({
   method: 'post',
   path: '/',
   summary: 'Create a new user',
-  tags: ['users'],
+  tags: [tagDefs.users.name],
   middleware: [
     zValidator('json', CreateUserSchema, (result, _c) => {
       if (!result.success) {
@@ -15,7 +16,7 @@ const route = createRoute({
       }
     }),
     adminAuth(),
-  ],
+  ] as const,
   request: {
     body: {
       content: {

@@ -1,13 +1,14 @@
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
 import { ProblemDetailsSchema, UserIdSchema } from '@repo/types';
+import { tagDefs } from '../../lib';
 import { adminAuth } from '../../middleware';
 
 const route = createRoute({
   method: 'delete',
   path: '/{id}',
   summary: 'Delete a user',
-  tags: ['users'],
-  middleware: [adminAuth()],
+  tags: [tagDefs.users.name],
+  middleware: [adminAuth()] as const,
   request: {
     params: UserIdSchema,
   },

@@ -7,6 +7,7 @@ const route = createRoute({
   method: 'get',
   path: '/{id}',
   summary: 'Get a user by ID',
+  description: `Retrieve a user from the database using their unique ID.`,
   tags: ['users'],
   middleware: [
     zValidator('param', UserIdSchema, (result, _c) => {

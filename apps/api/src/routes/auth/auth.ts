@@ -1,11 +1,12 @@
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
+import { tagDefs } from '../../lib';
 
 const route = createRoute({
   method: 'get',
   path: '/session',
   summary: 'Get current user session',
   description: 'Returns the session information of the currently authenticated user.',
-  tags: ['auth'],
+  tags: [tagDefs.auth.name],
   responses: {
     200: {
       description: 'User session data',

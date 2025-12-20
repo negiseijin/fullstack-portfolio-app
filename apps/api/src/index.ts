@@ -13,10 +13,10 @@ import { OpenAPIHono } from '@hono/zod-openapi';
 import { authConfig } from '@repo/auth';
 import { PrismaClient } from '@repo/database';
 import { onError } from './error';
+import { doc31 } from './lib';
 import { pinoMw, prisma as prismaMw } from './middleware';
 import routes from './routes';
 import health from './routes/health';
-import { tags } from './utils';
 
 const port = 8787;
 const app = new OpenAPIHono().basePath('/api/v1');
@@ -47,21 +47,7 @@ app.use(
 );
 
 // OpenAPI Docs
-app.doc31('/doc', {
-  openapi: '3.1.0',
-  info: {
-    version: '1.0.0',
-    title: 'Portfolio API',
-    description: 'Portfolio API',
-  },
-  servers: [
-    {
-      url: `http://localhost:${port}`,
-      description: 'ローカルURL',
-    },
-  ],
-  tags: tags,
-});
+app.doc31('/doc', doc31(port));
 
 // Swagger UI
 app.get('/ui', swaggerUI({ url: '/api/v1/doc' }));

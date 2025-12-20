@@ -1,11 +1,12 @@
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
 import { RootSchema } from '@repo/types';
+import { tagDefs } from '../../lib';
 
 const route = createRoute({
   method: 'get',
   path: '/',
   summary: 'Root endpoint',
-  tags: ['health'],
+  tags: [tagDefs.health.name],
   responses: {
     200: {
       description: 'Successful response',

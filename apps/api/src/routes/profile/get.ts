@@ -1,13 +1,14 @@
 import { createRoute, OpenAPIHono } from '@hono/zod-openapi';
 import { type ProblemDetails, ProblemDetailsSchema, UserSchema } from '@repo/types';
+import { tagDefs } from '../../lib';
 import { userAuth } from '../../middleware';
 
 const route = createRoute({
   method: 'get',
   path: '/',
   summary: 'Get current user profile',
-  tags: ['profile'],
-  middleware: [userAuth()],
+  tags: [tagDefs.profile.name],
+  middleware: [userAuth()] as const,
   responses: {
     200: {
       description: 'The user profile',
