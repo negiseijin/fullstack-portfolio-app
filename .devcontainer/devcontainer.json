@@ -71,8 +71,7 @@
           "*.css": "tailwindcss"
         },
         "remote.autoForwardPorts": false,
-        "remote.restoreForwardedPorts": false,
-        "remote.autoForwardPortsFallback": 0
+        "remote.restoreForwardedPorts": false
       }
     }
   },
