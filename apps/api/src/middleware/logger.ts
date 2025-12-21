@@ -34,7 +34,14 @@ export const pinoMw = createMiddleware(async (c: Context, next: Next) => {
   const child = logger.child({ reqId, path: c.req.path, method: c.req.method });
   c.set('logger', child);
 
-  child.info({ header: c.req.header(), queries: c.req.queries() }, 'request');
+  const qs = c.req.queries();
+  child.info(
+    {
+      header: c.req.header(),
+      ...(qs && Object.keys(qs).length > 0 ? { queries: qs } : {}),
+    },
+    'request',
+  );
 
   const start = performance.now();
   try {
