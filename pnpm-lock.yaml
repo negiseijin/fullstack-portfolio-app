@@ -52,19 +52,19 @@ importers:
     dependencies:
       '@hono/auth-js':
         specifier: ^1.1.0
-        version: 1.1.0(@auth/core@0.41.1)(hono@4.11.4)(react@19.2.1)
+        version: 1.1.0(@auth/core@0.41.1)(hono@4.11.7)(react@19.2.1)
       '@hono/node-server':
         specifier: ^1.19.7
-        version: 1.19.7(hono@4.11.4)
+        version: 1.19.7(hono@4.11.7)
       '@hono/swagger-ui':
         specifier: ^0.5.2
-        version: 0.5.2(hono@4.11.4)
+        version: 0.5.2(hono@4.11.7)
       '@hono/zod-openapi':
         specifier: ^1.1.5
-        version: 1.1.5(hono@4.11.4)(zod@4.1.13)
+        version: 1.1.5(hono@4.11.7)(zod@4.1.13)
       '@hono/zod-validator':
         specifier: ^0.7.5
-        version: 0.7.5(hono@4.11.4)(zod@4.1.13)
+        version: 0.7.5(hono@4.11.7)(zod@4.1.13)
       '@repo/auth':
         specifier: workspace:*
         version: link:../../packages/auth
@@ -78,11 +78,11 @@ importers:
         specifier: ^17.2.3
         version: 17.2.3
       hono:
-        specifier: ^4.11.4
-        version: 4.11.4
+        specifier: ^4.11.7
+        version: 4.11.7
       hono-rate-limiter:
         specifier: ^0.4.2
-        version: 0.4.2(hono@4.11.4)
+        version: 0.4.2(hono@4.11.7)
       pino:
         specifier: ^10.1.0
         version: 10.1.0
@@ -3840,8 +3840,8 @@ packages:
     resolution: {integrity: sha512-j6vWzfrGVfyXxge+O0x5sh6cvxAog0a/4Rdd2K36zCMV5eJ+/+tOAngRO8cODMNWbVRdVlmGZQL2YS3yR8bIUA==}
     engines: {node: '>= 0.4'}
 
-  es-toolkit@1.43.0:
-    resolution: {integrity: sha512-SKCT8AsWvYzBBuUqMk4NPwFlSdqLpJwmy6AP322ERn8W2YLIB6JBXnwMI2Qsh2gfphT3q7EKAxKb23cvFHFwKA==}
+  es-toolkit@1.44.0:
+    resolution: {integrity: sha512-6penXeZalaV88MM3cGkFZZfOoLGWshWWfdy0tWw/RlVVyhvMaWSBTOvXNeiW3e5FwdS5ePW0LGEu17zT139ktg==}
 
   esbuild-register@3.6.0:
     resolution: {integrity: sha512-H2/S7Pm8a9CL1uhp9OvjwrBh5Pvx0H8qVOxNu8Wed9Y7qv56MPtq+GGM8RJpq6glYJn9Wspr8uw7l55uyinNeg==}
@@ -4304,8 +4304,8 @@ packages:
     resolution: {integrity: sha512-BIdolzGpDO9MQ4nu3AUuDwHZZ+KViNm+EZ75Ae55eMXMqLVhDFqEMXxtUe9Qh8hjL+pIna/frs2j6Y2yD5Ua/g==}
     engines: {node: '>=16.9.0'}
 
-  hono@4.11.4:
-    resolution: {integrity: sha512-U7tt8JsyrxSRKspfhtLET79pU8K+tInj5QZXs1jSugO1Vq5dFj3kmZsRldo29mTBfcjDRVRXrEZ6LS63Cog9ZA==}
+  hono@4.11.7:
+    resolution: {integrity: sha512-l7qMiNee7t82bH3SeyUCt9UF15EVmaBvsppY2zQtrbIhl/yzBTny+YUxsVjSjQ6gaqaeVtZmGocom8TzBlA4Yw==}
     engines: {node: '>=16.9.0'}
 
   hosted-git-info@7.0.2:
@@ -5939,6 +5939,7 @@ packages:
   tar@7.5.2:
     resolution: {integrity: sha512-7NyxrTE4Anh8km8iEy7o0QYPs+0JKBTj5ZaqHg6B39erLg0qYXN3BijtShwbsNSvQ+LN75+KV+C4QR/f6Gwnpg==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
 
   teeny-request@9.0.0:
     resolution: {integrity: sha512-resvxdc6Mgb7YEThw6G6bExlXKkv6+YbuzGg9xuXxSgxJF7Ozs+o8Y9+2R3sArdWdW8nOokoQb1yrpFB0pQK2g==}
@@ -7736,10 +7737,10 @@ snapshots:
       protobufjs: 7.5.4
       yargs: 17.7.2
 
-  '@hono/auth-js@1.1.0(@auth/core@0.41.1)(hono@4.11.4)(react@19.2.1)':
+  '@hono/auth-js@1.1.0(@auth/core@0.41.1)(hono@4.11.7)(react@19.2.1)':
     dependencies:
       '@auth/core': 0.41.1
-      hono: 4.11.4
+      hono: 4.11.7
       react: 19.2.1
 
   '@hono/node-server@1.19.6(hono@4.10.6)':
@@ -7747,25 +7748,25 @@ snapshots:
       hono: 4.10.6
     optional: true
 
-  '@hono/node-server@1.19.7(hono@4.11.4)':
+  '@hono/node-server@1.19.7(hono@4.11.7)':
     dependencies:
-      hono: 4.11.4
+      hono: 4.11.7
 
-  '@hono/swagger-ui@0.5.2(hono@4.11.4)':
+  '@hono/swagger-ui@0.5.2(hono@4.11.7)':
     dependencies:
-      hono: 4.11.4
+      hono: 4.11.7
 
-  '@hono/zod-openapi@1.1.5(hono@4.11.4)(zod@4.1.13)':
+  '@hono/zod-openapi@1.1.5(hono@4.11.7)(zod@4.1.13)':
     dependencies:
       '@asteasolutions/zod-to-openapi': 8.1.0(zod@4.1.13)
-      '@hono/zod-validator': 0.7.5(hono@4.11.4)(zod@4.1.13)
-      hono: 4.11.4
+      '@hono/zod-validator': 0.7.5(hono@4.11.7)(zod@4.1.13)
+      hono: 4.11.7
       openapi3-ts: 4.5.0
       zod: 4.1.13
 
-  '@hono/zod-validator@0.7.5(hono@4.11.4)(zod@4.1.13)':
+  '@hono/zod-validator@0.7.5(hono@4.11.7)(zod@4.1.13)':
     dependencies:
-      hono: 4.11.4
+      hono: 4.11.7
       zod: 4.1.13
 
   '@hookform/resolvers@5.2.2(react-hook-form@7.68.0(react@19.2.1))':
@@ -7986,7 +7987,7 @@ snapshots:
       cli-cursor: 4.0.0
       cli-truncate: 4.0.0
       code-excerpt: 4.0.0
-      es-toolkit: 1.43.0
+      es-toolkit: 1.44.0
       indent-string: 5.0.0
       is-in-ci: 2.0.0
       mnemonist: 0.40.3
@@ -10323,7 +10324,7 @@ snapshots:
       has-tostringtag: 1.0.2
       hasown: 2.0.2
 
-  es-toolkit@1.43.0: {}
+  es-toolkit@1.44.0: {}
 
   esbuild-register@3.6.0(esbuild@0.25.12):
     dependencies:
@@ -10946,14 +10947,14 @@ snapshots:
 
   highlight.js@11.11.1: {}
 
-  hono-rate-limiter@0.4.2(hono@4.11.4):
+  hono-rate-limiter@0.4.2(hono@4.11.7):
     dependencies:
-      hono: 4.11.4
+      hono: 4.11.7
 
   hono@4.10.6:
     optional: true
 
-  hono@4.11.4: {}
+  hono@4.11.7: {}
 
   hosted-git-info@7.0.2:
     dependencies:
