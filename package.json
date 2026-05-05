@@ -21,10 +21,10 @@
     "studio": "turbo studio"
   },
   "devDependencies": {
-    "@anthropic-ai/claude-code": "^2.1.7",
+    "@anthropic-ai/claude-code": "^2.1.84",
     "@biomejs/biome": "2.3.8",
     "@byterover/cipher": "^0.3.0",
-    "@google/gemini-cli": "^0.20.0",
+    "@google/gemini-cli": "^0.39.1",
     "@openai/codex": "^0.69.0",
     "@repo/biome-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
