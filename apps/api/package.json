@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@hono/auth-js": "^1.1.0",
-    "@hono/node-server": "^1.19.7",
+    "@hono/node-server": "^1.19.13",
     "@hono/swagger-ui": "^0.5.2",
     "@hono/zod-openapi": "^1.1.5",
     "@hono/zod-validator": "^0.7.5",
@@ -22,7 +22,7 @@
     "@repo/database": "workspace:*",
     "@repo/types": "workspace:*",
     "dotenv": "^17.2.3",
-    "hono": "^4.12.4",
+    "hono": "^4.12.18",
     "hono-rate-limiter": "^0.4.2",
     "pino": "^10.1.0"
   },
