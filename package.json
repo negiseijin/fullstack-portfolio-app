@@ -18,7 +18,10 @@
     "codex": "codex",
     "gemini": "gemini",
     "prepare": "lefthook install",
-    "studio": "turbo studio"
+    "studio": "turbo studio",
+    "env:setup": "node scripts/setup-env.mjs",
+    "env:setup:force": "node scripts/setup-env.mjs --force",
+    "env:check": "node scripts/setup-env.mjs --dry-run --verbose"
   },
   "devDependencies": {
     "@anthropic-ai/claude-code": "^2.0.65",
