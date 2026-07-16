@@ -9,6 +9,7 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:seed": "tsx src/seed.ts",
+    "dev": "tsx src/script.ts",
     "check-types": "tsc --noEmit",
     "format": "prisma format",
     "generate": "prisma generate",

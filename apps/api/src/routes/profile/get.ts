@@ -49,4 +49,25 @@ const app = new OpenAPIHono().openapi(route, async (c) => {
   return c.json(user, 200);
 });
 
+app.openAPIRegistry.register(
+  'Profile',
+  UserSchema.openapi({
+    description: 'profile',
+    example: {
+      id: 'aaaa',
+      email: 'user@example.com',
+      name: 'name',
+      image: 'https://example.com/',
+      bio: 'bio',
+      githubUrl: 'https://example.com/',
+      twitterUrl: 'https://example.com/',
+      linkedinUrl: 'https://example.com/',
+      role: 'USER',
+      emailVerified: '2025-12-21',
+      createdAt: '2025-12-21',
+      updatedAt: '2025-12-21',
+    },
+  }),
+);
+
 export default app;
